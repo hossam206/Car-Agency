@@ -1,0 +1,12 @@
+[
+  {
+    "ContainingType": "Server.Controllers.UserController",
+    "Method": "GetAllCars",
+    "RelativePath": "api/User",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  }
+]

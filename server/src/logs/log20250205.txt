@@ -1,0 +1,724 @@
+[2025-02-05 16:23:04 ] Starting the application...
+[2025-02-05 16:23:05 ] Application startup failed!
+System.IO.InvalidDataException: Failed to load configuration from file 'F:\Ecommerce .Net\Project_Net\Maemaluh\Maemaluh\appsettings.Development.json'.
+ ---> System.FormatException: Could not parse the JSON file.
+ ---> System.Text.Json.JsonReaderException: The input does not contain any JSON tokens. Expected the input to start with a valid JSON token, when isFinalBlock is true. LineNumber: 0 | BytePositionInLine: 0.
+   at System.Text.Json.ThrowHelper.ThrowJsonReaderException(Utf8JsonReader& json, ExceptionResource resource, Byte nextByte, ReadOnlySpan`1 bytes)
+   at System.Text.Json.Utf8JsonReader.Read()
+   at System.Text.Json.JsonDocument.Parse(ReadOnlySpan`1 utf8JsonSpan, JsonReaderOptions readerOptions, MetadataDb& database, StackRowStack& stack)
+   at System.Text.Json.JsonDocument.Parse(ReadOnlyMemory`1 utf8Json, JsonReaderOptions readerOptions, Byte[] extraRentedArrayPoolBytes, PooledByteBufferWriter extraPooledByteBufferWriter)
+   at System.Text.Json.JsonDocument.Parse(ReadOnlyMemory`1 json, JsonDocumentOptions options)
+   at System.Text.Json.JsonDocument.Parse(String json, JsonDocumentOptions options)
+   at Microsoft.Extensions.Configuration.Json.JsonConfigurationFileParser.ParseStream(Stream input)
+   at Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider.Load(Stream stream)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider.Load(Stream stream)
+   at Microsoft.Extensions.Configuration.FileConfigurationProvider.Load(Boolean reload)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.Configuration.FileConfigurationProvider.Load(Boolean reload)
+   at Microsoft.Extensions.Configuration.ConfigurationRoot..ctor(IList`1 providers)
+   at Microsoft.Extensions.Configuration.ConfigurationBuilder.Build()
+   at Microsoft.Extensions.Hosting.HostBuilder.InitializeAppConfiguration()
+   at Microsoft.Extensions.Hosting.HostBuilder.Build()
+   at Program.Main(String[] args) in F:\Ecommerce .Net\Project_Net\Maemaluh\Maemaluh\Program.cs:line 17
+[2025-02-05 16:30:48 ] Starting the application...
+[2025-02-05 16:30:48 ] Application startup failed!
+System.IO.InvalidDataException: Failed to load configuration from file 'F:\Ecommerce .Net\Project_Net\Car-Agency\Car-Agency\appsettings.Development.json'.
+ ---> System.FormatException: Could not parse the JSON file.
+ ---> System.Text.Json.JsonReaderException: The input does not contain any JSON tokens. Expected the input to start with a valid JSON token, when isFinalBlock is true. LineNumber: 0 | BytePositionInLine: 0.
+   at System.Text.Json.ThrowHelper.ThrowJsonReaderException(Utf8JsonReader& json, ExceptionResource resource, Byte nextByte, ReadOnlySpan`1 bytes)
+   at System.Text.Json.Utf8JsonReader.Read()
+   at System.Text.Json.JsonDocument.Parse(ReadOnlySpan`1 utf8JsonSpan, JsonReaderOptions readerOptions, MetadataDb& database, StackRowStack& stack)
+   at System.Text.Json.JsonDocument.Parse(ReadOnlyMemory`1 utf8Json, JsonReaderOptions readerOptions, Byte[] extraRentedArrayPoolBytes, PooledByteBufferWriter extraPooledByteBufferWriter)
+   at System.Text.Json.JsonDocument.Parse(ReadOnlyMemory`1 json, JsonDocumentOptions options)
+   at System.Text.Json.JsonDocument.Parse(String json, JsonDocumentOptions options)
+   at Microsoft.Extensions.Configuration.Json.JsonConfigurationFileParser.ParseStream(Stream input)
+   at Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider.Load(Stream stream)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider.Load(Stream stream)
+   at Microsoft.Extensions.Configuration.FileConfigurationProvider.Load(Boolean reload)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.Configuration.FileConfigurationProvider.Load(Boolean reload)
+   at Microsoft.Extensions.Configuration.ConfigurationRoot..ctor(IList`1 providers)
+   at Microsoft.Extensions.Configuration.ConfigurationBuilder.Build()
+   at Microsoft.Extensions.Hosting.HostBuilder.InitializeAppConfiguration()
+   at Microsoft.Extensions.Hosting.HostBuilder.Build()
+   at Program.Main(String[] args) in F:\Ecommerce .Net\Project_Net\Car-Agency\Car-Agency\Program.cs:line 17
+[2025-02-05 16:32:13 ] Starting the application...
+[2025-02-05 16:32:14 ] Application startup failed!
+System.IO.InvalidDataException: Failed to load configuration from file 'F:\Ecommerce .Net\Project_Net\Car-Agency\Car-Agency\appsettings.Development.json'.
+ ---> System.FormatException: Could not parse the JSON file.
+ ---> System.Text.Json.JsonReaderException: The input does not contain any JSON tokens. Expected the input to start with a valid JSON token, when isFinalBlock is true. LineNumber: 0 | BytePositionInLine: 0.
+   at System.Text.Json.ThrowHelper.ThrowJsonReaderException(Utf8JsonReader& json, ExceptionResource resource, Byte nextByte, ReadOnlySpan`1 bytes)
+   at System.Text.Json.Utf8JsonReader.Read()
+   at System.Text.Json.JsonDocument.Parse(ReadOnlySpan`1 utf8JsonSpan, JsonReaderOptions readerOptions, MetadataDb& database, StackRowStack& stack)
+   at System.Text.Json.JsonDocument.Parse(ReadOnlyMemory`1 utf8Json, JsonReaderOptions readerOptions, Byte[] extraRentedArrayPoolBytes, PooledByteBufferWriter extraPooledByteBufferWriter)
+   at System.Text.Json.JsonDocument.Parse(ReadOnlyMemory`1 json, JsonDocumentOptions options)
+   at System.Text.Json.JsonDocument.Parse(String json, JsonDocumentOptions options)
+   at Microsoft.Extensions.Configuration.Json.JsonConfigurationFileParser.ParseStream(Stream input)
+   at Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider.Load(Stream stream)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider.Load(Stream stream)
+   at Microsoft.Extensions.Configuration.FileConfigurationProvider.Load(Boolean reload)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.Configuration.FileConfigurationProvider.Load(Boolean reload)
+   at Microsoft.Extensions.Configuration.ConfigurationRoot..ctor(IList`1 providers)
+   at Microsoft.Extensions.Configuration.ConfigurationBuilder.Build()
+   at Microsoft.Extensions.Hosting.HostBuilder.InitializeAppConfiguration()
+   at Microsoft.Extensions.Hosting.HostBuilder.Build()
+   at Program.Main(String[] args) in F:\Ecommerce .Net\Project_Net\Car-Agency\Car-Agency\Program.cs:line 17
+[2025-02-05 16:33:05 ] Starting the application...
+[2025-02-05 16:33:06 ] Application startup failed!
+System.IO.InvalidDataException: Failed to load configuration from file 'F:\Ecommerce .Net\Project_Net\Car-Agency\Car-Agency\appsettings.Development.json'.
+ ---> System.FormatException: Could not parse the JSON file.
+ ---> System.Text.Json.JsonReaderException: The input does not contain any JSON tokens. Expected the input to start with a valid JSON token, when isFinalBlock is true. LineNumber: 0 | BytePositionInLine: 0.
+   at System.Text.Json.ThrowHelper.ThrowJsonReaderException(Utf8JsonReader& json, ExceptionResource resource, Byte nextByte, ReadOnlySpan`1 bytes)
+   at System.Text.Json.Utf8JsonReader.Read()
+   at System.Text.Json.JsonDocument.Parse(ReadOnlySpan`1 utf8JsonSpan, JsonReaderOptions readerOptions, MetadataDb& database, StackRowStack& stack)
+   at System.Text.Json.JsonDocument.Parse(ReadOnlyMemory`1 utf8Json, JsonReaderOptions readerOptions, Byte[] extraRentedArrayPoolBytes, PooledByteBufferWriter extraPooledByteBufferWriter)
+   at System.Text.Json.JsonDocument.Parse(ReadOnlyMemory`1 json, JsonDocumentOptions options)
+   at System.Text.Json.JsonDocument.Parse(String json, JsonDocumentOptions options)
+   at Microsoft.Extensions.Configuration.Json.JsonConfigurationFileParser.ParseStream(Stream input)
+   at Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider.Load(Stream stream)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider.Load(Stream stream)
+   at Microsoft.Extensions.Configuration.FileConfigurationProvider.Load(Boolean reload)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.Configuration.FileConfigurationProvider.Load(Boolean reload)
+   at Microsoft.Extensions.Configuration.ConfigurationRoot..ctor(IList`1 providers)
+   at Microsoft.Extensions.Configuration.ConfigurationBuilder.Build()
+   at Microsoft.Extensions.Hosting.HostBuilder.InitializeAppConfiguration()
+   at Microsoft.Extensions.Hosting.HostBuilder.Build()
+   at Program.Main(String[] args) in F:\Ecommerce .Net\Project_Net\Car-Agency\Car-Agency\Program.cs:line 17
+[2025-02-05 16:34:27 ] Starting the application...
+[2025-02-05 16:34:28 Microsoft.AspNetCore.Hosting.Diagnostics] Application startup exception
+System.InvalidOperationException: Unable to find the required services. Please add all the required services by calling 'IServiceCollection.AddRateLimiter' in the application startup code.
+   at Microsoft.AspNetCore.Builder.RateLimiterApplicationBuilderExtensions.VerifyServicesAreRegistered(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Builder.RateLimiterApplicationBuilderExtensions.UseRateLimiter(IApplicationBuilder app)
+   at Server.Startup.Configure(IApplicationBuilder app, IWebHostEnvironment env) in F:\Ecommerce .Net\Project_Net\Car-Agency\Car-Agency\Startup.cs:line 194
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.AspNetCore.Hosting.ConfigureBuilder.Invoke(Object instance, IApplicationBuilder builder)
+   at Microsoft.WebTools.BrowserLink.Net.HostingStartup.<>c__DisplayClass1_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Watch.BrowserRefresh.HostingStartup.<>c__DisplayClass1_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.WebTools.ApiEndpointDiscovery.HostingStartup.<>c__DisplayClass2_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+[2025-02-05 16:34:29 Microsoft.Extensions.Hosting.Internal.Host] Hosting failed to start
+System.InvalidOperationException: Unable to find the required services. Please add all the required services by calling 'IServiceCollection.AddRateLimiter' in the application startup code.
+   at Microsoft.AspNetCore.Builder.RateLimiterApplicationBuilderExtensions.VerifyServicesAreRegistered(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Builder.RateLimiterApplicationBuilderExtensions.UseRateLimiter(IApplicationBuilder app)
+   at Server.Startup.Configure(IApplicationBuilder app, IWebHostEnvironment env) in F:\Ecommerce .Net\Project_Net\Car-Agency\Car-Agency\Startup.cs:line 194
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.AspNetCore.Hosting.ConfigureBuilder.Invoke(Object instance, IApplicationBuilder builder)
+   at Microsoft.WebTools.BrowserLink.Net.HostingStartup.<>c__DisplayClass1_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Watch.BrowserRefresh.HostingStartup.<>c__DisplayClass1_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.WebTools.ApiEndpointDiscovery.HostingStartup.<>c__DisplayClass2_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+[2025-02-05 16:34:29 ] Application startup failed!
+System.InvalidOperationException: Unable to find the required services. Please add all the required services by calling 'IServiceCollection.AddRateLimiter' in the application startup code.
+   at Microsoft.AspNetCore.Builder.RateLimiterApplicationBuilderExtensions.VerifyServicesAreRegistered(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Builder.RateLimiterApplicationBuilderExtensions.UseRateLimiter(IApplicationBuilder app)
+   at Server.Startup.Configure(IApplicationBuilder app, IWebHostEnvironment env) in F:\Ecommerce .Net\Project_Net\Car-Agency\Car-Agency\Startup.cs:line 194
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.AspNetCore.Hosting.ConfigureBuilder.Invoke(Object instance, IApplicationBuilder builder)
+   at Microsoft.WebTools.BrowserLink.Net.HostingStartup.<>c__DisplayClass1_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Watch.BrowserRefresh.HostingStartup.<>c__DisplayClass1_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.WebTools.ApiEndpointDiscovery.HostingStartup.<>c__DisplayClass2_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run(IHost host)
+   at Program.Main(String[] args) in F:\Ecommerce .Net\Project_Net\Car-Agency\Car-Agency\Program.cs:line 17
+[2025-02-05 16:36:26 ] Starting the application...
+[2025-02-05 16:36:26 Microsoft.AspNetCore.Hosting.Diagnostics] Application startup exception
+System.InvalidOperationException: Unable to find the required services. Please add all the required services by calling 'IServiceCollection.AddRateLimiter' in the application startup code.
+   at Microsoft.AspNetCore.Builder.RateLimiterApplicationBuilderExtensions.VerifyServicesAreRegistered(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Builder.RateLimiterApplicationBuilderExtensions.UseRateLimiter(IApplicationBuilder app)
+   at Server.Startup.Configure(IApplicationBuilder app, IWebHostEnvironment env) in F:\Ecommerce .Net\Project_Net\Car-Agency\Car-Agency\Startup.cs:line 195
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.AspNetCore.Hosting.ConfigureBuilder.Invoke(Object instance, IApplicationBuilder builder)
+   at Microsoft.WebTools.BrowserLink.Net.HostingStartup.<>c__DisplayClass1_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Watch.BrowserRefresh.HostingStartup.<>c__DisplayClass1_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.WebTools.ApiEndpointDiscovery.HostingStartup.<>c__DisplayClass2_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+[2025-02-05 16:36:26 Microsoft.Extensions.Hosting.Internal.Host] Hosting failed to start
+System.InvalidOperationException: Unable to find the required services. Please add all the required services by calling 'IServiceCollection.AddRateLimiter' in the application startup code.
+   at Microsoft.AspNetCore.Builder.RateLimiterApplicationBuilderExtensions.VerifyServicesAreRegistered(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Builder.RateLimiterApplicationBuilderExtensions.UseRateLimiter(IApplicationBuilder app)
+   at Server.Startup.Configure(IApplicationBuilder app, IWebHostEnvironment env) in F:\Ecommerce .Net\Project_Net\Car-Agency\Car-Agency\Startup.cs:line 195
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.AspNetCore.Hosting.ConfigureBuilder.Invoke(Object instance, IApplicationBuilder builder)
+   at Microsoft.WebTools.BrowserLink.Net.HostingStartup.<>c__DisplayClass1_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Watch.BrowserRefresh.HostingStartup.<>c__DisplayClass1_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.WebTools.ApiEndpointDiscovery.HostingStartup.<>c__DisplayClass2_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+[2025-02-05 16:36:26 ] Application startup failed!
+System.InvalidOperationException: Unable to find the required services. Please add all the required services by calling 'IServiceCollection.AddRateLimiter' in the application startup code.
+   at Microsoft.AspNetCore.Builder.RateLimiterApplicationBuilderExtensions.VerifyServicesAreRegistered(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Builder.RateLimiterApplicationBuilderExtensions.UseRateLimiter(IApplicationBuilder app)
+   at Server.Startup.Configure(IApplicationBuilder app, IWebHostEnvironment env) in F:\Ecommerce .Net\Project_Net\Car-Agency\Car-Agency\Startup.cs:line 195
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.AspNetCore.Hosting.ConfigureBuilder.Invoke(Object instance, IApplicationBuilder builder)
+   at Microsoft.WebTools.BrowserLink.Net.HostingStartup.<>c__DisplayClass1_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Watch.BrowserRefresh.HostingStartup.<>c__DisplayClass1_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.WebTools.ApiEndpointDiscovery.HostingStartup.<>c__DisplayClass2_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run(IHost host)
+   at Program.Main(String[] args) in F:\Ecommerce .Net\Project_Net\Car-Agency\Car-Agency\Program.cs:line 17
+[2025-02-05 16:37:07 ] Starting the application...
+[2025-02-05 16:37:07 Microsoft.AspNetCore.Hosting.Diagnostics] Application startup exception
+System.InvalidOperationException: Unable to find the required services. Please add all the required services by calling 'IServiceCollection.AddRateLimiter' in the application startup code.
+   at Microsoft.AspNetCore.Builder.RateLimiterApplicationBuilderExtensions.VerifyServicesAreRegistered(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Builder.RateLimiterApplicationBuilderExtensions.UseRateLimiter(IApplicationBuilder app)
+   at Server.Startup.Configure(IApplicationBuilder app, IWebHostEnvironment env) in F:\Ecommerce .Net\Project_Net\Car-Agency\Car-Agency\Startup.cs:line 195
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.AspNetCore.Hosting.ConfigureBuilder.Invoke(Object instance, IApplicationBuilder builder)
+   at Microsoft.WebTools.BrowserLink.Net.HostingStartup.<>c__DisplayClass1_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Watch.BrowserRefresh.HostingStartup.<>c__DisplayClass1_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.WebTools.ApiEndpointDiscovery.HostingStartup.<>c__DisplayClass2_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+[2025-02-05 16:37:07 Microsoft.Extensions.Hosting.Internal.Host] Hosting failed to start
+System.InvalidOperationException: Unable to find the required services. Please add all the required services by calling 'IServiceCollection.AddRateLimiter' in the application startup code.
+   at Microsoft.AspNetCore.Builder.RateLimiterApplicationBuilderExtensions.VerifyServicesAreRegistered(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Builder.RateLimiterApplicationBuilderExtensions.UseRateLimiter(IApplicationBuilder app)
+   at Server.Startup.Configure(IApplicationBuilder app, IWebHostEnvironment env) in F:\Ecommerce .Net\Project_Net\Car-Agency\Car-Agency\Startup.cs:line 195
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.AspNetCore.Hosting.ConfigureBuilder.Invoke(Object instance, IApplicationBuilder builder)
+   at Microsoft.WebTools.BrowserLink.Net.HostingStartup.<>c__DisplayClass1_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Watch.BrowserRefresh.HostingStartup.<>c__DisplayClass1_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.WebTools.ApiEndpointDiscovery.HostingStartup.<>c__DisplayClass2_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+[2025-02-05 16:37:07 ] Application startup failed!
+System.InvalidOperationException: Unable to find the required services. Please add all the required services by calling 'IServiceCollection.AddRateLimiter' in the application startup code.
+   at Microsoft.AspNetCore.Builder.RateLimiterApplicationBuilderExtensions.VerifyServicesAreRegistered(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Builder.RateLimiterApplicationBuilderExtensions.UseRateLimiter(IApplicationBuilder app)
+   at Server.Startup.Configure(IApplicationBuilder app, IWebHostEnvironment env) in F:\Ecommerce .Net\Project_Net\Car-Agency\Car-Agency\Startup.cs:line 195
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.AspNetCore.Hosting.ConfigureBuilder.Invoke(Object instance, IApplicationBuilder builder)
+   at Microsoft.WebTools.BrowserLink.Net.HostingStartup.<>c__DisplayClass1_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Watch.BrowserRefresh.HostingStartup.<>c__DisplayClass1_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.WebTools.ApiEndpointDiscovery.HostingStartup.<>c__DisplayClass2_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run(IHost host)
+   at Program.Main(String[] args) in F:\Ecommerce .Net\Project_Net\Car-Agency\Car-Agency\Program.cs:line 17
+[2025-02-05 16:39:37 ] Starting the application...
+[2025-02-05 16:39:37 Microsoft.AspNetCore.Hosting.Diagnostics] Application startup exception
+System.InvalidOperationException: Unable to find the required services. Please add all the required services by calling 'IServiceCollection.AddRateLimiter' in the application startup code.
+   at Microsoft.AspNetCore.Builder.RateLimiterApplicationBuilderExtensions.VerifyServicesAreRegistered(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Builder.RateLimiterApplicationBuilderExtensions.UseRateLimiter(IApplicationBuilder app)
+   at Server.Startup.Configure(IApplicationBuilder app, IWebHostEnvironment env) in F:\Ecommerce .Net\Project_Net\Car-Agency\Car-Agency\Startup.cs:line 195
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.AspNetCore.Hosting.ConfigureBuilder.Invoke(Object instance, IApplicationBuilder builder)
+   at Microsoft.WebTools.BrowserLink.Net.HostingStartup.<>c__DisplayClass1_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Watch.BrowserRefresh.HostingStartup.<>c__DisplayClass1_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.WebTools.ApiEndpointDiscovery.HostingStartup.<>c__DisplayClass2_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+[2025-02-05 16:39:37 Microsoft.Extensions.Hosting.Internal.Host] Hosting failed to start
+System.InvalidOperationException: Unable to find the required services. Please add all the required services by calling 'IServiceCollection.AddRateLimiter' in the application startup code.
+   at Microsoft.AspNetCore.Builder.RateLimiterApplicationBuilderExtensions.VerifyServicesAreRegistered(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Builder.RateLimiterApplicationBuilderExtensions.UseRateLimiter(IApplicationBuilder app)
+   at Server.Startup.Configure(IApplicationBuilder app, IWebHostEnvironment env) in F:\Ecommerce .Net\Project_Net\Car-Agency\Car-Agency\Startup.cs:line 195
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.AspNetCore.Hosting.ConfigureBuilder.Invoke(Object instance, IApplicationBuilder builder)
+   at Microsoft.WebTools.BrowserLink.Net.HostingStartup.<>c__DisplayClass1_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Watch.BrowserRefresh.HostingStartup.<>c__DisplayClass1_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.WebTools.ApiEndpointDiscovery.HostingStartup.<>c__DisplayClass2_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+[2025-02-05 16:39:37 ] Application startup failed!
+System.InvalidOperationException: Unable to find the required services. Please add all the required services by calling 'IServiceCollection.AddRateLimiter' in the application startup code.
+   at Microsoft.AspNetCore.Builder.RateLimiterApplicationBuilderExtensions.VerifyServicesAreRegistered(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Builder.RateLimiterApplicationBuilderExtensions.UseRateLimiter(IApplicationBuilder app)
+   at Server.Startup.Configure(IApplicationBuilder app, IWebHostEnvironment env) in F:\Ecommerce .Net\Project_Net\Car-Agency\Car-Agency\Startup.cs:line 195
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.AspNetCore.Hosting.ConfigureBuilder.Invoke(Object instance, IApplicationBuilder builder)
+   at Microsoft.WebTools.BrowserLink.Net.HostingStartup.<>c__DisplayClass1_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Watch.BrowserRefresh.HostingStartup.<>c__DisplayClass1_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.WebTools.ApiEndpointDiscovery.HostingStartup.<>c__DisplayClass2_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run(IHost host)
+   at Program.Main(String[] args) in F:\Ecommerce .Net\Project_Net\Car-Agency\Car-Agency\Program.cs:line 17
+[2025-02-05 16:40:13 ] Starting the application...
+[2025-02-05 16:40:15 Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager] User profile is available. Using 'C:\Users\Amr Gamal\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-02-05 16:40:16 Microsoft.AspNetCore.Mvc.Infrastructure.DefaultActionDescriptorCollectionProvider] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+[2025-02-05 16:40:16 Microsoft.AspNetCore.Hosting.Diagnostics] Application startup exception
+System.InvalidOperationException: Unable to find the required services. Please add all the required services by calling 'IServiceCollection.AddRazorPages' inside the call to 'ConfigureServices(...)' in the application startup code.
+   at Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.EnsureRazorPagesServices(IEndpointRouteBuilder endpoints)
+   at Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapRazorPages(IEndpointRouteBuilder endpoints)
+   at Server.Startup.<>c.<Configure>b__6_5(IEndpointRouteBuilder endpoints) in F:\Ecommerce .Net\Project_Net\Car-Agency\Car-Agency\Startup.cs:line 216
+   at Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints(IApplicationBuilder builder, Action`1 configure)
+   at Server.Startup.<>c__DisplayClass6_0.<Configure>b__4(IEndpointRouteBuilder endpoints) in F:\Ecommerce .Net\Project_Net\Car-Agency\Car-Agency\Startup.cs:line 211
+   at Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints(IApplicationBuilder builder, Action`1 configure)
+   at Server.Startup.Configure(IApplicationBuilder app, IWebHostEnvironment env) in F:\Ecommerce .Net\Project_Net\Car-Agency\Car-Agency\Startup.cs:line 209
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.AspNetCore.Hosting.ConfigureBuilder.Invoke(Object instance, IApplicationBuilder builder)
+   at Microsoft.WebTools.BrowserLink.Net.HostingStartup.<>c__DisplayClass1_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Watch.BrowserRefresh.HostingStartup.<>c__DisplayClass1_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.WebTools.ApiEndpointDiscovery.HostingStartup.<>c__DisplayClass2_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+[2025-02-05 16:40:16 Microsoft.Extensions.Hosting.Internal.Host] Hosting failed to start
+System.InvalidOperationException: Unable to find the required services. Please add all the required services by calling 'IServiceCollection.AddRazorPages' inside the call to 'ConfigureServices(...)' in the application startup code.
+   at Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.EnsureRazorPagesServices(IEndpointRouteBuilder endpoints)
+   at Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapRazorPages(IEndpointRouteBuilder endpoints)
+   at Server.Startup.<>c.<Configure>b__6_5(IEndpointRouteBuilder endpoints) in F:\Ecommerce .Net\Project_Net\Car-Agency\Car-Agency\Startup.cs:line 216
+   at Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints(IApplicationBuilder builder, Action`1 configure)
+   at Server.Startup.<>c__DisplayClass6_0.<Configure>b__4(IEndpointRouteBuilder endpoints) in F:\Ecommerce .Net\Project_Net\Car-Agency\Car-Agency\Startup.cs:line 211
+   at Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints(IApplicationBuilder builder, Action`1 configure)
+   at Server.Startup.Configure(IApplicationBuilder app, IWebHostEnvironment env) in F:\Ecommerce .Net\Project_Net\Car-Agency\Car-Agency\Startup.cs:line 209
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.AspNetCore.Hosting.ConfigureBuilder.Invoke(Object instance, IApplicationBuilder builder)
+   at Microsoft.WebTools.BrowserLink.Net.HostingStartup.<>c__DisplayClass1_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Watch.BrowserRefresh.HostingStartup.<>c__DisplayClass1_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.WebTools.ApiEndpointDiscovery.HostingStartup.<>c__DisplayClass2_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+[2025-02-05 16:40:16 ] Application startup failed!
+System.InvalidOperationException: Unable to find the required services. Please add all the required services by calling 'IServiceCollection.AddRazorPages' inside the call to 'ConfigureServices(...)' in the application startup code.
+   at Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.EnsureRazorPagesServices(IEndpointRouteBuilder endpoints)
+   at Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapRazorPages(IEndpointRouteBuilder endpoints)
+   at Server.Startup.<>c.<Configure>b__6_5(IEndpointRouteBuilder endpoints) in F:\Ecommerce .Net\Project_Net\Car-Agency\Car-Agency\Startup.cs:line 216
+   at Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints(IApplicationBuilder builder, Action`1 configure)
+   at Server.Startup.<>c__DisplayClass6_0.<Configure>b__4(IEndpointRouteBuilder endpoints) in F:\Ecommerce .Net\Project_Net\Car-Agency\Car-Agency\Startup.cs:line 211
+   at Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints(IApplicationBuilder builder, Action`1 configure)
+   at Server.Startup.Configure(IApplicationBuilder app, IWebHostEnvironment env) in F:\Ecommerce .Net\Project_Net\Car-Agency\Car-Agency\Startup.cs:line 209
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+   at System.Reflection.MethodBaseInvoker.InvokeWithFewArgs(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.AspNetCore.Hosting.ConfigureBuilder.Invoke(Object instance, IApplicationBuilder builder)
+   at Microsoft.WebTools.BrowserLink.Net.HostingStartup.<>c__DisplayClass1_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Watch.BrowserRefresh.HostingStartup.<>c__DisplayClass1_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.WebTools.ApiEndpointDiscovery.HostingStartup.<>c__DisplayClass2_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run(IHost host)
+   at Program.Main(String[] args) in F:\Ecommerce .Net\Project_Net\Car-Agency\Car-Agency\Program.cs:line 17
+[2025-02-05 16:41:07 ] Starting the application...
+[2025-02-05 16:41:07 Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager] User profile is available. Using 'C:\Users\Amr Gamal\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-02-05 16:41:08 Microsoft.AspNetCore.Mvc.Infrastructure.DefaultActionDescriptorCollectionProvider] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+[2025-02-05 16:41:08 Microsoft.Hosting.Lifetime] Now listening on: https://localhost:7299
+[2025-02-05 16:41:08 Microsoft.Hosting.Lifetime] Now listening on: http://localhost:5185
+[2025-02-05 16:41:08 Microsoft.Hosting.Lifetime] Application started. Press Ctrl+C to shut down.
+[2025-02-05 16:41:08 Microsoft.Hosting.Lifetime] Hosting environment: Development
+[2025-02-05 16:41:08 Microsoft.Hosting.Lifetime] Content root path: F:\Ecommerce .Net\Project_Net\Car-Agency\Car-Agency
+[2025-02-05 16:41:10 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/ - null null
+[2025-02-05 16:41:10 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/ - 301 0 null 264.7022ms
+[2025-02-05 16:41:10 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/index.html - null null
+[2025-02-05 16:41:10 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/index.html - 200 null text/html;charset=utf-8 107.7483ms
+[2025-02-05 16:41:10 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/swagger-ui.css - null null
+[2025-02-05 16:41:10 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/index.css - null null
+[2025-02-05 16:41:10 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/swagger-ui/custom.js - null null
+[2025-02-05 16:41:10 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/swagger-ui-bundle.js - null null
+[2025-02-05 16:41:10 Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware] Sending file. Request path: '/index.css'. Physical path: 'N/A'
+[2025-02-05 16:41:10 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/index.css - 200 202 text/css 21.9037ms
+[2025-02-05 16:41:10 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/swagger-ui-standalone-preset.js - null null
+[2025-02-05 16:41:10 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/index.js - null null
+[2025-02-05 16:41:10 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/_framework/aspnetcore-browser-refresh.js - null null
+[2025-02-05 16:41:10 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/index.js - 200 null application/javascript;charset=utf-8 0.8006ms
+[2025-02-05 16:41:10 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/_framework/aspnetcore-browser-refresh.js - 200 13770 application/javascript; charset=utf-8 21.2102ms
+[2025-02-05 16:41:10 Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+[2025-02-05 16:41:10 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/swagger-ui.css - 200 152035 text/css 138.5695ms
+[2025-02-05 16:41:10 Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+[2025-02-05 16:41:10 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/swagger-ui-standalone-preset.js - 200 230007 text/javascript 116.6256ms
+[2025-02-05 16:41:10 Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+[2025-02-05 16:41:10 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/swagger-ui-bundle.js - 200 1426050 text/javascript 209.366ms
+[2025-02-05 16:41:10 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/_vs/browserLink - null null
+[2025-02-05 16:41:13 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/_vs/browserLink - 200 null text/javascript; charset=UTF-8 2315.1927ms
+[2025-02-05 16:41:16 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/swagger-ui/custom.js - 404 0 null 5685.4626ms
+[2025-02-05 16:41:16 Microsoft.AspNetCore.Hosting.Diagnostics] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7299/swagger-ui/custom.js, Response status code: 404
+[2025-02-05 16:41:16 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/swagger/v1/swagger.json - null null
+[2025-02-05 16:41:16 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 49.6733ms
+[2025-02-05 16:41:16 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/favicon-32x32.png - null null
+[2025-02-05 16:41:16 Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+[2025-02-05 16:41:16 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/favicon-32x32.png - 200 628 image/png 0.622ms
+[2025-02-05 16:43:18 ] Starting the application...
+[2025-02-05 16:43:18 Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager] User profile is available. Using 'C:\Users\Amr Gamal\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-02-05 16:43:18 Microsoft.AspNetCore.Mvc.Infrastructure.DefaultActionDescriptorCollectionProvider] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+[2025-02-05 16:43:19 Microsoft.Hosting.Lifetime] Now listening on: https://localhost:7299
+[2025-02-05 16:43:19 Microsoft.Hosting.Lifetime] Now listening on: http://localhost:5185
+[2025-02-05 16:43:19 Microsoft.Hosting.Lifetime] Application started. Press Ctrl+C to shut down.
+[2025-02-05 16:43:19 Microsoft.Hosting.Lifetime] Hosting environment: Development
+[2025-02-05 16:43:19 Microsoft.Hosting.Lifetime] Content root path: F:\Ecommerce .Net\Project_Net\Car-Agency\Car-Agency
+[2025-02-05 16:43:19 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/index.html - null null
+[2025-02-05 16:43:19 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/index.html - 200 null text/html;charset=utf-8 189.758ms
+[2025-02-05 16:43:19 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/swagger-ui/custom.js - null null
+[2025-02-05 16:43:19 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/index.js - null null
+[2025-02-05 16:43:19 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/index.js - 200 null application/javascript;charset=utf-8 1.3325ms
+[2025-02-05 16:43:19 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/_framework/aspnetcore-browser-refresh.js - null null
+[2025-02-05 16:43:19 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/_framework/aspnetcore-browser-refresh.js - 200 13770 application/javascript; charset=utf-8 15.2357ms
+[2025-02-05 16:43:19 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/_vs/browserLink - null null
+[2025-02-05 16:43:19 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/swagger-ui/custom.js - 404 0 null 70.0938ms
+[2025-02-05 16:43:19 Microsoft.AspNetCore.Hosting.Diagnostics] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7299/swagger-ui/custom.js, Response status code: 404
+[2025-02-05 16:43:19 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/_vs/browserLink - 200 null text/javascript; charset=UTF-8 51.7507ms
+[2025-02-05 16:43:20 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/swagger/v1/swagger.json - null null
+[2025-02-05 16:43:20 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 9.3924ms
+[2025-02-05 16:43:31 ] Starting the application...
+[2025-02-05 16:43:31 Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager] User profile is available. Using 'C:\Users\Amr Gamal\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-02-05 16:43:31 Microsoft.AspNetCore.Mvc.Infrastructure.DefaultActionDescriptorCollectionProvider] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+[2025-02-05 16:43:31 Microsoft.Hosting.Lifetime] Now listening on: https://localhost:7299
+[2025-02-05 16:43:31 Microsoft.Hosting.Lifetime] Now listening on: http://localhost:5185
+[2025-02-05 16:43:32 Microsoft.Hosting.Lifetime] Application started. Press Ctrl+C to shut down.
+[2025-02-05 16:43:32 Microsoft.Hosting.Lifetime] Hosting environment: Development
+[2025-02-05 16:43:32 Microsoft.Hosting.Lifetime] Content root path: F:\Ecommerce .Net\Project_Net\Car-Agency\Car-Agency
+[2025-02-05 16:43:33 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/index.html - null null
+[2025-02-05 16:43:33 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/index.html - 200 null text/html;charset=utf-8 203.2812ms
+[2025-02-05 16:43:33 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/_framework/aspnetcore-browser-refresh.js - null null
+[2025-02-05 16:43:33 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/swagger-ui/custom.js - null null
+[2025-02-05 16:43:33 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/index.js - null null
+[2025-02-05 16:43:33 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/index.js - 200 null application/javascript;charset=utf-8 1.4978ms
+[2025-02-05 16:43:33 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/_framework/aspnetcore-browser-refresh.js - 200 13770 application/javascript; charset=utf-8 16.3181ms
+[2025-02-05 16:43:33 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/_vs/browserLink - null null
+[2025-02-05 16:43:33 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/swagger-ui/custom.js - 404 0 null 70.1953ms
+[2025-02-05 16:43:33 Microsoft.AspNetCore.Hosting.Diagnostics] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7299/swagger-ui/custom.js, Response status code: 404
+[2025-02-05 16:43:34 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/_vs/browserLink - 200 null text/javascript; charset=UTF-8 79.2273ms
+[2025-02-05 16:43:34 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/swagger/v1/swagger.json - null null
+[2025-02-05 16:43:34 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 13.4489ms
+[2025-02-05 16:44:22 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/swagger/v1/swagger.json - null null
+[2025-02-05 16:44:22 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 10.0377ms
+[2025-02-05 16:44:22 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/favicon.ico - null null
+[2025-02-05 16:44:22 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/favicon.ico - 404 0 null 5.188ms
+[2025-02-05 16:44:22 Microsoft.AspNetCore.Hosting.Diagnostics] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7299/favicon.ico, Response status code: 404
+[2025-02-05 16:45:18 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/index.html - null null
+[2025-02-05 16:45:18 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/index.html - 200 null text/html;charset=utf-8 3.3939ms
+[2025-02-05 16:45:18 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/_framework/aspnetcore-browser-refresh.js - null null
+[2025-02-05 16:45:18 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/swagger-ui/custom.js - null null
+[2025-02-05 16:45:18 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/index.js - null null
+[2025-02-05 16:45:18 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/index.js - 200 null application/javascript;charset=utf-8 0.5401ms
+[2025-02-05 16:45:18 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/_framework/aspnetcore-browser-refresh.js - 200 13770 application/javascript; charset=utf-8 2.2354ms
+[2025-02-05 16:45:18 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/_vs/browserLink - null null
+[2025-02-05 16:45:18 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/swagger-ui/custom.js - 404 0 null 11.3276ms
+[2025-02-05 16:45:18 Microsoft.AspNetCore.Hosting.Diagnostics] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7299/swagger-ui/custom.js, Response status code: 404
+[2025-02-05 16:45:18 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/_vs/browserLink - 200 null text/javascript; charset=UTF-8 9.1247ms
+[2025-02-05 16:45:19 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/swagger/v1/swagger.json - null null
+[2025-02-05 16:45:19 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 1.1809ms
+[2025-02-05 16:46:15 ] Starting the application...
+[2025-02-05 16:46:15 Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager] User profile is available. Using 'C:\Users\Amr Gamal\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-02-05 16:46:16 Microsoft.Hosting.Lifetime] Now listening on: https://localhost:7299
+[2025-02-05 16:46:16 Microsoft.Hosting.Lifetime] Now listening on: http://localhost:5185
+[2025-02-05 16:46:16 Microsoft.Hosting.Lifetime] Application started. Press Ctrl+C to shut down.
+[2025-02-05 16:46:16 Microsoft.Hosting.Lifetime] Hosting environment: Development
+[2025-02-05 16:46:16 Microsoft.Hosting.Lifetime] Content root path: F:\Ecommerce .Net\Project_Net\Car-Agency\Car-Agency
+[2025-02-05 16:46:17 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/index.html - null null
+[2025-02-05 16:46:18 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/index.html - 200 null text/html;charset=utf-8 177.2483ms
+[2025-02-05 16:46:18 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/_framework/aspnetcore-browser-refresh.js - null null
+[2025-02-05 16:46:18 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/swagger-ui/custom.js - null null
+[2025-02-05 16:46:18 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/index.js - null null
+[2025-02-05 16:46:18 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/index.js - 200 null application/javascript;charset=utf-8 28.0899ms
+[2025-02-05 16:46:18 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/_framework/aspnetcore-browser-refresh.js - 200 13770 application/javascript; charset=utf-8 40.1198ms
+[2025-02-05 16:46:18 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/_vs/browserLink - null null
+[2025-02-05 16:46:18 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/_vs/browserLink - 200 null text/javascript; charset=UTF-8 40.0607ms
+[2025-02-05 16:46:18 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/swagger-ui/custom.js - 404 0 null 220.4637ms
+[2025-02-05 16:46:18 Microsoft.AspNetCore.Hosting.Diagnostics] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7299/swagger-ui/custom.js, Response status code: 404
+[2025-02-05 16:46:18 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/swagger/v1/swagger.json - null null
+[2025-02-05 16:46:18 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 11.4661ms
+[2025-02-05 16:47:39 ] Starting the application...
+[2025-02-05 16:47:41 Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager] User profile is available. Using 'C:\Users\Amr Gamal\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-02-05 16:47:42 Microsoft.Hosting.Lifetime] Now listening on: https://localhost:7299
+[2025-02-05 16:47:42 Microsoft.Hosting.Lifetime] Now listening on: http://localhost:5185
+[2025-02-05 16:47:42 Microsoft.Hosting.Lifetime] Application started. Press Ctrl+C to shut down.
+[2025-02-05 16:47:42 Microsoft.Hosting.Lifetime] Hosting environment: Development
+[2025-02-05 16:47:42 Microsoft.Hosting.Lifetime] Content root path: F:\Ecommerce .Net\Project_Net\Car-Agency\Car-Agency
+[2025-02-05 16:47:43 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/index.html - null null
+[2025-02-05 16:47:43 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/index.html - 200 null text/html;charset=utf-8 178.4467ms
+[2025-02-05 16:47:43 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/swagger-ui/custom.js - null null
+[2025-02-05 16:47:43 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/_framework/aspnetcore-browser-refresh.js - null null
+[2025-02-05 16:47:43 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/index.js - null null
+[2025-02-05 16:47:43 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/index.js - 200 null application/javascript;charset=utf-8 7.5662ms
+[2025-02-05 16:47:43 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/_framework/aspnetcore-browser-refresh.js - 200 13770 application/javascript; charset=utf-8 20.0267ms
+[2025-02-05 16:47:43 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/_vs/browserLink - null null
+[2025-02-05 16:47:43 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/_vs/browserLink - 200 null text/javascript; charset=UTF-8 41.2659ms
+[2025-02-05 16:47:45 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/swagger-ui/custom.js - 404 0 null 1818.2422ms
+[2025-02-05 16:47:45 Microsoft.AspNetCore.Hosting.Diagnostics] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7299/swagger-ui/custom.js, Response status code: 404
+[2025-02-05 16:47:45 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/swagger/v1/swagger.json - null null
+[2025-02-05 16:47:45 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 17.9581ms
+[2025-02-05 16:48:10 ] Starting the application...
+[2025-02-05 16:48:12 Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager] User profile is available. Using 'C:\Users\Amr Gamal\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-02-05 16:48:13 Microsoft.Hosting.Lifetime] Now listening on: https://localhost:7299
+[2025-02-05 16:48:13 Microsoft.Hosting.Lifetime] Now listening on: http://localhost:5185
+[2025-02-05 16:48:13 Microsoft.Hosting.Lifetime] Application started. Press Ctrl+C to shut down.
+[2025-02-05 16:48:13 Microsoft.Hosting.Lifetime] Hosting environment: Development
+[2025-02-05 16:48:13 Microsoft.Hosting.Lifetime] Content root path: F:\Ecommerce .Net\Project_Net\Car-Agency\Car-Agency
+[2025-02-05 16:48:13 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/index.html - null null
+[2025-02-05 16:48:13 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/index.html - 200 null text/html;charset=utf-8 194.7603ms
+[2025-02-05 16:48:13 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/_framework/aspnetcore-browser-refresh.js - null null
+[2025-02-05 16:48:13 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/swagger-ui/custom.js - null null
+[2025-02-05 16:48:13 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/index.js - null null
+[2025-02-05 16:48:13 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/index.js - 200 null application/javascript;charset=utf-8 3.7802ms
+[2025-02-05 16:48:13 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/_framework/aspnetcore-browser-refresh.js - 200 13770 application/javascript; charset=utf-8 18.3726ms
+[2025-02-05 16:48:13 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/_vs/browserLink - null null
+[2025-02-05 16:48:13 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/_vs/browserLink - 200 null text/javascript; charset=UTF-8 45.9515ms
+[2025-02-05 16:48:15 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/swagger-ui/custom.js - 404 0 null 1785.9115ms
+[2025-02-05 16:48:15 Microsoft.AspNetCore.Hosting.Diagnostics] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7299/swagger-ui/custom.js, Response status code: 404
+[2025-02-05 16:48:15 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/swagger/v1/swagger.json - null null
+[2025-02-05 16:48:15 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 12.4334ms
+[2025-02-05 16:48:23 ] Starting the application...
+[2025-02-05 16:48:23 Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager] User profile is available. Using 'C:\Users\Amr Gamal\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-02-05 16:48:23 Microsoft.Hosting.Lifetime] Now listening on: https://localhost:7299
+[2025-02-05 16:48:23 Microsoft.Hosting.Lifetime] Now listening on: http://localhost:5185
+[2025-02-05 16:48:24 Microsoft.Hosting.Lifetime] Application started. Press Ctrl+C to shut down.
+[2025-02-05 16:48:24 Microsoft.Hosting.Lifetime] Hosting environment: Development
+[2025-02-05 16:48:24 Microsoft.Hosting.Lifetime] Content root path: F:\Ecommerce .Net\Project_Net\Car-Agency\Car-Agency
+[2025-02-05 16:48:34 ] Starting the application...
+[2025-02-05 16:48:34 Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager] User profile is available. Using 'C:\Users\Amr Gamal\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-02-05 16:48:35 Microsoft.Hosting.Lifetime] Now listening on: https://localhost:7299
+[2025-02-05 16:48:35 Microsoft.Hosting.Lifetime] Now listening on: http://localhost:5185
+[2025-02-05 16:48:35 Microsoft.Hosting.Lifetime] Application started. Press Ctrl+C to shut down.
+[2025-02-05 16:48:35 Microsoft.Hosting.Lifetime] Hosting environment: Development
+[2025-02-05 16:48:35 Microsoft.Hosting.Lifetime] Content root path: F:\Ecommerce .Net\Project_Net\Car-Agency\Car-Agency
+[2025-02-05 16:48:35 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/index.html - null null
+[2025-02-05 16:48:36 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/index.html - 200 null text/html;charset=utf-8 321.3345ms
+[2025-02-05 16:48:36 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/_framework/aspnetcore-browser-refresh.js - null null
+[2025-02-05 16:48:36 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/swagger-ui/custom.js - null null
+[2025-02-05 16:48:36 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/_framework/aspnetcore-browser-refresh.js - 200 13770 application/javascript; charset=utf-8 25.7927ms
+[2025-02-05 16:48:36 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/index.js - null null
+[2025-02-05 16:48:36 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/index.js - 200 null application/javascript;charset=utf-8 0.8671ms
+[2025-02-05 16:48:36 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/_vs/browserLink - null null
+[2025-02-05 16:48:36 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/swagger-ui/custom.js - 404 0 null 106.621ms
+[2025-02-05 16:48:36 Microsoft.AspNetCore.Hosting.Diagnostics] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7299/swagger-ui/custom.js, Response status code: 404
+[2025-02-05 16:48:36 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/_vs/browserLink - 200 null text/javascript; charset=UTF-8 84.5203ms
+[2025-02-05 16:48:36 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/swagger/v1/swagger.json - null null
+[2025-02-05 16:48:36 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 14.2856ms
+[2025-02-05 16:48:55 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/index.html - null null
+[2025-02-05 16:48:55 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/index.html - 200 null text/html;charset=utf-8 8.4451ms
+[2025-02-05 16:48:55 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/swagger-ui/custom.js - null null
+[2025-02-05 16:48:55 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/index.js - null null
+[2025-02-05 16:48:55 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/_framework/aspnetcore-browser-refresh.js - null null
+[2025-02-05 16:48:55 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/index.js - 200 null application/javascript;charset=utf-8 0.4928ms
+[2025-02-05 16:48:55 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/_framework/aspnetcore-browser-refresh.js - 200 13770 application/javascript; charset=utf-8 3.2142ms
+[2025-02-05 16:48:55 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/swagger-ui/custom.js - 404 0 null 4.104ms
+[2025-02-05 16:48:55 Microsoft.AspNetCore.Hosting.Diagnostics] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7299/swagger-ui/custom.js, Response status code: 404
+[2025-02-05 16:48:55 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/_vs/browserLink - null null
+[2025-02-05 16:48:55 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/_vs/browserLink - 200 null text/javascript; charset=UTF-8 83.9731ms
+[2025-02-05 16:48:55 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/swagger/v1/swagger.json - null null
+[2025-02-05 16:48:55 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 2.8098ms
+[2025-02-05 16:51:22 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/index.html - null null
+[2025-02-05 16:51:22 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/index.html - 200 null text/html;charset=utf-8 12.0159ms
+[2025-02-05 16:51:22 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/swagger-ui/custom.js - null null
+[2025-02-05 16:51:22 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/swagger-ui/custom.js - 404 0 null 14.5012ms
+[2025-02-05 16:51:22 Microsoft.AspNetCore.Hosting.Diagnostics] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7299/swagger-ui/custom.js, Response status code: 404
+[2025-02-05 16:51:22 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/index.js - null null
+[2025-02-05 16:51:22 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/index.js - 200 null application/javascript;charset=utf-8 0.6832ms
+[2025-02-05 16:51:22 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/_framework/aspnetcore-browser-refresh.js - null null
+[2025-02-05 16:51:22 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/_framework/aspnetcore-browser-refresh.js - 200 13770 application/javascript; charset=utf-8 0.6444ms
+[2025-02-05 16:51:22 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/_vs/browserLink - null null
+[2025-02-05 16:51:22 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/_vs/browserLink - 200 null text/javascript; charset=UTF-8 4.9557ms
+[2025-02-05 16:51:22 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/swagger/v1/swagger.json - null null
+[2025-02-05 16:51:22 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 2.5333ms
+[2025-02-05 16:51:43 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/index.html - null null
+[2025-02-05 16:51:43 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/index.html - 200 null text/html;charset=utf-8 2.5911ms
+[2025-02-05 16:51:43 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/swagger-ui/custom.js - null null
+[2025-02-05 16:51:43 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/swagger-ui/custom.js - 404 0 null 2.0085ms
+[2025-02-05 16:51:43 Microsoft.AspNetCore.Hosting.Diagnostics] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7299/swagger-ui/custom.js, Response status code: 404
+[2025-02-05 16:51:43 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/index.js - null null
+[2025-02-05 16:51:43 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/index.js - 200 null application/javascript;charset=utf-8 0.4456ms
+[2025-02-05 16:51:43 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/_framework/aspnetcore-browser-refresh.js - null null
+[2025-02-05 16:51:43 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/_framework/aspnetcore-browser-refresh.js - 200 13770 application/javascript; charset=utf-8 1.3378ms
+[2025-02-05 16:51:43 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/_vs/browserLink - null null
+[2025-02-05 16:51:43 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/_vs/browserLink - 200 null text/javascript; charset=UTF-8 9.1275ms
+[2025-02-05 16:51:43 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/swagger/v1/swagger.json - null null
+[2025-02-05 16:51:43 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 1.5533ms
+[2025-02-05 16:52:08 ] Starting the application...
+[2025-02-05 16:52:10 Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager] User profile is available. Using 'C:\Users\Amr Gamal\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-02-05 16:52:11 Microsoft.Hosting.Lifetime] Now listening on: https://localhost:7299
+[2025-02-05 16:52:11 Microsoft.Hosting.Lifetime] Now listening on: http://localhost:5185
+[2025-02-05 16:52:11 Microsoft.Hosting.Lifetime] Application started. Press Ctrl+C to shut down.
+[2025-02-05 16:52:11 Microsoft.Hosting.Lifetime] Hosting environment: Development
+[2025-02-05 16:52:11 Microsoft.Hosting.Lifetime] Content root path: F:\Ecommerce .Net\Project_Net\Car-Agency\Car-Agency
+[2025-02-05 16:52:11 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/index.html - null null
+[2025-02-05 16:52:11 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/index.html - 200 null text/html;charset=utf-8 179.3147ms
+[2025-02-05 16:52:11 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/_framework/aspnetcore-browser-refresh.js - null null
+[2025-02-05 16:52:11 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/index.js - null null
+[2025-02-05 16:52:11 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/index.js - 200 null application/javascript;charset=utf-8 12.0564ms
+[2025-02-05 16:52:11 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/_vs/browserLink - null null
+[2025-02-05 16:52:11 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/_framework/aspnetcore-browser-refresh.js - 200 13770 application/javascript; charset=utf-8 23.6563ms
+[2025-02-05 16:52:11 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/_vs/browserLink - 200 null text/javascript; charset=UTF-8 79.4242ms
+[2025-02-05 16:52:12 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/swagger/v1/swagger.json - null null
+[2025-02-05 16:52:12 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 20.3165ms
+[2025-02-05 16:52:34 ] Starting the application...
+[2025-02-05 16:52:35 Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager] User profile is available. Using 'C:\Users\Amr Gamal\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-02-05 16:52:35 Microsoft.Hosting.Lifetime] Now listening on: https://localhost:7299
+[2025-02-05 16:52:35 Microsoft.Hosting.Lifetime] Now listening on: http://localhost:5185
+[2025-02-05 16:52:35 Microsoft.Hosting.Lifetime] Application started. Press Ctrl+C to shut down.
+[2025-02-05 16:52:35 Microsoft.Hosting.Lifetime] Hosting environment: Development
+[2025-02-05 16:52:35 Microsoft.Hosting.Lifetime] Content root path: F:\Ecommerce .Net\Project_Net\Car-Agency\Car-Agency
+[2025-02-05 16:52:36 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/index.html - null null
+[2025-02-05 16:52:36 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/index.html - 200 null text/html;charset=utf-8 250.6631ms
+[2025-02-05 16:52:36 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/index.js - null null
+[2025-02-05 16:52:36 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/index.js - 200 null application/javascript;charset=utf-8 3.2693ms
+[2025-02-05 16:52:36 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/_vs/browserLink - null null
+[2025-02-05 16:52:36 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/_vs/browserLink - 200 null text/javascript; charset=UTF-8 79.6514ms
+[2025-02-05 16:52:36 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/_framework/aspnetcore-browser-refresh.js - null null
+[2025-02-05 16:52:36 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/_framework/aspnetcore-browser-refresh.js - 200 13770 application/javascript; charset=utf-8 8.8139ms
+[2025-02-05 16:52:36 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/swagger/v1/swagger.json - null null
+[2025-02-05 16:52:36 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 14.3596ms
+[2025-02-05 16:52:44 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/index.html - null null
+[2025-02-05 16:52:44 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/index.html - 200 null text/html;charset=utf-8 5.8598ms
+[2025-02-05 16:52:44 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/_framework/aspnetcore-browser-refresh.js - null null
+[2025-02-05 16:52:44 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/_framework/aspnetcore-browser-refresh.js - 200 13770 application/javascript; charset=utf-8 3.4461ms
+[2025-02-05 16:52:44 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/index.js - null null
+[2025-02-05 16:52:44 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/_vs/browserLink - null null
+[2025-02-05 16:52:44 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/index.js - 200 null application/javascript;charset=utf-8 0.5274ms
+[2025-02-05 16:52:44 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/_vs/browserLink - 200 null text/javascript; charset=UTF-8 20.4993ms
+[2025-02-05 16:52:44 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/swagger/v1/swagger.json - null null
+[2025-02-05 16:52:44 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 9.7823ms
+[2025-02-05 16:52:45 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/index.html - null null
+[2025-02-05 16:52:45 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/index.html - 200 null text/html;charset=utf-8 3.1624ms
+[2025-02-05 16:52:45 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/index.js - null null
+[2025-02-05 16:52:45 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/index.js - 200 null application/javascript;charset=utf-8 0.6848ms
+[2025-02-05 16:52:45 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/_framework/aspnetcore-browser-refresh.js - null null
+[2025-02-05 16:52:45 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/_vs/browserLink - null null
+[2025-02-05 16:52:45 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/_framework/aspnetcore-browser-refresh.js - 200 13770 application/javascript; charset=utf-8 1.2733ms
+[2025-02-05 16:52:45 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/_vs/browserLink - 200 null text/javascript; charset=UTF-8 11.6659ms
+[2025-02-05 16:52:45 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/swagger/v1/swagger.json - null null
+[2025-02-05 16:52:45 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 7.7297ms
+[2025-02-05 16:52:45 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/index.html - null null
+[2025-02-05 16:52:45 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/index.html - 200 null text/html;charset=utf-8 2.8751ms
+[2025-02-05 16:52:45 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/_framework/aspnetcore-browser-refresh.js - null null
+[2025-02-05 16:52:45 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/index.js - null null
+[2025-02-05 16:52:45 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/_vs/browserLink - null null
+[2025-02-05 16:52:45 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/index.js - 200 null application/javascript;charset=utf-8 0.4712ms
+[2025-02-05 16:52:45 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/_framework/aspnetcore-browser-refresh.js - 200 13770 application/javascript; charset=utf-8 2.2149ms
+[2025-02-05 16:52:45 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/_vs/browserLink - 200 null text/javascript; charset=UTF-8 18.8513ms
+[2025-02-05 16:52:45 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/swagger/v1/swagger.json - null null
+[2025-02-05 16:52:45 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 2.7154ms
+[2025-02-05 16:52:45 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/index.html - null null
+[2025-02-05 16:52:45 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/index.html - 200 null text/html;charset=utf-8 4.1563ms
+[2025-02-05 16:52:45 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/_framework/aspnetcore-browser-refresh.js - null null
+[2025-02-05 16:52:45 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/index.js - null null
+[2025-02-05 16:52:45 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/index.js - 200 null application/javascript;charset=utf-8 0.8813ms
+[2025-02-05 16:52:45 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/_vs/browserLink - null null
+[2025-02-05 16:52:45 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/_framework/aspnetcore-browser-refresh.js - 200 13770 application/javascript; charset=utf-8 4.689ms
+[2025-02-05 16:52:45 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/_vs/browserLink - 200 null text/javascript; charset=UTF-8 32.3682ms
+[2025-02-05 16:52:45 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/swagger/v1/swagger.json - null null
+[2025-02-05 16:52:45 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 1.0369ms
+[2025-02-05 16:55:06 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/swagger/v1/swagger.json - null null
+[2025-02-05 16:55:06 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 16.2124ms
+[2025-02-05 16:58:49 ] Starting the application...
+[2025-02-05 16:58:50 Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager] User profile is available. Using 'C:\Users\Amr Gamal\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-02-05 16:58:51 Microsoft.Hosting.Lifetime] Now listening on: https://localhost:7299
+[2025-02-05 16:58:51 Microsoft.Hosting.Lifetime] Now listening on: http://localhost:5185
+[2025-02-05 16:58:51 Microsoft.Hosting.Lifetime] Application started. Press Ctrl+C to shut down.
+[2025-02-05 16:58:51 Microsoft.Hosting.Lifetime] Hosting environment: Development
+[2025-02-05 16:58:51 Microsoft.Hosting.Lifetime] Content root path: F:\Ecommerce .Net\Project_Net\Car-Agency\Car-Agency
+[2025-02-05 16:58:51 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/index.html - null null
+[2025-02-05 16:58:51 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/index.html - 200 null text/html;charset=utf-8 329.9145ms
+[2025-02-05 16:58:51 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/_vs/browserLink - null null
+[2025-02-05 16:58:52 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/_framework/aspnetcore-browser-refresh.js - null null
+[2025-02-05 16:58:52 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/_framework/aspnetcore-browser-refresh.js - 200 13770 application/javascript; charset=utf-8 6.5301ms
+[2025-02-05 16:58:52 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/_vs/browserLink - 200 null text/javascript; charset=UTF-8 47.1295ms
+[2025-02-05 16:58:52 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/swagger/v1/swagger.json - null null
+[2025-02-05 16:58:52 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 8.3769ms
+[2025-02-05 16:58:55 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/api/User - null null
+[2025-02-05 16:58:57 Microsoft.AspNetCore.Routing.EndpointMiddleware] Executing endpoint 'Server.Controllers.UserController.GetAllCars (Server)'
+[2025-02-05 16:58:57 Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker] Route matched with {action = "GetAllCars", controller = "User"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllCars() on controller Server.Controllers.UserController (Server).
+[2025-02-05 16:58:57 Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker] Executed action Server.Controllers.UserController.GetAllCars (Server) in 6.4647ms
+[2025-02-05 16:58:57 Microsoft.AspNetCore.Routing.EndpointMiddleware] Executed endpoint 'Server.Controllers.UserController.GetAllCars (Server)'
+[2025-02-05 16:58:57 Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Unable to resolve service for type 'Server.Models.UserService' while attempting to activate 'Server.Controllers.UserController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.ThrowHelperUnableToResolveService(Type type, Type requiredBy)
+   at lambda_method4(Closure, IServiceProvider, Object[])
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass6_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.ResponseCompression.ResponseCompressionMiddleware.InvokeCore(HttpContext context)
+   at Server.Startup.<>c.<<Configure>b__6_1>d.MoveNext() in F:\Ecommerce .Net\Project_Net\Car-Agency\Car-Agency\Startup.cs:line 193
+--- End of stack trace from previous location ---
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+[2025-02-05 16:58:58 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/api/User - 500 null text/plain; charset=utf-8 2196.3797ms
+[2025-02-05 16:59:05 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/swagger/v1/swagger.json - null null
+[2025-02-05 16:59:05 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 13.0901ms
+[2025-02-05 17:20:07 ] Starting the application...
+[2025-02-05 17:20:08 Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager] User profile is available. Using 'C:\Users\Amr Gamal\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2025-02-05 17:20:08 Microsoft.Hosting.Lifetime] Now listening on: https://localhost:7299
+[2025-02-05 17:20:08 Microsoft.Hosting.Lifetime] Now listening on: http://localhost:5185
+[2025-02-05 17:20:08 Microsoft.Hosting.Lifetime] Application started. Press Ctrl+C to shut down.
+[2025-02-05 17:20:08 Microsoft.Hosting.Lifetime] Hosting environment: Development
+[2025-02-05 17:20:08 Microsoft.Hosting.Lifetime] Content root path: F:\Ecommerce .Net\Project_Net\Car-Agency\Car-Agency
+[2025-02-05 17:20:13 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/_framework/aspnetcore-browser-refresh.js - null null
+[2025-02-05 17:20:13 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/_framework/aspnetcore-browser-refresh.js - 200 13770 application/javascript; charset=utf-8 48.7416ms
+[2025-02-05 17:20:13 Microsoft.AspNetCore.Hosting.Diagnostics] Request starting HTTP/2 GET https://localhost:7299/swagger/v1/swagger.json - null null
+[2025-02-05 17:20:13 Microsoft.AspNetCore.Hosting.Diagnostics] Request finished HTTP/2 GET https://localhost:7299/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 45.6289ms
