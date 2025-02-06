@@ -17,6 +17,7 @@ namespace Server.Data
             modelBuilder.Entity<Item>().HasData(new Item
             {
                 Id = -2,
+                ExportCountryTo = "Yemen",
                 VehicleType = "Sedan",
                 ExportPlateNumber = "EXP12345",
                 RegistrationPlateNumber = "ABC123",
@@ -52,6 +53,7 @@ namespace Server.Data
              new Item
              {
                  Id = -1,
+                 ExportCountryTo = "Yemen",
                  VehicleType = "SUV",
                  ExportPlateNumber = "EXP67890",
                  RegistrationPlateNumber = "XYZ789",

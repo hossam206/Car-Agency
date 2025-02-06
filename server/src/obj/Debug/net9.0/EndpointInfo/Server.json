@@ -32,7 +32,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           }
         }
       }
@@ -63,7 +63,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           }
         }
       }
@@ -86,7 +86,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           }
         }
       }
@@ -128,7 +128,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           }
         }
       }
@@ -150,7 +150,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           }
         }
       }
@@ -173,7 +173,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           }
         }
       }
@@ -196,7 +196,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           }
         }
       }
@@ -216,6 +216,7 @@
           "emiratesIdNumber",
           "emptyWeight",
           "engineNumber",
+          "exportCountryTo",
           "exportPlateNumber",
           "fuelType",
           "insuranceCompany",
@@ -244,40 +245,56 @@
             "type": "integer",
             "format": "int32"
           },
+          "exportCountryTo": {
+            "minLength": 1,
+            "type": "string"
+          },
           "vehicleType": {
+            "minLength": 1,
             "type": "string"
           },
           "exportPlateNumber": {
+            "minLength": 1,
             "type": "string"
           },
           "registrationPlateNumber": {
+            "minLength": 1,
             "type": "string"
           },
           "registrationDate": {
+            "minLength": 1,
             "type": "string"
           },
           "registrationExpiryDate": {
+            "minLength": 1,
             "type": "string"
           },
           "vehicleMake": {
+            "minLength": 1,
             "type": "string"
           },
           "category": {
+            "minLength": 1,
             "type": "string"
           },
           "modelYear": {
+            "minLength": 1,
             "type": "string"
           },
           "countryOfOrigin": {
+            "minLength": 1,
             "type": "string"
           },
           "vehicleColor": {
+            "minLength": 1,
             "type": "string"
           },
           "chassisNumber": {
+            "minLength": 1,
             "type": "string"
           },
           "engineNumber": {
+            "minLength": 1,
             "type": "string"
           },
           "numberOfDoors": {
@@ -285,6 +302,7 @@
             "format": "int32"
           },
           "fuelType": {
+            "minLength": 1,
             "type": "string"
           },
           "numberOfSeats": {
@@ -296,48 +314,63 @@
             "format": "int32"
           },
           "insuranceCompany": {
+            "minLength": 1,
             "type": "string"
           },
           "insuranceType": {
+            "minLength": 1,
             "type": "string"
           },
           "insurancePolicyNumber": {
+            "minLength": 1,
             "type": "string"
           },
           "insuranceExpiryDate": {
+            "minLength": 1,
             "type": "string"
           },
           "ownerName": {
+            "minLength": 1,
             "type": "string"
           },
           "nationality": {
+            "minLength": 1,
             "type": "string"
           },
           "passportNumber": {
+            "minLength": 1,
             "type": "string"
           },
           "trafficCodeNumber": {
+            "minLength": 1,
             "type": "string"
           },
           "emiratesIdNumber": {
+            "minLength": 1,
             "type": "string"
           },
           "driverName": {
+            "minLength": 1,
             "type": "string"
           },
           "licenseNumber": {
+            "minLength": 1,
             "type": "string"
           },
           "driverNationality": {
+            "minLength": 1,
             "type": "string"
           },
           "licenseSource": {
+            "minLength": 1,
             "type": "string"
           },
           "certificateIssueDate": {
+            "minLength": 1,
             "type": "string"
           },
           "certificateReferenceNumber": {
+            "minLength": 1,
             "type": "string"
           }
         },
@@ -351,10 +384,12 @@
         "type": "object",
         "properties": {
           "email": {
+            "minLength": 1,
             "type": "string",
             "format": "email"
           },
           "password": {
+            "minLength": 1,
             "type": "string"
           }
         },

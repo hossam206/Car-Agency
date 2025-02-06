@@ -1,2 +1,0 @@
-wwwroot\ExportCertificate.pdf
-wwwroot\new1.jpg
