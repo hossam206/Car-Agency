@@ -1,6 +1,20 @@
-﻿using iTextSharp.text.pdf;
-using iTextSharp.text;
-using System.Drawing;
+﻿using System.Drawing;
+using System.Drawing.Imaging;
+using ZXing;
+using ZXing.Common;
+using iText.Kernel.Pdf;
+using iText.Layout;
+using iText.IO.Image;
+using iText.Layout.Element;
+using iText.Kernel.Font;
+using iText.IO.Font;
+using iText.Kernel.Colors;
+using iText.IO.Font.Constants;
+using Image = iText.Layout.Element.Image;
+using iText.Kernel.Geom;
+
+
+
 
 namespace Server.Models
 {
@@ -13,9 +27,17 @@ namespace Server.Models
         Task<bool> Update(Item item, int id);
         void GenerateCertificate(Item item);
     }
-    public class ItemService: IItemService
+    public class ItemService : IItemService
     {
-        private readonly ItemRepository  _itemRepository;
+        private readonly ItemRepository _itemRepository;
+        private const string TemplatePath = "F:\\new.jpg";
+        private const string OutputPath = "F:\\ExportCertificate.pdf";
+        private const string QrCodePath = "F:\\QRCode.png";
+        private static readonly PdfFont Font = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
+        private const float LargeFontSize = 10;
+        private const float SmallFontSize = 8;
+        private static readonly DeviceRgb BlueColor = new DeviceRgb(53, 60, 145);
+        private static readonly DeviceRgb WhiteColor = new DeviceRgb(249, 251, 255);
 
         public ItemService(ItemRepository itemRepository)
         {
@@ -26,7 +48,7 @@ namespace Server.Models
         {
             if (item == null)
                 return false;
-           return await _itemRepository.Add(item);
+            return await _itemRepository.Add(item);
         }
 
         public async Task<bool> Delete(int id)
@@ -53,71 +75,104 @@ namespace Server.Models
             return await _itemRepository.Update(item, id);
         }
 
+
         public void GenerateCertificate(Item item)
         {
-            string templatePath = "F:\\Ecommerce .Net\\Project_Net\\Car-Agency\\server\\src\\wwwroot\\new1.jpg"; // صورة القالب
-            string outputPath = "F:\\Ecommerce .Net\\Project_Net\\Car-Agency\\server\\src\\wwwroot\\ExportCertificate.pdf";
+            string url = "https://localhost:7299/api/item/create/7";
+            GenerateQrCode(url, QrCodePath);
 
-            using (FileStream fs = new FileStream(outputPath, FileMode.Create))
+            using (PdfWriter writer = new PdfWriter(OutputPath))
+            using (PdfDocument pdf = new PdfDocument(writer))
+            using (Document document = new Document(pdf))
             {
-                Document document = new Document(PageSize.A4);
-                PdfWriter writer = PdfWriter.GetInstance(document, fs);
-                document.Open();
-
-                // تحميل صورة القالب
-                iTextSharp.text.Image background = iTextSharp.text.Image.GetInstance(templatePath);
-                background.SetAbsolutePosition(0, 0);
-                background.ScaleToFit(PageSize.A4.Width, PageSize.A4.Height);
-                document.Add(background);
-
-                // إنشاء طبقة الكتابة فوق الصورة
-                PdfContentByte cb = writer.DirectContent;
-                BaseFont bf = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
-                cb.SetFontAndSize(bf, 12);
-                cb.SetColorFill(BaseColor.BLACK);
-
-                // إضافة البيانات في أماكنها
-                cb.BeginText();
-                cb.ShowTextAligned(Element.ALIGN_LEFT, item.VehicleType, 335, 720, 0);
-                cb.ShowTextAligned(Element.ALIGN_LEFT, item.ExportPlateNumber, 335, 160, 0);
-                cb.ShowTextAligned(Element.ALIGN_LEFT, item.RegistrationPlateNumber, 335, 660, 0);
-                cb.ShowTextAligned(Element.ALIGN_LEFT, item.RegistrationDate, 335, 233, 0);
-                cb.ShowTextAligned(Element.ALIGN_LEFT, item.RegistrationExpiryDate, 335, 234, 0);
-                cb.ShowTextAligned(Element.ALIGN_LEFT, item.VehicleMake, 335, 235, 0);
-                cb.ShowTextAligned(Element.ALIGN_LEFT, item.Category, 335, 234, 0);
-                cb.ShowTextAligned(Element.ALIGN_LEFT, item.ModelYear, 335, 560, 0);
-                cb.ShowTextAligned(Element.ALIGN_LEFT, item.CountryOfOrigin, 689, 540, 0);
-                cb.ShowTextAligned(Element.ALIGN_LEFT, item.VehicleColor, 335, 520, 0);
-                cb.ShowTextAligned(Element.ALIGN_LEFT, item.ChassisNumber, 335, 500, 0);
-                cb.ShowTextAligned(Element.ALIGN_LEFT, item.EngineNumber, 335, 480, 0);
-                cb.ShowTextAligned(Element.ALIGN_LEFT, item.NumberOfDoors.ToString(), 335, 460, 0);
-                cb.ShowTextAligned(Element.ALIGN_LEFT, item.FuelType, 335, 440, 0);
-                cb.ShowTextAligned(Element.ALIGN_LEFT, item.NumberOfSeats.ToString(), 335, 420, 0);
-                cb.ShowTextAligned(Element.ALIGN_LEFT, item.EmptyWeight.ToString(), 335, 400, 0);
-                cb.ShowTextAligned(Element.ALIGN_LEFT, item.InsuranceCompany, 335, 380, 0);
-                cb.ShowTextAligned(Element.ALIGN_LEFT, item.InsuranceType, 335, 335, 0);
-                cb.ShowTextAligned(Element.ALIGN_LEFT, item.InsurancePolicyNumber, 400, 340, 0);
-                cb.ShowTextAligned(Element.ALIGN_LEFT, item.InsuranceExpiryDate, 400, 320, 0);
-                cb.ShowTextAligned(Element.ALIGN_LEFT, item.OwnerName, 400, 300, 0);
-                cb.ShowTextAligned(Element.ALIGN_LEFT, item.Nationality, 400, 280, 0);
-                cb.ShowTextAligned(Element.ALIGN_LEFT, item.PassportNumber, 400, 260, 0);
-                cb.ShowTextAligned(Element.ALIGN_LEFT, item.TrafficCodeNumber, 400, 240, 0);
-                cb.ShowTextAligned(Element.ALIGN_LEFT, item.EmiratesIdNumber, 400, 220, 0);
-                cb.ShowTextAligned(Element.ALIGN_LEFT, item.DriverName, 400, 200, 0);
-                cb.ShowTextAligned(Element.ALIGN_LEFT, item.LicenseNumber, 400, 180, 0);
-                cb.ShowTextAligned(Element.ALIGN_LEFT, item.DriverNationality, 400, 160, 0);
-                cb.ShowTextAligned(Element.ALIGN_LEFT, item.LicenseSource, 400, 140, 0);
-                cb.ShowTextAligned(Element.ALIGN_LEFT, item.CertificateIssueDate, 400, 120, 0);
-                cb.ShowTextAligned(Element.ALIGN_LEFT, item.CertificateReferenceNumber, 400, 100, 0);
-                cb.EndText();
-                document.Close();
+                AddImage(document, TemplatePath, 0, 0, PageSize.A4.GetWidth(), PageSize.A4.GetHeight());
+                AddImage(document, QrCodePath, 250, 397, 64, 50);
+                AddCertificateText(document, item);
             }
-}
+        }
 
+        private static void AddCertificateText(Document document, Item item)
+        {
+            var textElements = new (string, float, float, float, DeviceRgb)[]
+            {
+            (item.ExportCountryTo, 173, 725, LargeFontSize, WhiteColor),
+            (item.ExportCountryTo, 150, 624, LargeFontSize, WhiteColor),
+            (item.VehicleType, 340, 714, LargeFontSize, BlueColor),
+            (item.ExportPlateNumber, 340, 683, LargeFontSize, BlueColor),
+            (item.RegistrationPlateNumber, 340, 652, LargeFontSize, BlueColor),
+            (item.RegistrationDate, 340, 619, LargeFontSize, BlueColor),
+            (item.RegistrationExpiryDate, 340, 586, LargeFontSize, BlueColor),
+            (item.VehicleMake, 340, 554, LargeFontSize, BlueColor),
+            (item.Category, 340, 521, LargeFontSize, BlueColor),
+            (item.ModelYear, 340, 488, LargeFontSize, BlueColor),
+            (item.CountryOfOrigin, 340, 456, LargeFontSize, BlueColor),
+            (item.VehicleColor, 340, 424, LargeFontSize, BlueColor),
+            (item.ChassisNumber, 340, 394, LargeFontSize, BlueColor),
+            (item.EngineNumber, 410, 359, LargeFontSize, BlueColor),
+            (item.NumberOfDoors.ToString(), 340, 329, LargeFontSize, BlueColor),
+            (item.FuelType, 340, 297, LargeFontSize, BlueColor),
+            (item.NumberOfSeats.ToString(), 340, 266, LargeFontSize, BlueColor),
+            (item.EmptyWeight.ToString(), 340, 233, LargeFontSize, BlueColor),
+            (item.InsuranceCompany, 340, 200, LargeFontSize, BlueColor),
+            (item.InsuranceType, 340, 170, LargeFontSize, BlueColor),
+            (item.InsurancePolicyNumber, 340, 139, LargeFontSize, BlueColor),
+            (item.InsuranceExpiryDate, 340, 107, LargeFontSize, BlueColor),
+            (item.OwnerName, 268, 365, LargeFontSize, BlueColor),
+            (item.OwnerName, 25, 338, LargeFontSize, BlueColor),
+            (item.Nationality, 25, 311, LargeFontSize, BlueColor),
+            (item.PassportNumber, 140, 280, LargeFontSize, BlueColor),
+            (item.TrafficCodeNumber, 140, 258, LargeFontSize, BlueColor),
+            (item.EmiratesIdNumber, 140, 228, LargeFontSize, BlueColor),
+            (item.DriverName, 220, 210, LargeFontSize, BlueColor),
+            (item.DriverName, 78, 189, LargeFontSize, BlueColor),
+            (item.LicenseNumber, 140, 172, LargeFontSize, BlueColor),
+            (item.DriverNationality, 140, 152, LargeFontSize, BlueColor),
+            (item.LicenseSource, 140, 122, LargeFontSize, BlueColor),
+            (item.CertificateIssueDate, 22, 500, SmallFontSize, WhiteColor),
+            (item.CertificateIssueDate, 260, 492, SmallFontSize, WhiteColor),
+            (item.CertificateReferenceNumber, 242, 450, SmallFontSize, WhiteColor)
+            };
 
-       
+            foreach (var (text, x, y, fontSize, color) in textElements)
+            {
+                AddText(document, text, x, y, fontSize, color);
+            }
+        }
 
+        private static void AddText(Document document, string text, float x, float y, float fontSize, DeviceRgb color)
+        {
+            document.Add(new Paragraph(text).SetFont(Font).SetFontSize(fontSize).SetFontColor(color).SetFixedPosition(x, y, 200));
+        }
 
+        private static void AddImage(Document document, string path, float x, float y, float width, float height)
+        {
+            Image image = new Image(ImageDataFactory.Create(path)).SetFixedPosition(x, y).ScaleToFit(width, height);
+            document.Add(image);
+        }
 
+        private static void GenerateQrCode(string text, string filePath)
+        {
+            var writer = new BarcodeWriterPixelData
+            {
+                Format = BarcodeFormat.QR_CODE,
+                Options = new EncodingOptions { Height = 150, Width = 150, Margin = 1 }
+            };
+
+            var pixelData = writer.Write(text);
+
+            using (Bitmap bitmap = new Bitmap(pixelData.Width, pixelData.Height, PixelFormat.Format32bppArgb))
+            {
+                for (int y = 0; y < pixelData.Height; y++)
+                {
+                    for (int x = 0; x < pixelData.Width; x++)
+                    {
+                        System.Drawing.Color pixelColor = pixelData.Pixels[(y * pixelData.Width + x) * 4] == 0 ? System.Drawing.Color.Black : System.Drawing.Color.White;
+                        bitmap.SetPixel(x, y, pixelColor);
+                    }
+                }
+                bitmap.Save(filePath, ImageFormat.Png);
+            }
+        }
     }
+
 }
