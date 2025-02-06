@@ -11,6 +11,7 @@ using System.Text;
 using Server.Models;
 using Server.Services;
 using Server.Repositorys;
+using Server.Middlewares;
 
 namespace Server
 {
@@ -140,15 +141,17 @@ namespace Server
             });
 
             // Middlewares
+            services.AddScoped<AuthenticationMiddleware>();
 
             // Services
             services.AddScoped<IItemService, ItemService>();
-            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IQRCodeService, QRCodeService>();
 
             // Reposeitorys
             services.AddScoped<ItemRepository>();
-            services.AddScoped<UserRepository>();
+            services.AddScoped<IItemRepository, ItemRepository>();
+            services.AddScoped<AuthRepository>();
             services.AddScoped<QRCodeRepository>();
 
             // Controllers
@@ -206,7 +209,7 @@ namespace Server
             !context.Request.Path.StartsWithSegments("/api/car/view"),
               appBuilder =>
               {
-                  // Here middleWare
+                  appBuilder.UseMiddleware<AuthenticationMiddleware>();
               });
 
             app.UseEndpoints(endpoints =>

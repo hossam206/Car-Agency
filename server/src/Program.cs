@@ -1,3 +1,4 @@
+global using System;
 using Server;
 using Serilog;
 
