@@ -1,0 +1,113 @@
+import React, { useState } from "react";
+import { loginStyles } from "./className";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { BiSolidShow } from "react-icons/bi";
+import { BiSolidHide } from "react-icons/bi";
+import { Button } from "@/Components/ui/button";
+const Login: React.FC = () => {
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const formik = useFormik({
+    initialValues: {
+      Username: "",
+      password: "",
+    },
+    validationSchema: Yup.object({
+      Username: Yup.string().required("Username is required"),
+      password: Yup.string().required("Password is required"),
+    }),
+    onSubmit: (values) => {
+      console.log(values);
+    },
+  });
+  return (
+    <div className="container mx-auto flex flex-col justify-center  h-screen   ">
+      <section className="flex flex-col items-center pt-6">
+        <div className={loginStyles.formContainer}>
+          <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+            <h1 className={loginStyles.HeadingStyles}>Welcome Login</h1>
+            <form
+              className="space-y-4 md:space-y-6"
+              method="POST"
+              onSubmit={formik.handleSubmit}
+            >
+              <div>
+                <label
+                  htmlFor="name"
+                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  User name
+                </label>
+                <input
+                  id="name"
+                  type="text"
+                  placeholder="e.g John 23"
+                  name="Username"
+                  className={`${loginStyles.inputStyles} ${
+                    formik.touched.Username && formik.errors.Username
+                      ? "border-red-500"
+                      : ""
+                  }`}
+                  value={formik.values.Username}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                />
+                {formik.touched.Username && formik.errors.Username && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {formik.errors.Username}
+                  </p>
+                )}
+              </div>
+
+              <div className="relative overflow-hidden">
+                <label
+                  htmlFor="password"
+                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  Password
+                </label>
+                <input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  placeholder="••••••••"
+                  className={`${loginStyles.inputStyles} ${
+                    formik.touched.password && formik.errors.password
+                      ? "border-red-500"
+                      : "focus:border-slate-700"
+                  }`}
+                  value={formik.values.password}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                />
+                {formik.touched.password && formik.errors.password && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {formik.errors.password}
+                  </p>
+                )}
+                <span
+                  className="absolute right-1 top-8 transform   cursor-pointer w-6 h-6 rounded-full flex items-center justify-center text-gray-800 hover:text-gray-500 hover:bg-gray-100 transition-colors duration-200"
+                  onClick={() => {
+                    setShowPassword(!showPassword);
+                  }}
+                >
+                  {showPassword ? <BiSolidShow /> : <BiSolidHide />}
+                </span>
+              </div>
+              <Button
+                variant={"default"}
+                type="submit"
+                size="lg"
+                className="w-full"
+              >
+                Login
+              </Button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default Login;
