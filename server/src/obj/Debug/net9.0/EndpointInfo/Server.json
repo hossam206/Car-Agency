@@ -6,10 +6,193 @@
     "version": "v1"
   },
   "paths": {
-    "/api/User": {
+    "/api/Auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Item/add": {
+      "post": {
+        "tags": [
+          "Item"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Item"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Item"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Item"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Item/remove/{carId}": {
+      "delete": {
+        "tags": [
+          "Item"
+        ],
+        "parameters": [
+          {
+            "name": "carId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Item/update/{carId}": {
+      "put": {
+        "tags": [
+          "Item"
+        ],
+        "parameters": [
+          {
+            "name": "carId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Item"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Item"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Item"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Item": {
       "get": {
         "tags": [
-          "User"
+          "Item"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Item/{id}": {
+      "get": {
+        "tags": [
+          "Item"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Item/create/{id}": {
+      "get": {
+        "tags": [
+          "Item"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
         ],
         "responses": {
           "200": {
@@ -20,6 +203,164 @@
     }
   },
   "components": {
+    "schemas": {
+      "Item": {
+        "required": [
+          "category",
+          "certificateIssueDate",
+          "certificateReferenceNumber",
+          "chassisNumber",
+          "countryOfOrigin",
+          "driverName",
+          "driverNationality",
+          "emiratesIdNumber",
+          "emptyWeight",
+          "engineNumber",
+          "exportPlateNumber",
+          "fuelType",
+          "insuranceCompany",
+          "insuranceExpiryDate",
+          "insurancePolicyNumber",
+          "insuranceType",
+          "licenseNumber",
+          "licenseSource",
+          "modelYear",
+          "nationality",
+          "numberOfDoors",
+          "numberOfSeats",
+          "ownerName",
+          "passportNumber",
+          "registrationDate",
+          "registrationExpiryDate",
+          "registrationPlateNumber",
+          "trafficCodeNumber",
+          "vehicleColor",
+          "vehicleMake",
+          "vehicleType"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "vehicleType": {
+            "type": "string"
+          },
+          "exportPlateNumber": {
+            "type": "string"
+          },
+          "registrationPlateNumber": {
+            "type": "string"
+          },
+          "registrationDate": {
+            "type": "string"
+          },
+          "registrationExpiryDate": {
+            "type": "string"
+          },
+          "vehicleMake": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "modelYear": {
+            "type": "string"
+          },
+          "countryOfOrigin": {
+            "type": "string"
+          },
+          "vehicleColor": {
+            "type": "string"
+          },
+          "chassisNumber": {
+            "type": "string"
+          },
+          "engineNumber": {
+            "type": "string"
+          },
+          "numberOfDoors": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fuelType": {
+            "type": "string"
+          },
+          "numberOfSeats": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "emptyWeight": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "insuranceCompany": {
+            "type": "string"
+          },
+          "insuranceType": {
+            "type": "string"
+          },
+          "insurancePolicyNumber": {
+            "type": "string"
+          },
+          "insuranceExpiryDate": {
+            "type": "string"
+          },
+          "ownerName": {
+            "type": "string"
+          },
+          "nationality": {
+            "type": "string"
+          },
+          "passportNumber": {
+            "type": "string"
+          },
+          "trafficCodeNumber": {
+            "type": "string"
+          },
+          "emiratesIdNumber": {
+            "type": "string"
+          },
+          "driverName": {
+            "type": "string"
+          },
+          "licenseNumber": {
+            "type": "string"
+          },
+          "driverNationality": {
+            "type": "string"
+          },
+          "licenseSource": {
+            "type": "string"
+          },
+          "certificateIssueDate": {
+            "type": "string"
+          },
+          "certificateReferenceNumber": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserDto": {
+        "required": [
+          "email",
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
     "securitySchemes": {
       "Bearer": {
         "type": "apiKey",
