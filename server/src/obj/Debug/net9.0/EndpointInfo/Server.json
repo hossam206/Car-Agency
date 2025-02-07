@@ -13,6 +13,11 @@
         ],
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserDto"
+              }
+            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/UserDto"
@@ -56,6 +61,11 @@
         ],
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Car"
+              }
+            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/Car"
@@ -121,6 +131,11 @@
         ],
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Car"
+              }
+            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/Car"

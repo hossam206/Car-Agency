@@ -38,6 +38,7 @@ namespace Server
                 options.UseSqlServer(_connectionString)
             );
 
+
             //  Gzip Compression 
             services.Configure<GzipCompressionProviderOptions>(options =>
             {
