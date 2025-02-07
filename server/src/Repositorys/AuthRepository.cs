@@ -5,7 +5,7 @@ using Server.Models;
 namespace Server.Repositorys
 {
     public interface IAuthRepository {
-        Task<User> GetUser(string email ,string password);
+        Task<User> Login(string email ,string password);
     }
 
     public class AuthRepository : IAuthRepository
@@ -17,9 +17,12 @@ namespace Server.Repositorys
             _context = context;
         }
 
-        public async Task<User> GetUser(string email , string password)
+        public async Task<User> Login(string email , string password)
         {
-            return await _context.Users.FirstOrDefaultAsync(e => e.Email == email && e.Password == password);
+            var user = await _context.Users.FirstOrDefaultAsync(e => e.Email.ToLower() == email.ToLower() && e.Password == password );
+           if (user == null) 
+                return null;
+            return user;
         }
     }
 }

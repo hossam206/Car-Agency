@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "XoU0aYXHCymtD0JuZprpMzSqS76GhmmBLQJCwnK9rTU=",
+  "Hash": "tVLs3OAM214IkgNfnYraZUheyQnDrW12mCt1tIEirNs=",
   "Source": "Server",
   "BasePath": "_content/Server",
   "Mode": "Default",
@@ -10,7 +10,7 @@
     {
       "Name": "Server\\wwwroot",
       "Source": "Server",
-      "ContentRoot": "F:\\Ecommerce _Net\\Project_Net\\Car-Agency\\server\\src\\wwwroot\\",
+      "ContentRoot": "F:\\Ecommerce_Net\\Project_Net\\Car-Agency\\server\\src\\wwwroot\\",
       "BasePath": "_content/Server",
       "Pattern": "**"
     }

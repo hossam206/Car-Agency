@@ -16,9 +16,19 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "Server.Controllers.ItemController",
+    "ContainingType": "Server.Controllers.AuthController",
+    "Method": "Logout",
+    "RelativePath": "api/Auth/logout",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Server.Controllers.CarController",
     "Method": "GetAll",
-    "RelativePath": "api/Item",
+    "RelativePath": "api/Car",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -32,9 +42,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "Server.Controllers.ItemController",
+    "ContainingType": "Server.Controllers.CarController",
     "Method": "GetById",
-    "RelativePath": "api/Item/{id}",
+    "RelativePath": "api/Car/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -48,25 +58,35 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "Server.Controllers.ItemController",
+    "ContainingType": "Server.Controllers.CarController",
     "Method": "Add",
-    "RelativePath": "api/Item/add",
+    "RelativePath": "api/Car/add",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "car",
-        "Type": "Server.Models.Item",
+        "Type": "Server.Models.Car",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "Server.Controllers.ItemController",
-    "Method": "CreateCertificate",
-    "RelativePath": "api/Item/create/{id}",
+    "ContainingType": "Server.Controllers.CarController",
+    "Method": "Count",
+    "RelativePath": "api/Car/count",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Server.Controllers.CarController",
+    "Method": "DownloadCertificate",
+    "RelativePath": "api/Car/download/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -80,9 +100,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "Server.Controllers.ItemController",
+    "ContainingType": "Server.Controllers.CarController",
     "Method": "Delete",
-    "RelativePath": "api/Item/remove/{carId}",
+    "RelativePath": "api/Car/remove/{carId}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -96,16 +116,16 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "Server.Controllers.ItemController",
+    "ContainingType": "Server.Controllers.CarController",
     "Method": "Update",
-    "RelativePath": "api/Item/update/{carId}",
+    "RelativePath": "api/Car/update/{carId}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "car",
-        "Type": "Server.Models.Item",
+        "Type": "Server.Models.Car",
         "IsRequired": true
       },
       {
