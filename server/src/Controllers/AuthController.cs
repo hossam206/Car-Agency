@@ -17,39 +17,44 @@ namespace Server.Controllers
         {
             _authService = authService;
             _logger = logger;
-
         }
 
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] UserDto data)
         {
             try
-                             
             {
-                var user =  _authService.GetUser(data.Email, data.Password);
-
+                var user = await _authService.Login(data.Email, data.Password);
                 if (user == null)
-                {
-                    return BadRequest(new { message = "Something Error" });
-                }
-              
+                    return BadRequest(new { message = "Invalid credentials" });
+
                 var token = _authService.GenerateJwtToken(data);
-                Response.Cookies.Append("AuthToken",token ,new CookieOptions
+                Response.Cookies.Append("AuthToken", token, new CookieOptions
                 {
                     HttpOnly = true,
-                    Secure = true,
+                    Secure = false,  // Change in production to true 
                     SameSite = SameSiteMode.Strict,
                     Expires = DateTime.UtcNow.AddDays(7),
                 });
+
                 Response.Cookies.Delete("token");
                 Response.Cookies.Delete("refreshToken");
-                return Ok(new { message = "Login successfully"});
+                return Ok(new { message = "Login successfully" });
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "An error occurred while executing the action.");
-                return StatusCode(500, new { message = "Internal Server Error" ,error =ex });
+                return StatusCode(500, new { message = "Internal Server Error", error = ex });
             }
         }
+
+        [HttpGet("logout")]
+        public  IActionResult Logout()
+        {
+            Response.Cookies.Delete("AuthToken");
+            return Ok(new { message = "Logout successfully" });
+        }
+
+
     }
 }

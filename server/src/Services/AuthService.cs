@@ -10,7 +10,7 @@ namespace Server.Services
 {
     public interface IAuthService
     {
-        Task<User> GetUser(string email, string password);
+        Task<User> Login(string email, string password);
         public string GenerateJwtToken(UserDto user);
     }
 
@@ -27,17 +27,16 @@ namespace Server.Services
             _key = Environment.GetEnvironmentVariable("KEY");
         }
 
-        public async Task<User> GetUser(string email, string password)
+        public async Task<User> Login(string email, string password)
         {
             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
                 return null;
-            return await _authRepository.GetUser(email, password);
+            return await _authRepository.Login(email, password);
         }
 
         public string GenerateJwtToken(UserDto user)
         {
             var key = Encoding.ASCII.GetBytes(_key);
-
             var tokenHandler = new JwtSecurityTokenHandler();
             var tokenDescriptor = new SecurityTokenDescriptor
             {

@@ -2,6 +2,7 @@ global using System;
 using Server;
 using Serilog;
 
+
 public class Program {
 
 
@@ -25,7 +26,7 @@ public class Program {
         {
             Log.CloseAndFlush();
         }
-
+        
         CreateHostBuilder(args).Build().Run();
     }
     public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -34,5 +35,4 @@ public class Program {
        {
            webBuilder.UseStartup<Startup>();
        });
-
 }

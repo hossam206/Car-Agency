@@ -13,6 +13,7 @@ using Server.Services;
 using Server.Repositorys;
 using Server.Middlewares;
 
+
 namespace Server
 {
     public class Startup
@@ -144,15 +145,18 @@ namespace Server
             services.AddScoped<AuthenticationMiddleware>();
 
             // Services
-            services.AddScoped<IItemService, ItemService>();
+            services.AddScoped<ICarService, CarService>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IQRCodeService, QRCodeService>();
 
             // Reposeitorys
-            services.AddScoped<ItemRepository>();
-            services.AddScoped<IItemRepository, ItemRepository>();
+            services.AddScoped<CarRepository>();
+            services.AddScoped<ICarRepository, CarRepository>();
             services.AddScoped<AuthRepository>();
             services.AddScoped<QRCodeRepository>();
+
+            // AutoMapper
+            services.AddAutoMapper(typeof(Startup));
 
             // Controllers
             services.AddControllers();
@@ -206,7 +210,7 @@ namespace Server
             // Expect path [ login - view ]
             app.UseWhen(context =>
             !context.Request.Path.StartsWithSegments("/api/auth/login") &&
-            !context.Request.Path.StartsWithSegments("/api/car/view"),
+            !context.Request.Path.StartsWithSegments("/api/car/download"),
               appBuilder =>
               {
                   appBuilder.UseMiddleware<AuthenticationMiddleware>();
