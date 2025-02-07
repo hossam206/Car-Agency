@@ -380,7 +380,6 @@ F:\Ecommerce _Net\Project_Net\Car-Agency\server\src\obj\Debug\net9.0\refint\Serv
 F:\Ecommerce _Net\Project_Net\Car-Agency\server\src\obj\Debug\net9.0\Server.pdb
 F:\Ecommerce _Net\Project_Net\Car-Agency\server\src\obj\Debug\net9.0\Server.genruntimeconfig.cache
 F:\Ecommerce _Net\Project_Net\Car-Agency\server\src\obj\Debug\net9.0\ref\Server.dll
-F:\Ecommerce_Net\Project_Net\Car-Agency\server\src\bin\Debug\net9.0\itext.io.dll
 F:\Ecommerce_Net\Project_Net\Car-Agency\server\src\bin\Debug\net9.0\appsettings.Development.json
 F:\Ecommerce_Net\Project_Net\Car-Agency\server\src\bin\Debug\net9.0\appsettings.json
 F:\Ecommerce_Net\Project_Net\Car-Agency\server\src\bin\Debug\net9.0\Server.staticwebassets.runtime.json
@@ -401,6 +400,7 @@ F:\Ecommerce_Net\Project_Net\Car-Agency\server\src\bin\Debug\net9.0\Humanizer.dl
 F:\Ecommerce_Net\Project_Net\Car-Agency\server\src\bin\Debug\net9.0\itext.barcodes.dll
 F:\Ecommerce_Net\Project_Net\Car-Agency\server\src\bin\Debug\net9.0\itext.bouncy-castle-connector.dll
 F:\Ecommerce_Net\Project_Net\Car-Agency\server\src\bin\Debug\net9.0\itext.forms.dll
+F:\Ecommerce_Net\Project_Net\Car-Agency\server\src\bin\Debug\net9.0\itext.io.dll
 F:\Ecommerce_Net\Project_Net\Car-Agency\server\src\bin\Debug\net9.0\itext.kernel.dll
 F:\Ecommerce_Net\Project_Net\Car-Agency\server\src\bin\Debug\net9.0\itext.layout.dll
 F:\Ecommerce_Net\Project_Net\Car-Agency\server\src\bin\Debug\net9.0\itext.pdfa.dll
@@ -412,6 +412,8 @@ F:\Ecommerce_Net\Project_Net\Car-Agency\server\src\bin\Debug\net9.0\itext.bouncy
 F:\Ecommerce_Net\Project_Net\Car-Agency\server\src\bin\Debug\net9.0\itext.commons.dll
 F:\Ecommerce_Net\Project_Net\Car-Agency\server\src\bin\Debug\net9.0\JWT.dll
 F:\Ecommerce_Net\Project_Net\Car-Agency\server\src\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+F:\Ecommerce_Net\Project_Net\Car-Agency\server\src\bin\Debug\net9.0\Microsoft.AspNetCore.JsonPatch.dll
+F:\Ecommerce_Net\Project_Net\Car-Agency\server\src\bin\Debug\net9.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 F:\Ecommerce_Net\Project_Net\Car-Agency\server\src\bin\Debug\net9.0\Microsoft.Bcl.AsyncInterfaces.dll
 F:\Ecommerce_Net\Project_Net\Car-Agency\server\src\bin\Debug\net9.0\Microsoft.Build.Locator.dll
 F:\Ecommerce_Net\Project_Net\Car-Agency\server\src\bin\Debug\net9.0\Microsoft.CodeAnalysis.dll
@@ -441,6 +443,7 @@ F:\Ecommerce_Net\Project_Net\Car-Agency\server\src\bin\Debug\net9.0\Microsoft.Sq
 F:\Ecommerce_Net\Project_Net\Car-Agency\server\src\bin\Debug\net9.0\Microsoft.Win32.SystemEvents.dll
 F:\Ecommerce_Net\Project_Net\Car-Agency\server\src\bin\Debug\net9.0\Mono.TextTemplating.dll
 F:\Ecommerce_Net\Project_Net\Car-Agency\server\src\bin\Debug\net9.0\Newtonsoft.Json.dll
+F:\Ecommerce_Net\Project_Net\Car-Agency\server\src\bin\Debug\net9.0\Newtonsoft.Json.Bson.dll
 F:\Ecommerce_Net\Project_Net\Car-Agency\server\src\bin\Debug\net9.0\RestSharp.dll
 F:\Ecommerce_Net\Project_Net\Car-Agency\server\src\bin\Debug\net9.0\Serilog.dll
 F:\Ecommerce_Net\Project_Net\Car-Agency\server\src\bin\Debug\net9.0\Serilog.AspNetCore.dll
