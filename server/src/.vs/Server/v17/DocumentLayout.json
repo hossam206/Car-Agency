@@ -1,7 +1,12 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "F:\\Ecommerce_Net\\Project_Net\\Car-Agency\\server\\src\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{37451A90-436B-4949-8280-7A12182364A0}|Server.csproj|f:\\ecommerce_net\\project_net\\car-agency\\server\\src\\startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{37451A90-436B-4949-8280-7A12182364A0}|Server.csproj|solutionrelative:startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,7 +14,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 10,
           "Children": [
             {
               "$type": "Bookmark",
@@ -50,6 +55,19 @@
             {
               "$type": "Bookmark",
               "Name": "ST:130:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Startup.cs",
+              "DocumentMoniker": "F:\\Ecommerce_Net\\Project_Net\\Car-Agency\\server\\src\\Startup.cs",
+              "RelativeDocumentMoniker": "Startup.cs",
+              "ToolTip": "F:\\Ecommerce_Net\\Project_Net\\Car-Agency\\server\\src\\Startup.cs",
+              "RelativeToolTip": "Startup.cs",
+              "ViewState": "AgIAACwAAAAAAAAAAAAwwCUAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-07T16:42:00.911Z",
+              "EditorCaption": ""
             }
           ]
         }

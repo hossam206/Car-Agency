@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "F:\\Ecommerce_Net\\Project_Net\\Car-Agency\\server\\src\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{37451A90-436B-4949-8280-7A12182364A0}|Server.csproj|f:\\ecommerce_net\\project_net\\car-agency\\server\\src\\services\\carservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{37451A90-436B-4949-8280-7A12182364A0}|Server.csproj|solutionrelative:services\\carservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{37451A90-436B-4949-8280-7A12182364A0}|Server.csproj|f:\\ecommerce_net\\project_net\\car-agency\\server\\src\\startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{37451A90-436B-4949-8280-7A12182364A0}|Server.csproj|solutionrelative:startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{37451A90-436B-4949-8280-7A12182364A0}|Server.csproj|f:\\ecommerce_net\\project_net\\car-agency\\server\\src\\controllers\\carcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{37451A90-436B-4949-8280-7A12182364A0}|Server.csproj|solutionrelative:controllers\\carcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{37451A90-436B-4949-8280-7A12182364A0}|Server.csproj|f:\\ecommerce_net\\project_net\\car-agency\\server\\src\\.env||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{37451A90-436B-4949-8280-7A12182364A0}|Server.csproj|solutionrelative:.env||{8B382828-6202-11D1-8870-0000F87579D2}"
     }
   ],
   "DocumentGroupContainers": [
@@ -63,27 +63,27 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "CarController.cs",
-              "DocumentMoniker": "F:\\Ecommerce_Net\\Project_Net\\Car-Agency\\server\\src\\Controllers\\CarController.cs",
-              "RelativeDocumentMoniker": "Controllers\\CarController.cs",
-              "ToolTip": "F:\\Ecommerce_Net\\Project_Net\\Car-Agency\\server\\src\\Controllers\\CarController.cs",
-              "RelativeToolTip": "Controllers\\CarController.cs",
-              "ViewState": "AgIAAF8AAAAAAAAAAAAiwGYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-07T07:20:47.523Z",
+              "Title": ".env",
+              "DocumentMoniker": "F:\\Ecommerce_Net\\Project_Net\\Car-Agency\\server\\src\\.env",
+              "RelativeDocumentMoniker": ".env",
+              "ToolTip": "F:\\Ecommerce_Net\\Project_Net\\Car-Agency\\server\\src\\.env",
+              "RelativeToolTip": ".env",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-02-07T17:53:02.927Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "CarService.cs",
-              "DocumentMoniker": "F:\\Ecommerce_Net\\Project_Net\\Car-Agency\\server\\src\\Services\\CarService.cs",
-              "RelativeDocumentMoniker": "Services\\CarService.cs",
-              "ToolTip": "F:\\Ecommerce_Net\\Project_Net\\Car-Agency\\server\\src\\Services\\CarService.cs*",
-              "RelativeToolTip": "Services\\CarService.cs*",
-              "ViewState": "AgIAADwBAAAAAAAAAAAkwFMBAAAAAAAAAAAAAA==",
+              "Title": "Startup.cs",
+              "DocumentMoniker": "F:\\Ecommerce_Net\\Project_Net\\Car-Agency\\server\\src\\Startup.cs",
+              "RelativeDocumentMoniker": "Startup.cs",
+              "ToolTip": "F:\\Ecommerce_Net\\Project_Net\\Car-Agency\\server\\src\\Startup.cs",
+              "RelativeToolTip": "Startup.cs",
+              "ViewState": "AgIAACwAAAAAAAAAAAAwwCUAAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-07T06:19:31.57Z",
+              "WhenOpened": "2025-02-07T16:42:00.911Z",
               "EditorCaption": ""
             }
           ]
