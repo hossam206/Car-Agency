@@ -1,16 +1,32 @@
 import { carsLicences } from "@/types/columnsTypes";
 import { ColumnDef } from "@tanstack/react-table";
-export const columns: ColumnDef<carsLicences>[] = [
+export const carTablecolumns: ColumnDef<carsLicences>[] = [
   {
-    accessorKey: "name",
-    header: "Name",
+    accessorKey: "vehicle Type",
+    header: "vehicle Type",
   },
   {
-    accessorKey: "age",
-    header: "Age",
+    accessorKey: " Number Chassis",
+    header: " Number Chassis",
   },
   {
-    accessorKey: "email",
-    header: "Email",
+    accessorKey: "Registration Date",
+    header: "Registration Date",
+  },
+  {
+    accessorKey: "Registration Expiry Date",
+    header: "Registration Expiry Date",
+  },
+  {
+    accessorKey: "vehicle Type",
+    header: "Owner Name",
+  },
+  {
+    accessorKey: "Registration Date",
+    header: "Driver Name",
+  },
+  {
+    accessorKey: "Registration Expiry Date",
+    header: "Driver Nationality",
   },
 ];

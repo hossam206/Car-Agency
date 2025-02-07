@@ -11780,31 +11780,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Amr Gamal\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\jhoss\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\Ecommerce_Net\\Project_Net\\Car-Agency\\server\\src\\Server.csproj",
+      "projectUniqueName": "D:\\web-tutorials\\web-projects\\projects\\Work\\Car-Agency\\server\\src\\Server.csproj",
       "projectName": "Server",
-      "projectPath": "F:\\Ecommerce_Net\\Project_Net\\Car-Agency\\server\\src\\Server.csproj",
-      "packagesPath": "C:\\Users\\Amr Gamal\\.nuget\\packages\\",
-      "outputPath": "F:\\Ecommerce_Net\\Project_Net\\Car-Agency\\server\\src\\obj\\",
+      "projectPath": "D:\\web-tutorials\\web-projects\\projects\\Work\\Car-Agency\\server\\src\\Server.csproj",
+      "packagesPath": "C:\\Users\\jhoss\\.nuget\\packages\\",
+      "outputPath": "D:\\web-tutorials\\web-projects\\projects\\Work\\Car-Agency\\server\\src\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Amr Gamal\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\jhoss\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

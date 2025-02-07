@@ -1,20 +1,12 @@
 {
   "Version": 1,
-  "Hash": "tVLs3OAM214IkgNfnYraZUheyQnDrW12mCt1tIEirNs=",
+  "Hash": "Msj1GGVGID5rXoZaj7mjcmskldbr9uoRoMjfsTcpitQ=",
   "Source": "Server",
   "BasePath": "_content/Server",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [
-    {
-      "Name": "Server\\wwwroot",
-      "Source": "Server",
-      "ContentRoot": "F:\\Ecommerce_Net\\Project_Net\\Car-Agency\\server\\src\\wwwroot\\",
-      "BasePath": "_content/Server",
-      "Pattern": "**"
-    }
-  ],
+  "DiscoveryPatterns": [],
   "Assets": [],
   "Endpoints": []
 }

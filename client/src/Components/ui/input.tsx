@@ -1,22 +1,70 @@
-import * as React from "react"
+import * as React from "react";
+import { cn } from "@/lib/utils";
 
-import { cn } from "@/lib/utils"
+type InputProps = {
+  name: string;
+  placeholder: string;
+  value: string;
+  id?: string | undefined;
+  labelName?: string | undefined;
+  className?: string | undefined;
+  type: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  error?: string;
+};
 
-const Input = React.forwardRef<HTMLInputElement, React.ComponentProps<"input">>(
-  ({ className, type, ...props }, ref) => {
+const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  (
+    {
+      name,
+      placeholder,
+      value,
+      id,
+      labelName,
+      className,
+      type,
+      onChange,
+      onBlur,
+
+      ...props
+    },
+    ref
+  ) => {
     return (
-      <input
-        type={type}
-        className={cn(
-          "flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
-          className
+      <div className="flex flex-col items-start justify-center w-full">
+        {/* Label */}
+        {labelName && (
+          <label htmlFor={id} className="text-sm font-medium mb-1">
+            {labelName}
+          </label>
         )}
-        ref={ref}
-        {...props}
-      />
-    )
-  }
-)
-Input.displayName = "Input"
 
-export { Input }
+        {/* Input Field */}
+        <Input
+          id={id}
+          name={name}
+          type={type}
+          placeholder={placeholder}
+          value={value}
+          onChange={onChange}
+          onBlur={onBlur}
+          className={cn(
+            "flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
+            className
+            // Add error styling
+          )}
+          ref={ref}
+          {...props}
+        />
+
+        {/* Error Message */}
+        {/* {error && <p className="text-sm text-red-500 mt-1">{error}</p>} */}
+      </div>
+    );
+  }
+);
+
+Input.displayName = "Input";
+
+export { Input };

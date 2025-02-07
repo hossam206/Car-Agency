@@ -4,20 +4,33 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { BiSolidShow } from "react-icons/bi";
 import { BiSolidHide } from "react-icons/bi";
+import { ImSpinner8 } from "react-icons/im";
+import { IoIosLock } from "react-icons/io";
 import { Button } from "@/Components/ui/button";
+import { useAuth } from "@/Context/AuthProvider";
+
 const Login: React.FC = () => {
+  const { loginService, loading } = useAuth();
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [loginError, setLoginError] = useState<boolean>(false);
+
+  // formik setUp
   const formik = useFormik({
     initialValues: {
-      Username: "",
+      email: "",
       password: "",
     },
     validationSchema: Yup.object({
-      Username: Yup.string().required("Username is required"),
+      email: Yup.string().required("email is required"),
       password: Yup.string().required("Password is required"),
     }),
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: async (values) => {
+      try {
+        const response = await loginService(values);
+        console.log(response);
+      } catch (error) {
+        console.log("error happen while login", error);
+      }
     },
   });
   return (
@@ -26,35 +39,40 @@ const Login: React.FC = () => {
         <div className={loginStyles.formContainer}>
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className={loginStyles.HeadingStyles}>Welcome Login</h1>
+            {loginError && (
+              <div className="p-2 bg-red-300 text-red-600 rounded-lg m-0">
+                <span>email or password is incorrect</span>
+              </div>
+            )}
             <form
-              className="space-y-4 md:space-y-6"
+              className="space-y-4 md:space-y-4"
               method="POST"
               onSubmit={formik.handleSubmit}
             >
               <div>
                 <label
                   htmlFor="name"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  className="block mb-2 text-sm   text-gray-900 dark:text-white placeholder:text-xs placeholder:font-normal"
                 >
-                  User name
+                  Email
                 </label>
                 <input
                   id="name"
                   type="text"
-                  placeholder="e.g John 23"
-                  name="Username"
+                  placeholder="e.g John23@gmail.com"
+                  name="email"
                   className={`${loginStyles.inputStyles} ${
-                    formik.touched.Username && formik.errors.Username
+                    formik.touched.email && formik.errors.email
                       ? "border-red-500"
                       : ""
                   }`}
-                  value={formik.values.Username}
+                  value={formik.values.email}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                 />
-                {formik.touched.Username && formik.errors.Username && (
+                {formik.touched.email && formik.errors.email && (
                   <p className="text-red-500 text-xs mt-1">
-                    {formik.errors.Username}
+                    {formik.errors.email}
                   </p>
                 )}
               </div>
@@ -100,7 +118,8 @@ const Login: React.FC = () => {
                 size="lg"
                 className="w-full"
               >
-                Login
+                <span>{loading ? <ImSpinner8 /> : <IoIosLock />}</span>
+                {loading ? "loading.." : "Login"}
               </Button>
             </form>
           </div>
