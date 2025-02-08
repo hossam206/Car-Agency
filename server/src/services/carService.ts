@@ -1,5 +1,10 @@
 import Car from "../models/mongodb/car.model";
-import { CarDto, CarTypeDto } from "../dto/car.dto";
+import {
+  CarDto,
+  CarTypeDto,
+  CarDtoRetrieved,
+  CarDtoRetrievedType,
+} from "../dto/car.dto";
 import { PDFDocument, rgb, StandardFonts } from "pdf-lib";
 import fs from "fs";
 import QRCode from "qrcode";
@@ -58,25 +63,29 @@ class CarService {
     }
   }
 
-  async getAllCars(page = 1): Promise<CarTypeDto[]> {
+  async getAllCars(page = 1, limit = 5): Promise<CarDtoRetrievedType[]> {
     try {
       const retrievedCars = await Car.find({})
-        .skip((page - 1) * 10)
-        .limit(10);
+        .skip((page - 1) * limit)
+        .limit(limit);
+
       if (!retrievedCars.length) {
         throw new Error("No cars found!");
       }
+
       const carsDto = retrievedCars.map((car) => {
-        const parsed = CarDto.safeParse(car);
+        const { _id, ...carWithoutId } = car.toObject();
+        const parsed = CarDtoRetrieved.safeParse(carWithoutId);
+
         if (!parsed.success) {
           throw new Error("Car validation failed");
         }
-        return parsed.data;
+        return { _id, ...parsed.data };
       });
       return carsDto;
     } catch (error) {
       throw new Error(
-        error instanceof Error ? error.message : "Error fetching car count"
+        error instanceof Error ? error.message : "Error fetching cars"
       );
     }
   }
@@ -117,28 +126,26 @@ class CarService {
     }
 
     const TemplatePath =
-      "D:\\project\\Car-AgencyNew\\src\\pdf\\ExportCertificate.jpeg";
-    const LargeFontSize = 10;
-    const SmallFontSize = 10;
+      "D:\\project\\Car-Agency\\server\\src\\pdf\\ExportCertificate.jpeg";
+    const LargeFontSize = 15;
+    const SmallFontSize = 13;
     const BlueColor = rgb(53 / 255, 60 / 255, 145 / 255);
-    const WhiteColor = rgb(249 / 255, 251 / 255, 1);
+    const WhiteColor = rgb(240 / 255, 248 / 250, 1);
     const url = `http://localhost:8080/api/car/download/${car}`;
 
-    // Generate QR code as a Data URL (PNG format)
+    // Generate QR code
     const qrDataUrl = await QRCode.toDataURL(url, { width: 150, margin: 1 });
-    // Extract the Base64 portion (remove "data:image/png;base64,")
     const base64Data = qrDataUrl.split(",")[1];
     const qrImageBytes = Buffer.from(base64Data, "base64");
 
-    // Read the JPEG template from disk.
+    // Read the JPEG template from server.
     const templateBytes = fs.readFileSync(TemplatePath);
 
     // Create a new PDF document.
     const pdfDoc = await PDFDocument.create();
-    // const page = pdfDoc.addPage([595.28, 841.89]);
     const page = pdfDoc.addPage([850, 1000]);
 
-    // Embed the JPEG template image as the background.
+    // Image as the background.
     const backgroundImage = await pdfDoc.embedJpg(templateBytes);
     page.drawImage(backgroundImage, {
       x: 0,
@@ -150,16 +157,16 @@ class CarService {
     // Embed the QR code image (PNG).
     const qrImage = await pdfDoc.embedPng(qrImageBytes);
     page.drawImage(qrImage, {
-      x: 250,
-      y: 397,
-      width: 100,
-      height: 100,
+      x: 360,
+      y: 482,
+      width: 73,
+      height: 67,
     });
 
-    // Embed a bold Helvetica font.
+    // Font.
     const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
 
-    // Helper function to add text to the page.
+    // Add text to the page.
     const addText = (
       text: string,
       x: number,
@@ -170,126 +177,204 @@ class CarService {
       page.drawText(text, { x, y, size: fontSize, font, color });
     };
 
-    // Define all text elements with their positions, font sizes, and colors.
-    const textElements: [string, number, number, number, any][] = [
-      [carRetrieved.exportCountryTo ?? "", 173, 725, LargeFontSize, WhiteColor],
-      [carRetrieved.exportCountryTo ?? "", 150, 624, LargeFontSize, WhiteColor],
-      [carRetrieved.vehicleType ?? "", 340, 714, LargeFontSize, BlueColor],
+    // Define all text elements with positions, font sizes, and colors. [ English ]
+    const textEnglish: [string, number, number, number, any][] = [
+      [carRetrieved.exportCountryTo ?? "", 217, 772, LargeFontSize, WhiteColor],
+      [carRetrieved.vehicleType ?? "", 786, 880, LargeFontSize, BlueColor],
+      [carRetrieved.vehicleType ?? "", 484, 880, LargeFontSize, BlueColor],
       [
         carRetrieved.exportPlateNumber ?? "",
-        340,
-        683,
+        485,
+        841,
         LargeFontSize,
         BlueColor,
       ],
       [
         carRetrieved.registrationPlateNumber ?? "",
-        340,
-        652,
+        485,
+        805,
         LargeFontSize,
         BlueColor,
       ],
-      [carRetrieved.registrationDate ?? "", 340, 619, LargeFontSize, BlueColor],
+      [carRetrieved.registrationDate ?? "", 485, 764, LargeFontSize, BlueColor],
       [
         carRetrieved.registrationExpiryDate ?? "",
-        340,
-        586,
+        485,
+        723,
         LargeFontSize,
         BlueColor,
       ],
-      [carRetrieved.vehicleMake ?? "", 340, 554, LargeFontSize, BlueColor],
-      [carRetrieved.category ?? "", 340, 521, LargeFontSize, BlueColor],
-      [carRetrieved.modelYear ?? "", 340, 488, LargeFontSize, BlueColor],
-      [carRetrieved.countryOfOrigin ?? "", 340, 456, LargeFontSize, BlueColor],
-      [carRetrieved.vehicleColor ?? "", 340, 424, LargeFontSize, BlueColor],
-      [carRetrieved.chassisNumber ?? "", 340, 394, LargeFontSize, BlueColor],
-      [carRetrieved.engineNumber ?? "", 410, 359, LargeFontSize, BlueColor],
+      [carRetrieved.vehicleMake ?? "", 485, 685, LargeFontSize, BlueColor],
+      [carRetrieved.category ?? "", 485, 645, LargeFontSize, BlueColor],
+      [carRetrieved.modelYear ?? "", 485, 600, LargeFontSize, BlueColor],
+      [carRetrieved.countryOfOrigin ?? "", 485, 565, LargeFontSize, BlueColor],
+      [carRetrieved.vehicleColor ?? "", 485, 527, LargeFontSize, BlueColor],
+      [carRetrieved.chassisNumber ?? "", 485, 485, LargeFontSize, BlueColor],
+      [carRetrieved.engineNumber ?? "", 485, 445, LargeFontSize, BlueColor],
       [
         String(carRetrieved.numberOfDoors ?? 0),
-        340,
-        329,
+        485,
+        408,
         LargeFontSize,
         BlueColor,
       ],
-      [carRetrieved.fuelType ?? "", 340, 297, LargeFontSize, BlueColor],
+      [carRetrieved.fuelType ?? "", 485, 365, LargeFontSize, BlueColor],
       [
         String(carRetrieved.numberOfSeats ?? 0),
-        340,
-        266,
+        485,
+        329,
         LargeFontSize,
         BlueColor,
       ],
       [
         String(carRetrieved.emptyWeight ?? 0),
-        340,
-        233,
+        485,
+        288,
         LargeFontSize,
         BlueColor,
       ],
-      [carRetrieved.insuranceCompany ?? "", 340, 200, LargeFontSize, BlueColor],
-      [carRetrieved.insuranceType ?? "", 340, 170, LargeFontSize, BlueColor],
+      [carRetrieved.insuranceCompany ?? "", 485, 250, LargeFontSize, BlueColor],
+      [carRetrieved.insuranceType ?? "", 485, 210, LargeFontSize, BlueColor],
       [
         carRetrieved.insurancePolicyNumber ?? "",
-        340,
-        139,
+        485,
+        172,
         LargeFontSize,
         BlueColor,
       ],
       [
         carRetrieved.insuranceExpiryDate ?? "",
-        340,
-        107,
+        485,
+        134,
         LargeFontSize,
         BlueColor,
       ],
-      [carRetrieved.ownerName ?? "", 268, 365, LargeFontSize, BlueColor],
-      [carRetrieved.ownerName ?? "", 25, 338, LargeFontSize, BlueColor],
-      [carRetrieved.nationality ?? "", 25, 311, LargeFontSize, BlueColor],
-      [carRetrieved.passportNumber ?? "", 140, 280, LargeFontSize, BlueColor],
+      [carRetrieved.ownerName ?? "", 36, 418, LargeFontSize, BlueColor],
+      [carRetrieved.nationality ?? "", 36, 383, LargeFontSize, BlueColor],
+      [carRetrieved.passportNumber ?? "", 200, 348, LargeFontSize, BlueColor],
       [
         carRetrieved.trafficCodeNumber ?? "",
-        140,
-        258,
+        200,
+        320,
         LargeFontSize,
         BlueColor,
       ],
-      [carRetrieved.emiratesIdNumber ?? "", 140, 228, LargeFontSize, BlueColor],
-      [carRetrieved.driverName ?? "", 220, 210, LargeFontSize, BlueColor],
-      [carRetrieved.driverName ?? "", 78, 189, LargeFontSize, BlueColor],
-      [carRetrieved.licenseNumber ?? "", 140, 172, LargeFontSize, BlueColor],
+      [carRetrieved.emiratesIdNumber ?? "", 200, 285, LargeFontSize, BlueColor],
+      [carRetrieved.driverName ?? "", 117, 238, LargeFontSize, BlueColor],
+      [carRetrieved.licenseNumber ?? "", 200, 216, LargeFontSize, BlueColor],
       [
         carRetrieved.driverNationality ?? "",
-        140,
-        152,
+        200,
+        190,
         LargeFontSize,
         BlueColor,
       ],
-      [carRetrieved.licenseSource ?? "", 140, 122, LargeFontSize, BlueColor],
+      [carRetrieved.licenseSource ?? "", 200, 150, LargeFontSize, BlueColor],
       [
         carRetrieved.certificateIssueDate ?? "",
-        22,
-        500,
-        SmallFontSize,
-        WhiteColor,
-      ],
-      [
-        carRetrieved.certificateIssueDate ?? "",
-        260,
-        492,
+        30,
+        615,
         SmallFontSize,
         WhiteColor,
       ],
       [
         carRetrieved.certificateReferenceNumber ?? "",
-        242,
-        450,
+        370,
+        556,
         SmallFontSize,
         WhiteColor,
       ],
     ];
 
-    // Add each text element onto the PDF page.
-    textElements.forEach(([text, x, y, fontSize, color]) => {
+    // Add each text element onto the PDF page.  [ English ]
+    textEnglish.forEach(([text, x, y, fontSize, color]) => {
+      addText(text, x, y, fontSize, color);
+    });
+
+    // Define all text elements with positions, font sizes, and colors. [ arabic ]
+    const textArabic: [string, number, number, number, any][] = [
+      [carRetrieved.exportCountryTo ?? "", 260, 892, LargeFontSize, WhiteColor],
+      [carRetrieved.vehicleType ?? "", 786, 880, LargeFontSize, BlueColor],
+      [
+        carRetrieved.exportPlateNumber ?? "",
+        786,
+        841,
+        LargeFontSize,
+        BlueColor,
+      ],
+      [
+        carRetrieved.registrationPlateNumber ?? "",
+        786,
+        805,
+        LargeFontSize,
+        BlueColor,
+      ],
+      [carRetrieved.registrationDate ?? "", 786, 764, LargeFontSize, BlueColor],
+      [
+        carRetrieved.registrationExpiryDate ?? "",
+        786,
+        723,
+        LargeFontSize,
+        BlueColor,
+      ],
+      [carRetrieved.vehicleMake ?? "", 786, 685, LargeFontSize, BlueColor],
+      [carRetrieved.category ?? "", 786, 645, LargeFontSize, BlueColor],
+      [carRetrieved.modelYear ?? "", 786, 600, LargeFontSize, BlueColor],
+      [carRetrieved.countryOfOrigin ?? "", 786, 565, LargeFontSize, BlueColor],
+      [carRetrieved.vehicleColor ?? "", 786, 527, LargeFontSize, BlueColor],
+      [carRetrieved.chassisNumber ?? "", 786, 485, LargeFontSize, BlueColor],
+      [carRetrieved.engineNumber ?? "", 786, 445, LargeFontSize, BlueColor],
+      [
+        String(carRetrieved.numberOfDoors ?? 0),
+        786,
+        408,
+        LargeFontSize,
+        BlueColor,
+      ],
+      [carRetrieved.fuelType ?? "", 786, 365, LargeFontSize, BlueColor],
+      [
+        String(carRetrieved.numberOfSeats ?? 0),
+        786,
+        329,
+        LargeFontSize,
+        BlueColor,
+      ],
+      [
+        String(carRetrieved.emptyWeight ?? 0),
+        786,
+        288,
+        LargeFontSize,
+        BlueColor,
+      ],
+      [carRetrieved.insuranceCompany ?? "", 786, 250, LargeFontSize, BlueColor],
+      [carRetrieved.insuranceType ?? "", 786, 210, LargeFontSize, BlueColor],
+      [
+        carRetrieved.insurancePolicyNumber ?? "",
+        786,
+        172,
+        LargeFontSize,
+        BlueColor,
+      ],
+      [
+        carRetrieved.insuranceExpiryDate ?? "",
+        786,
+        134,
+        LargeFontSize,
+        BlueColor,
+      ],
+      [carRetrieved.ownerName ?? "", 380, 450, LargeFontSize, BlueColor],
+      [carRetrieved.driverName ?? "", 320, 264, LargeFontSize, BlueColor],
+      [
+        carRetrieved.certificateIssueDate ?? "",
+        369,
+        608,
+        SmallFontSize,
+        WhiteColor,
+      ],
+    ];
+
+    // Add each text element onto the PDF page.  [ Arabic ]
+    textArabic.forEach(([text, x, y, fontSize, color]) => {
       addText(text, x, y, fontSize, color);
     });
 

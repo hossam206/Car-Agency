@@ -19,11 +19,18 @@ class UserController {
   async login(req: Request, res: Response): Promise<void> {
     try {
       const { email, password } = req.body;
-      const user = await this.serviceInstance.login(email, password);
-      if (!user) {
+
+      const user = await this.serviceInstance
+        .login(email, password)
+        .catch((error) => {
+          throw new Error(error.message || "Login failed");
+        });
+
+      if (user == null) {
         res.status(400).json({ message: "Invalid credentials" });
         return;
       }
+
       const token = this.serviceInstance.generateJwtToken(user);
       res.cookie("AuthToken", token, {
         httpOnly: false,
@@ -31,13 +38,14 @@ class UserController {
         sameSite: "strict",
         expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
       });
-
       res.clearCookie("token");
       res.clearCookie("refreshToken");
       res.status(200).json({ message: "Login successfully" });
     } catch (error) {
-      console.error("Login error:", error);
-      res.status(500).json({ message: "Internal Server Error", error });
+      res.status(500).json({
+        message: "Internal Server Error",
+        error: error instanceof Error ? error.message : "Unknown error",
+      });
     }
   }
 

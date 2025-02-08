@@ -47,7 +47,8 @@ router.get(
   "/",
   AuthenticationMiddleware.authenticate,
   async (req: Request, res: Response) => {
-    console.log("req from car routes", req);
+
+
     await controller.getAllCars(req, res);
   }
 );
@@ -64,9 +65,17 @@ router.get(
 // Download Export Certificate
 router.get(
   "/download/:id",
-  // AuthenticationMiddleware.authenticate,
+  AuthenticationMiddleware.authenticate,
   async (req: Request, res: Response) => {
     await controller.downloadCertificate(req, res);
+  }
+);
+
+router.get(
+  "/view/:id",
+  AuthenticationMiddleware.authenticate,
+  async (req: Request, res: Response) => {
+    await controller.ViewCertificate(req, res);
   }
 );
 
