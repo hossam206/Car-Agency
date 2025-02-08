@@ -26,7 +26,7 @@ class UserController {
       }
       const token = this.serviceInstance.generateJwtToken(user);
       res.cookie("AuthToken", token, {
-        httpOnly: true,
+        httpOnly: false,
         secure: process.env.NODE_ENV === "production",
         sameSite: "strict",
         expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),

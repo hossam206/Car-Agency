@@ -25,24 +25,22 @@ const apiCall = async ({
 }: apiProps) => {
   const config = {
     method,
-    url: `${api}/${path}/${page && limit ? `page=${page}&limit=${limit}` : ""}`,
+    url: `${api}/${path}/${page && limit ? `page=${page}` : ""}`,
     data,
     headers: { ...headers },
+    withCredentials: true,
   };
   try {
     const response = await axios(config);
-    return response.data;
+    return response;
   } catch (error) {
-    console.log(error);
     handleError(error, method);
   }
 };
 // get all items
 
-
-
-export const getAll = async (path: string, page?: number, limit?: number) => {
-  return apiCall({ method: "GET", path, page, limit });
+export const getAll = async (path: string, page?: number) => {
+  return apiCall({ method: "GET", path, page });
 };
 // add item
 export const addItem = async (path: string, data: object) => {
@@ -73,3 +71,5 @@ export const updateItem = async (
 export const deleteItem = (path: string, itemId: number) => {
   return apiCall({ method: "DELETE", path: `${path}/${itemId}` });
 };
+
+
