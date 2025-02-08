@@ -16,7 +16,12 @@ class CarController {
     return CarController.instance;
   }
 
-  private handleError(res: Response, message: string, error: unknown, status = 500): void {
+  private handleError(
+    res: Response,
+    message: string,
+    error: unknown,
+    status = 500
+  ): void {
     res.status(status).send({
       message,
       error: error instanceof Error ? error.message : error,
@@ -70,13 +75,18 @@ class CarController {
   // Get all Cars
   async getAllCars(req: Request, res: Response): Promise<void> {
     try {
-      const { page } = req.query;
-      const result = await this.serviceInstance.getAllCars(Number(page));
+      const { page, limit } = req.query;
+      const result = await this.serviceInstance.getAllCars(
+        Number(page),
+        Number(limit)
+      );
       if (!result) {
         res.status(404).json({ message: "No cars found" });
         return;
       }
-      res.status(200).json({ message: "Cars retrieved successfully", data: result });
+      res
+        .status(200)
+        .json({ message: "Cars retrieved successfully", data: result });
     } catch (error) {
       this.handleError(res, "Failed to retrieve cars", error);
     }
@@ -91,7 +101,9 @@ class CarController {
         res.status(404).json({ message: "Car not found" });
         return;
       }
-      res.status(200).json({ message: "Car retrieved successfully", data: result });
+      res
+        .status(200)
+        .json({ message: "Car retrieved successfully", data: result });
     } catch (error) {
       this.handleError(res, "Failed to retrieve car", error);
     }
@@ -101,7 +113,9 @@ class CarController {
   async getCarCount(req: Request, res: Response): Promise<void> {
     try {
       const count = await this.serviceInstance.getCarCount();
-      res.status(200).json({ message: "Car count retrieved successfully", count });
+      res
+        .status(200)
+        .json({ message: "Car count retrieved successfully", count });
     } catch (error) {
       this.handleError(res, "Failed to retrieve car count", error);
     }
@@ -117,7 +131,30 @@ class CarController {
         return;
       }
       res.setHeader("Content-Type", "application/pdf");
-      res.setHeader("Content-Disposition", `attachment; filename="Certificate_${id}.pdf"`);
+      res.setHeader(
+        "Content-Disposition",
+        `attachment; filename="Certificate_${id}.pdf"`
+      );
+      res.send(pdfStream);
+    } catch (error) {
+      this.handleError(res, "Failed to generate certificate", error);
+    }
+  }
+
+  // View Export Certificate
+  async ViewCertificate(req: Request, res: Response): Promise<void> {
+    try {
+      const { id } = req.params;
+      const pdfStream = await this.serviceInstance.generateCertificate(id);
+      if (!pdfStream || pdfStream.length === 0) {
+        res.status(400).json({ message: "Error view PDF" });
+        return;
+      }
+      res.setHeader("Content-Type", "application/pdf");
+      res.setHeader(
+        "Content-Disposition",
+        `inline; filename="Certificate_${id}.pdf"`
+      );
       res.send(pdfStream);
     } catch (error) {
       this.handleError(res, "Failed to generate certificate", error);

@@ -35,4 +35,15 @@ export const CarDto = z.object({
   certificateReferenceNumber: z.string().optional(),
 });
 
+export const CarDtoRetrieved = z.object({
+  ownerName: z.string().optional(),
+  vehicleType: z.string().optional(),
+  chassisNumber: z.string().optional(),
+  registrationDate: z.string().optional(),
+  registrationExpiryDate: z.string().optional(),
+  category: z.string().optional(),
+  driverName: z.string().optional(),
+});
+
 export type CarTypeDto = z.infer<typeof CarDto>;
+export type CarDtoRetrievedType = z.infer<typeof CarDto>;

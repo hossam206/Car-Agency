@@ -10,15 +10,13 @@ dotenv.config();
 const app: Application = express();
 
 const corsOptions = {
-  origin: "http://localhost:5173", // ✅ Allow only your frontend
+  origin: "http://localhost:5173",
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  // allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: true, // ✅ Allow credentials (cookies, auth headers)
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true,
 };
 
-// Apply CORS middleware
 app.use(cors(corsOptions));
-
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.json());
