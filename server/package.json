@@ -1,0 +1,33 @@
+{
+  "name": "car-agencynew",
+  "version": "1.0.0",
+  "description": "HallaDeals-BE is the backend service for the HallaDeals platform. It provides APIs for managing users, products, orders, payments, and more. This repository contains the core functionality for the platform, using Node.js, Express, MongoDB and SQL.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "pdf-lib": "^1.17.1",
+    "qrcode": "^1.5.4",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cookie-parser": "^1.4.8",
+    "@types/cors": "^2.8.17",
+    "@types/dotenv": "^6.1.1",
+    "@types/express": "^5.0.0",
+    "@types/jsonwebtoken": "^9.0.8",
+    "@types/mongoose": "^5.11.96",
+    "@types/qrcode": "^1.5.5"
+  }
+}
