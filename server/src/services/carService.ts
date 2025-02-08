@@ -80,7 +80,7 @@ class CarService {
         if (!parsed.success) {
           throw new Error("Car validation failed");
         }
-        return { _id, ...parsed.data };
+        return parsed.data;
       });
       return carsDto;
     } catch (error) {
@@ -96,11 +96,13 @@ class CarService {
       if (!retrievedCar) {
         throw new Error("No car found!");
       }
-      const parsed = CarDto.safeParse(retrievedCar);
+
+      const { _id, ...categoryWithoutId } = retrievedCar.toObject();
+      const parsed = CarDto.safeParse(categoryWithoutId);
       if (!parsed.success) {
         throw new Error("Car validation failed");
       }
-      return parsed.data;
+      return { _id: _id.toString(), ...parsed.data };
     } catch (error) {
       throw new Error(
         error instanceof Error ? error.message : "Error fetching car"
