@@ -1,5 +1,5 @@
 import axios from "axios";
-const api = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+const api = import.meta.env.VITE_API_URL || "http://localhost:8080/api";
 
 type apiProps = {
   method: "GET" | "POST" | "PUT" | "DELETE";
@@ -38,6 +38,9 @@ const apiCall = async ({
   }
 };
 // get all items
+
+
+
 export const getAll = async (path: string, page?: number, limit?: number) => {
   return apiCall({ method: "GET", path, page, limit });
 };

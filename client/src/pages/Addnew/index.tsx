@@ -44,7 +44,7 @@ const validationSchema = Yup.object({
   CertificateReferenceNumber: Yup.string(),
 });
 
-export const Addnew = () => {
+export default function Addnew() {
   const [loading, setLoading] = useState<boolean>(false);
   const formik = useFormik({
     initialValues: {
@@ -94,311 +94,374 @@ export const Addnew = () => {
   });
 
   return (
-    <form
-      onSubmit={formik.handleSubmit}
-      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4"
-    >
-      {/* Export Country To */}
-      <Input
-        labelName="Export Country To"
-        placeholder="e.g Uman"
-        id="Export Country To"
-        type="text"
-        name="ExportCountryTo"
-        value={formik.values.ExportCountryTo}
-        onChange={formik.handleChange}
-      />
+    <>
+      <div className="container py-10">
+        <h1 className="font-bold text-2xl my-4">Add New Car Info</h1>
+        <form onSubmit={formik.handleSubmit}>
+          <div className="grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 border border-solid rounded-lg p-4">
+            {/* Export Country To */}
+            <Input
+              labelName="Export Country To"
+              placeholder="e.g Uman"
+              id="Export Country To"
+              type="text"
+              name="ExportCountryTo"
+              value={formik.values.ExportCountryTo}
+              onChange={formik.handleChange}
+            />
 
-      {/* Vehicle Type */}
-      <Input
-        labelName="Vehicle Type"
-        name="VehicleType"
-        placeholder="e.g sadan"
-        id="VehicleType"
-        type="text"
-        value={formik.values.VehicleType}
-        onChange={formik.handleChange}
-      />
+            {/* Vehicle Type */}
+            <Input
+              labelName="Vehicle Type"
+              name="VehicleType"
+              placeholder="e.g sadan"
+              id="Vehicle Type"
+              type="text"
+              value={formik.values.VehicleType}
+              onChange={formik.handleChange}
+            />
 
-      {/* Export Plate Number */}
-      <Input
-        labelName="Export Plate Number"
-        name="ExportPlateNumber"
-        placeholder="e.g 235434"
-        id="ExportPlateNumber"
-        type="text"
-        value={formik.values.ExportPlateNumber}
-        onChange={formik.handleChange}
-      />
+            {/* Export Plate Number */}
+            <Input
+              labelName="Export Plate Number"
+              name="ExportPlateNumber"
+              placeholder="e.g 235434"
+              id="Export Plate Number"
+              type="text"
+              value={formik.values.ExportPlateNumber}
+              onChange={formik.handleChange}
+            />
 
-      {/* Registration Plate Number */}
-      <Input
-        labelName="Registration Plate Number"
-        name="RegistrationPlateNumber"
-        value={formik.values.RegistrationPlateNumber}
-        onChange={formik.handleChange}
-      />
+            {/* Registration Plate Number */}
+            <Input
+              labelName="Registration Plate Number"
+              name="RegistrationPlateNumber"
+              placeholder="e.g 235434"
+              id="RegistrationPlateNumber"
+              type="text"
+              value={formik.values.RegistrationPlateNumber}
+              onChange={formik.handleChange}
+            />
 
-      {/* Registration Date */}
-      <Input
-        labelName="Registration Date"
-        name="RegistrationDate"
-        value={formik.values.RegistrationDate}
-        onChange={formik.handleChange}
-      />
+            {/* Registration Date */}
+            <Input
+              labelName="Registration Date"
+              name="RegistrationDate"
+              placeholder="e.g 00/00/0000"
+              id="Registration Date"
+              type="date"
+              value={formik.values.RegistrationDate}
+              onChange={formik.handleChange}
+            />
 
-      {/* Registration Expiry Date */}
-      <Input
-        labelName="Registration Expiry Date"
-        name="RegistrationExpiryDate"
-        value={formik.values.RegistrationExpiryDate}
-        onChange={formik.handleChange}
-      />
+            {/* Registration Expiry Date */}
+            <Input
+              labelName="Registration Expiry Date"
+              name="RegistrationExpiryDate"
+              placeholder="e.g 00/00/0000"
+              id="Registration Expiry Date"
+              type="date"
+              value={formik.values.RegistrationExpiryDate}
+              onChange={formik.handleChange}
+            />
 
-      {/* Vehicle Make */}
-      <Input
-        labelName="Vehicle Make"
-        name="VehicleMake"
-        value={formik.values.VehicleMake}
-        onChange={formik.handleChange}
-      />
+            {/* Vehicle Make */}
+            <Input
+              labelName="Vehicle Make"
+              name="VehicleMake"
+              placeholder="e.g china"
+              id="Vehicle Make"
+              type="text"
+              value={formik.values.VehicleMake}
+              onChange={formik.handleChange}
+            />
 
-      {/* Category */}
-      <Input
-        labelName="Category"
-        name="Category"
-        value={formik.values.Category}
-        onChange={formik.handleChange}
-      />
+            {/* Category */}
+            <Input
+              labelName="Category"
+              name="Category"
+              placeholder="e.g sadan"
+              id="Category"
+              type="text"
+              value={formik.values.Category}
+              onChange={formik.handleChange}
+            />
 
-      {/* Model Year */}
-      <Input
-        labelName="Model Year"
-        name="ModelYear"
-        value={formik.values.ModelYear}
-        onChange={formik.handleChange}
-      />
+            {/* Model Year */}
+            <Input
+              labelName="Model Year"
+              name="ModelYear"
+              placeholder="e.g 2025"
+              id="Model Year"
+              type="text"
+              value={formik.values.ModelYear}
+              onChange={formik.handleChange}
+            />
 
-      {/* Country of Origin */}
-      <Input
-        labelName="Country of Origin"
-        id="Country of Origin"
-        name="CountryOfOrigin"
-        value={formik.values.CountryOfOrigin}
-        onChange={formik.handleChange}
-      />
+            {/* Country of Origin */}
+            <Input
+              labelName="Country of Origin"
+              name="CountryOfOrigin"
+              placeholder="e.g Germany"
+              id="Country of Origin"
+              type="text"
+              value={formik.values.CountryOfOrigin}
+              onChange={formik.handleChange}
+            />
 
-      {/* Vehicle Color */}
-      <Input
-        labelName="Vehicle Color"
-        name="VehicleColor"
-        value={formik.values.VehicleColor}
-        onChange={formik.handleChange}
-      />
+            {/* Vehicle Color */}
+            <Input
+              labelName="Vehicle Color"
+              name="VehicleColor"
+              placeholder="e.g red"
+              id="Vehicle Color"
+              type="text"
+              value={formik.values.VehicleColor}
+              onChange={formik.handleChange}
+            />
 
-      {/* Chassis Number */}
-      <Input
-        labelName="Chassis Number"
-        name="ChassisNumber"
-        value={formik.values.ChassisNumber}
-        onChange={formik.handleChange}
-      />
+            {/* Chassis Number */}
+            <Input
+              labelName="Chassis Number"
+              name="ChassisNumber"
+              placeholder="e.g 346782"
+              id="Chassis Number"
+              type="text"
+              value={formik.values.ChassisNumber}
+              onChange={formik.handleChange}
+            />
 
-      {/* Engine Number */}
-      <Input
-        labelName="Engine Number"
-        name="EngineNumber"
-        value={formik.values.EngineNumber}
-        onChange={formik.handleChange}
-      />
+            {/* Engine Number */}
+            <Input
+              labelName="Engine Number"
+              name="EngineNumber"
+              placeholder="e.g 346782"
+              id="Engine Number"
+              type="text"
+              value={formik.values.EngineNumber}
+              onChange={formik.handleChange}
+            />
 
-      {/* Number of Doors */}
-      <Input
-        labelName="Number of Doors"
-        name="NumberOfDoors"
-        value={formik.values.NumberOfDoors}
-        onChange={formik.handleChange}
-      />
+            {/* Number of Doors */}
+            <Input
+              labelName="Number of Doors"
+              name="NumberOfDoors"
+              placeholder="e.g 2"
+              id="Number of Doors"
+              type="number"
+              value={formik.values.NumberOfDoors}
+              onChange={formik.handleChange}
+            />
 
-      {/* Fuel Type */}
-      <Input
-        labelName="Fuel Type"
-        name="FuelType"
-        value={formik.values.FuelType}
-        onChange={formik.handleChange}
-      />
+            {/* Fuel Type */}
+            <Input
+              labelName="Fuel Type"
+              name="FuelType"
+              placeholder="e.g gas"
+              id="Fuel Type"
+              type="text"
+              value={formik.values.FuelType}
+              onChange={formik.handleChange}
+            />
 
-      {/* Number of Seats */}
-      <Input
-        labelName="Number of Seats"
-        name="NumberOfSeats"
-        value={formik.values.NumberOfSeats}
-        onChange={formik.handleChange}
-      />
+            {/* Number of Seats */}
+            <Input
+              labelName="Number of Seats"
+              name="NumberOfSeats"
+              placeholder="e.g 4"
+              id="Number of Seats"
+              type="number"
+              value={formik.values.NumberOfSeats}
+              onChange={formik.handleChange}
+            />
 
-      {/* Empty Weight */}
-      <Input
-        labelName="Empty Weight"
-        name="EmptyWeight"
-        value={formik.values.EmptyWeight}
-        onChange={formik.handleChange}
-      />
+            {/* Empty Weight */}
+            <Input
+              labelName="Empty Weight"
+              name="EmptyWeight"
+              placeholder="e.g 4"
+              id="Empty Weight"
+              type="text"
+              value={formik.values.EmptyWeight}
+              onChange={formik.handleChange}
+            />
 
-      {/* Insurance Company */}
-      <Input
-        labelName="Insurance Company"
-        name="InsuranceCompany"
-        value={formik.values.InsuranceCompany}
-        onChange={formik.handleChange}
-        error={
-          formik.touched.InsuranceCompany && formik.errors.InsuranceCompany
-        }
-      />
+            {/* Insurance Company */}
+            <Input
+              labelName="Insurance Company"
+              name="InsuranceCompany"
+              placeholder="e.g xyz"
+              id="Insurance Company"
+              type="text"
+              value={formik.values.InsuranceCompany}
+              onChange={formik.handleChange}
+            />
 
-      {/* Insurance Type */}
-      <Input
-        labelName="Insurance Type"
-        name="InsuranceType"
-        value={formik.values.InsuranceType}
-        onChange={formik.handleChange}
-        error={formik.touched.InsuranceType && formik.errors.InsuranceType}
-      />
+            {/* Insurance Type */}
+            <Input
+              labelName="Insurance Type"
+              name="InsuranceType"
+              placeholder="e.g xyz"
+              id="Insurance Type"
+              type="text"
+              value={formik.values.InsuranceType}
+              onChange={formik.handleChange}
+            />
 
-      {/* Insurance Policy Number */}
-      <Input
-        labelName="Insurance Policy Number"
-        name="InsurancePolicyNumber"
-        value={formik.values.InsurancePolicyNumber}
-        onChange={formik.handleChange}
-        error={
-          formik.touched.InsurancePolicyNumber &&
-          formik.errors.InsurancePolicyNumber
-        }
-      />
+            {/* Insurance Policy Number */}
+            <Input
+              labelName="Insurance Policy Number"
+              name="InsurancePolicyNumber"
+              placeholder="e.g xyz"
+              id="Insurance Policy Number"
+              type="text"
+              value={formik.values.InsurancePolicyNumber}
+              onChange={formik.handleChange}
+            />
 
-      {/* Insurance Expiry Date */}
-      <Input
-        labelName="Insurance Expiry Date"
-        name="InsuranceExpiryDate"
-        value={formik.values.InsuranceExpiryDate}
-        onChange={formik.handleChange}
-        error={
-          formik.touched.InsuranceExpiryDate &&
-          formik.errors.InsuranceExpiryDate
-        }
-      />
+            {/* Insurance Expiry Date */}
+            <Input
+              labelName="Insurance Expiry Date"
+              name="InsuranceExpiryDate"
+              placeholder="e.g 00/00/0000"
+              id="Insurance Expiry Date"
+              type="date"
+              value={formik.values.InsuranceExpiryDate}
+              onChange={formik.handleChange}
+            />
 
-      {/* Owner Name */}
-      <Input
-        labelName="Owner Name"
-        name="OwnerName"
-        value={formik.values.OwnerName}
-        onChange={formik.handleChange}
-        error={formik.touched.OwnerName && formik.errors.OwnerName}
-      />
+            {/* Owner Name */}
+            <Input
+              labelName="Owner Name"
+              name="OwnerName"
+              placeholder="e.g xyz"
+              id="Owner Name"
+              type="text"
+              value={formik.values.OwnerName}
+              onChange={formik.handleChange}
+            />
 
-      {/* Nationality */}
-      <Input
-        labelName="Nationality"
-        name="Nationality"
-        value={formik.values.Nationality}
-        onChange={formik.handleChange}
-        error={formik.touched.Nationality && formik.errors.Nationality}
-      />
+            {/* Nationality */}
+            <Input
+              labelName="Nationality"
+              name="Nationality"
+              placeholder="e.g xyz"
+              id="Nationality"
+              type="text"
+              value={formik.values.Nationality}
+              onChange={formik.handleChange}
+            />
 
-      {/* Passport Number */}
-      <Input
-        labelName="Passport Number"
-        name="PassportNumber"
-        value={formik.values.PassportNumber}
-        onChange={formik.handleChange}
-        error={formik.touched.PassportNumber && formik.errors.PassportNumber}
-      />
+            {/* Passport Number */}
+            <Input
+              labelName="Passport Number"
+              name="PassportNumber"
+              placeholder="e.g xyz"
+              id="Passport Number"
+              type="text"
+              value={formik.values.PassportNumber}
+              onChange={formik.handleChange}
+            />
 
-      {/* Traffic Code Number */}
-      <Input
-        labelName="Traffic Code Number"
-        name="TrafficCodeNumber"
-        value={formik.values.TrafficCodeNumber}
-        onChange={formik.handleChange}
-        error={
-          formik.touched.TrafficCodeNumber && formik.errors.TrafficCodeNumber
-        }
-      />
+            {/* Traffic Code Number */}
+            <Input
+              labelName="Traffic Code Number"
+              name="TrafficCodeNumber"
+              placeholder="e.g xyz"
+              id="Traffic Code Number"
+              type="text"
+              value={formik.values.TrafficCodeNumber}
+              onChange={formik.handleChange}
+            />
 
-      {/* Emirates ID Number */}
-      <Input
-        labelName="Emirates ID Number"
-        name="EmiratesIdNumber"
-        value={formik.values.EmiratesIdNumber}
-        onChange={formik.handleChange}
-        error={
-          formik.touched.EmiratesIdNumber && formik.errors.EmiratesIdNumber
-        }
-      />
+            {/* Emirates ID Number */}
+            <Input
+              labelName="Emirates ID Number"
+              name="EmiratesIdNumber"
+              placeholder="e.g xyz"
+              id="Emirates ID Number"
+              type="text"
+              value={formik.values.EmiratesIdNumber}
+              onChange={formik.handleChange}
+            />
 
-      {/* Driver Name */}
-      <Input
-        labelName="Driver Name"
-        name="DriverName"
-        value={formik.values.DriverName}
-        onChange={formik.handleChange}
-        error={formik.touched.DriverName && formik.errors.DriverName}
-      />
+            {/* Driver Name */}
+            <Input
+              labelName="Driver Name"
+              name="DriverName"
+              placeholder="e.g xyz"
+              id="Driver Name"
+              type="text"
+              value={formik.values.DriverName}
+              onChange={formik.handleChange}
+            />
 
-      {/* License Number */}
-      <Input
-        labelName="License Number"
-        name="LicenseNumber"
-        value={formik.values.LicenseNumber}
-        onChange={formik.handleChange}
-        error={formik.touched.LicenseNumber && formik.errors.LicenseNumber}
-      />
+            {/* License Number */}
+            <Input
+              labelName="License Number"
+              name="LicenseNumber"
+              placeholder="e.g xyz"
+              id="License Number"
+              type="text"
+              value={formik.values.LicenseNumber}
+              onChange={formik.handleChange}
+            />
 
-      {/* Driver Nationality */}
-      <Input
-        labelName="Driver Nationality"
-        name="DriverNationality"
-        value={formik.values.DriverNationality}
-        onChange={formik.handleChange}
-        error={
-          formik.touched.DriverNationality && formik.errors.DriverNationality
-        }
-      />
+            {/* Driver Nationality */}
+            <Input
+              labelName="Driver Nationality"
+              name="DriverNationality"
+              placeholder="e.g xyz"
+              id="Driver Nationality"
+              type="text"
+              value={formik.values.DriverNationality}
+              onChange={formik.handleChange}
+            />
 
-      {/* License Source */}
-      <Input
-        labelName="License Source"
-        name="LicenseSource"
-        value={formik.values.LicenseSource}
-        onChange={formik.handleChange}
-        error={formik.touched.LicenseSource && formik.errors.LicenseSource}
-      />
+            {/* License Source */}
+            <Input
+              labelName="License Source"
+              name="LicenseSource"
+              placeholder="e.g xyz"
+              id="License Source"
+              type="text"
+              value={formik.values.LicenseSource}
+              onChange={formik.handleChange}
+            />
 
-      {/* Certificate Issue Date */}
-      <Input
-        labelName="Certificate Issue Date"
-        name="Certificate"
-        value={formik.values.LicenseSource}
-        onChange={formik.handleChange}
-        error={formik.touched.LicenseSource && formik.errors.LicenseSource}
-      />
-      <Input
-        labelName="Certificate Issue Date"
-        name="Certificate"
-        value={formik.values.CertificateReferenceNumber}
-        onChange={formik.handleChange}
-        error={
-          formik.touched.CertificateReferenceNumber &&
-          formik.errors.CertificateReferenceNumber
-        }
-      />
-      <div>
-        <Button variant={"default"} type="submit" size="lg" className="w-full">
-          <span>{loading ? <ImSpinner8 /> : <MdAdd />}</span>
-          {loading ? "loading.." : "Login"}
-        </Button>
+            {/* Certificate Issue Date */}
+            <Input
+              labelName="Certificate Issue Date"
+              name="CertificateIssueDate"
+              placeholder="e.g xyz"
+              id="Certificate Issue Date"
+              type="date"
+              value={formik.values.LicenseSource}
+              onChange={formik.handleChange}
+            />
+            <Input
+              labelName="Certificate Reference Number"
+              name="CertificateReferenceNumber"
+              placeholder="e.g xyz"
+              id="Certificate Reference Number"
+              type="date"
+              value={formik.values.CertificateReferenceNumber}
+              onChange={formik.handleChange}
+            />
+          </div>
+          <div className="flex flex-row item-center justify-center">
+            <Button
+              variant={"default"}
+              type="submit"
+              size="lg"
+              className="mx-auto "
+            >
+              <span>{loading ? <ImSpinner8 /> : <MdAdd />}</span>
+              {loading ? "Adding.." : "Add new"}
+            </Button>
+          </div>
+        </form>
       </div>
-    </form>
+    </>
   );
-};
+}

@@ -1,5 +1,5 @@
 const DisplayDocument = () => {
-  return <div></div>;
+  return <div>display document</div>;
 };
 
 export default DisplayDocument;

@@ -53,17 +53,20 @@ export default function Dashboard() {
   const fetchCars = async () => {
     setLoadingStatus("loading");
     try {
-      const response = await getAll("item", 1, 5);
+      const response = await getAll("car", 1, 5);
       if (response.status === "200") {
         setData(response?.data);
         setLoadingStatus("success");
       }
+      console.log(response);
     } catch (error) {
       console.log(error);
       setLoadingStatus("failed");
     }
   };
-
+  useEffect(() => {
+    fetchCars();
+  }, []);
   // Initialize the table
   const table = useReactTable({
     data,

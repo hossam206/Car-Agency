@@ -3,7 +3,7 @@ import { jwtDecode, JwtPayload } from "jwt-decode";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { Navigate, useNavigate } from "react-router-dom";
-const api = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+const api = import.meta.env.VITE_API_URL || "http://localhost:8080/api";
 
 // Define a proper TypeScript interface for the context
 interface AuthContextType {
@@ -47,11 +47,12 @@ export const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
   }) => {
     setLoading(true);
     try {
-      const response = await axios.post(`${api}/auth/login`, credentials, {
+      const response = await axios.post(`${api}/user/login`, credentials, {
         withCredentials: true,
         headers: { "Content-Type": "application/json" },
       });
-
+      console.log(credentials);
+      console.log(response);
       if (response.data) {
         const Token = decodeToken({ Token: Cookies.get("AuthToken") || "" });
         if (Token) {

@@ -45,8 +45,9 @@ router.get(
 // Get all Cars
 router.get(
   "/",
-  AuthenticationMiddleware.authenticate,
+  // AuthenticationMiddleware.authenticate,
   async (req: Request, res: Response) => {
+    console.log('req from car routes',req)
     await controller.getAllCars(req, res);
   }
 );
