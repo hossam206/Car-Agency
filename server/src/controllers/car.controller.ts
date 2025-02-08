@@ -76,7 +76,10 @@ class CarController {
   async getAllCars(req: Request, res: Response): Promise<void> {
     try {
       const { page, limit } = req.query;
-      const result = await this.serviceInstance.getAllCars(Number(page));
+      const result = await this.serviceInstance.getAllCars(
+        Number(page),
+        Number(limit)
+      );
       if (!result) {
         res.status(404).json({ message: "No cars found" });
         return;

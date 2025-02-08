@@ -1,5 +1,10 @@
 import Car from "../models/mongodb/car.model";
-import { CarDto, CarTypeDto } from "../dto/car.dto";
+import {
+  CarDto,
+  CarTypeDto,
+  CarDtoRetrieved,
+  CarDtoRetrievedType,
+} from "../dto/car.dto";
 import { PDFDocument, rgb, StandardFonts } from "pdf-lib";
 import fs from "fs";
 import QRCode from "qrcode";
@@ -58,25 +63,29 @@ class CarService {
     }
   }
 
-  async getAllCars(page = 1): Promise<CarTypeDto[]> {
+  async getAllCars(page = 1, limit = 5): Promise<CarDtoRetrievedType[]> {
     try {
       const retrievedCars = await Car.find({})
-        .skip((page - 1) * 10)
-        .limit(10);
+        .skip((page - 1) * limit)
+        .limit(limit);
+
       if (!retrievedCars.length) {
         throw new Error("No cars found!");
       }
+
       const carsDto = retrievedCars.map((car) => {
-        const parsed = CarDto.safeParse(car);
+        const { _id, ...carWithoutId } = car.toObject();
+        const parsed = CarDtoRetrieved.safeParse(carWithoutId);
+
         if (!parsed.success) {
           throw new Error("Car validation failed");
         }
-        return parsed.data;
+        return { _id, ...parsed.data };
       });
       return carsDto;
     } catch (error) {
       throw new Error(
-        error instanceof Error ? error.message : "Error fetching car count"
+        error instanceof Error ? error.message : "Error fetching cars"
       );
     }
   }
@@ -117,7 +126,7 @@ class CarService {
     }
 
     const TemplatePath =
-      "D:\\project\\Car-AgencyNew\\src\\pdf\\ExportCertificate.jpeg";
+      "D:\\project\\Car-Agency\\server\\src\\pdf\\ExportCertificate.jpeg";
     const LargeFontSize = 15;
     const SmallFontSize = 13;
     const BlueColor = rgb(53 / 255, 60 / 255, 145 / 255);
