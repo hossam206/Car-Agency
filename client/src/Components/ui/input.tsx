@@ -35,7 +35,10 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       <div className="flex flex-col items-start justify-center w-full">
         {/* Label */}
         {labelName && (
-          <label htmlFor={id} className="text-sm font-medium mb-1 text-gray-500">
+          <label
+            htmlFor={id}
+            className="text-sm font-medium mb-1 text-gray-500"
+          >
             {labelName}
           </label>
         )}
@@ -47,6 +50,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           type={type}
           placeholder={placeholder}
           value={value}
+          min={0}
           onChange={onChange}
           onBlur={onBlur}
           className={cn(

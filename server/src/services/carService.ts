@@ -24,6 +24,7 @@ class CarService {
   async addCar(carData: CarTypeDto): Promise<boolean> {
     try {
       const parsed = CarDto.safeParse(carData);
+ 
       if (!parsed.success) {
         throw new Error("Car validation failed");
       }
@@ -126,12 +127,12 @@ class CarService {
     }
 
     const TemplatePath =
-      "D:\\project\\Car-Agency\\server\\src\\pdf\\ExportCertificate.jpeg";
+      "D:\\web-tutorials\\web-projects\\projects\\Work\\Car-Agency\\server\\src\\Pdf\\ExportCertificate.jpeg";
     const LargeFontSize = 15;
     const SmallFontSize = 13;
     const BlueColor = rgb(53 / 255, 60 / 255, 145 / 255);
     const WhiteColor = rgb(240 / 255, 248 / 250, 1);
-    const url = `http://localhost:8080/api/car/download/${car}`;
+    const url = `const url = ${process.env.API}/document/view/${car};`;
 
     // Generate QR code
     const qrDataUrl = await QRCode.toDataURL(url, { width: 150, margin: 1 });

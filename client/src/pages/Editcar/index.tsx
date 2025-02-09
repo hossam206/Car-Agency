@@ -1,14 +1,18 @@
-import { ChangeEvent, useState } from "react";
+import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+
 import { Button } from "@/Components/ui/button";
 import { ImSpinner8 } from "react-icons/im";
 import { MdAdd } from "react-icons/md";
-import { addItem } from "@/services/globalService";
+import { getItem, updateItem } from "@/services/globalService";
 import { Input } from "@/Components/ui/input";
 import Navbar from "@/Components/Navbar";
+import { useNavigate, useParams } from "react-router-dom";
+import { CarsData } from "@/types/CarsData";
 import { toast } from "sonner";
 import { FaCircleCheck } from "react-icons/fa6";
+
 // Yup validation schema
 const validationSchema = Yup.object({
   exportCountryTo: Yup.string(),
@@ -45,17 +49,31 @@ const validationSchema = Yup.object({
   certificateReferenceNumber: Yup.string(),
 });
 
-export default function Addnew() {
+export default function EditCar() {
   const [loading, setLoading] = useState<boolean>(false);
-  const [formateDate, setFormatDate] = useState("");
-  const handleDateChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const selectDate = new Date(e.target.value);
-    selectDate.setHours(14, 45, 10);
-    setFormatDate(selectDate?.toISOString()?.split(".")[0]); // Format correctly
-  };
+  const [initialData, setInitialData] = useState<CarsData | null>(null);
+  const navigate = useNavigate();
+  const { id } = useParams();
+
+  // Fetch car data when the component mounts
+  useEffect(() => {
+    const fetchCarData = async () => {
+      try {
+        const response = await getItem("car", `${id}`);
+        if (response?.status === 200) {
+          setInitialData(response.data.data); // Set the fetched data
+        }
+      } catch (error) {
+        console.error("Error fetching car data:", error);
+      }
+    };
+
+    fetchCarData();
+  }, [id]);
+
   // Initialize Formik with the fetched data
   const formik = useFormik({
-    initialValues: {
+    initialValues: initialData || {
       exportCountryTo: "",
       vehicleType: "",
       exportPlateNumber: "",
@@ -69,10 +87,10 @@ export default function Addnew() {
       vehicleColor: "",
       chassisNumber: "",
       engineNumber: "",
-      numberOfDoors: 0,
+      numberOfDoors: "",
       fuelType: "",
-      numberOfSeats: 0,
-      emptyWeight: 0,
+      numberOfSeats: "",
+      emptyWeight: "",
       insuranceCompany: "",
       insuranceType: "",
       insurancePolicyNumber: "",
@@ -90,17 +108,18 @@ export default function Addnew() {
       certificateReferenceNumber: "",
     },
     validationSchema,
-    // Reinitialize the form when initialData changes
+    enableReinitialize: true, // Reinitialize the form when initialData changes
     onSubmit: async (values) => {
-      console.log(values);
       setLoading(true);
       try {
-        const response = await addItem("car/add", values);
-        if (response?.status === 201) {
+        const response = await updateItem("car/update", `${id}`, values);
+        if (response?.status === 200) {
           setLoading(false);
-          toast.success("add new car Info Success!", {
-            icon: <FaCircleCheck className="h-5 w-5   text-green-600" />,
+          toast.success("car Info Update Success!", {
+            icon: <FaCircleCheck className="h-5 w-5   text-green-500  " />,
           });
+
+          navigate("/");
           // Show success message
         }
       } catch (error) {
@@ -110,11 +129,23 @@ export default function Addnew() {
     },
   });
 
+  // Show loading state while fetching data
+  if (!initialData) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <span className="flex flex-col items-center gap-1">
+          <ImSpinner8 size={24} className="animate-spin" />
+          <p className="font-medium">... جاري التحميل</p>
+        </span>
+      </div>
+    );
+  }
+
   return (
     <>
       <Navbar />
       <div className="container py-8">
-        <h1 className="font-bold text-2xl my-4">Add new Car Info</h1>
+        <h1 className="font-bold text-2xl my-4">Edit Car Info</h1>
         <form onSubmit={formik.handleSubmit}>
           <div className="grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 border border-solid rounded-lg p-4 my-4">
             {/* Export Country To */}
@@ -172,7 +203,7 @@ export default function Addnew() {
               <input
                 id="registrationDate"
                 name="registrationDate"
-                type="Date"
+                type="date"
                 placeholder="MM/DD/YYYY"
                 value={formik.values.registrationDate}
                 onChange={formik.handleChange}
@@ -283,7 +314,7 @@ export default function Addnew() {
               placeholder="e.g 4"
               id="numberOfDoors"
               type="number"
-              value={formik?.values?.numberOfDoors}
+              value={formik.values.numberOfDoors.toString()}
               onChange={formik.handleChange}
             />
 
@@ -305,7 +336,7 @@ export default function Addnew() {
               placeholder="e.g 5"
               id="numberOfSeats"
               type="number"
-              value={formik.values.numberOfSeats}
+              value={formik.values.numberOfSeats.toString()}
               onChange={formik.handleChange}
             />
 
@@ -315,8 +346,8 @@ export default function Addnew() {
               name="emptyWeight"
               placeholder="e.g 1500 kg"
               id="emptyWeight"
-              type="number"
-              value={formik.values.emptyWeight}
+              type="text"
+              value={formik.values.emptyWeight.toString()}
               onChange={formik.handleChange}
             />
 
@@ -523,7 +554,7 @@ export default function Addnew() {
                   <MdAdd />
                 )}
               </span>
-              {loading ? "Adding..." : "Add New"}
+              {loading ? "Updating..." : "Update"}
             </Button>
           </div>
         </form>
