@@ -4,7 +4,6 @@ import Loader from "./Components/Loader";
 import ProtectRoutes from "./routes/protectRoutes";
 import { AuthContextProvider } from "./Context/AuthProvider.tsx";
 import ViewDocument from "./pages/ViewDocument/index.tsx";
-
 const Login = lazy(() => import("./pages/Auth/Login"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
 const AddNew = lazy(() => import("./pages/Addnew"));
@@ -68,5 +67,6 @@ function App() {
     </BrowserRouter>
   );
 }
+
 
 export default App;

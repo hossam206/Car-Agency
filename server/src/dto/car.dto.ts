@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 export const CarDto = z.object({
+  _id: z.string().optional(),
   exportCountryTo: z.string().optional(),
   vehicleType: z.string().optional(),
   exportPlateNumber: z.string().optional(),
@@ -46,4 +47,4 @@ export const CarDtoRetrieved = z.object({
 });
 
 export type CarTypeDto = z.infer<typeof CarDto>;
-export type CarDtoRetrievedType = z.infer<typeof CarDto>;
+export type CarDtoRetrievedType = z.infer<typeof CarDtoRetrieved>;

@@ -12,7 +12,7 @@ router.post(
   AuthenticationMiddleware.authenticate,
   async (req: Request, res: Response) => {
     await controller.addCar(req, res);
-  }
+  },
 );
 
 // Delete Car
@@ -21,7 +21,7 @@ router.delete(
   AuthenticationMiddleware.authenticate,
   async (req: Request, res: Response) => {
     await controller.deleteCar(req, res);
-  }
+  },
 );
 
 // Update Car
@@ -30,7 +30,7 @@ router.put(
   AuthenticationMiddleware.authenticate,
   async (req: Request, res: Response) => {
     await controller.updateCar(req, res);
-  }
+  },
 );
 
 // Get Car Count
@@ -39,7 +39,7 @@ router.get(
   AuthenticationMiddleware.authenticate,
   async (req: Request, res: Response) => {
     await controller.getCarCount(req, res);
-  }
+  },
 );
 
 // Get all Cars
@@ -50,7 +50,7 @@ router.get(
 
 
     await controller.getAllCars(req, res);
-  }
+  },
 );
 
 // Get Car by ID
@@ -59,7 +59,7 @@ router.get(
   AuthenticationMiddleware.authenticate,
   async (req: Request, res: Response) => {
     await controller.getCarById(req, res);
-  }
+  },
 );
 
 // Download Export Certificate
@@ -68,7 +68,7 @@ router.get(
   AuthenticationMiddleware.authenticate,
   async (req: Request, res: Response) => {
     await controller.downloadCertificate(req, res);
-  }
+  },
 );
 
 router.get(
@@ -76,7 +76,7 @@ router.get(
   AuthenticationMiddleware.authenticate,
   async (req: Request, res: Response) => {
     await controller.ViewCertificate(req, res);
-  }
+  },
 );
 
 export default router;

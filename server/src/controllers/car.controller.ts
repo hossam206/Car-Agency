@@ -20,7 +20,7 @@ class CarController {
     res: Response,
     message: string,
     error: unknown,
-    status = 500
+    status = 500,
   ): void {
     res.status(status).send({
       message,
@@ -78,7 +78,7 @@ class CarController {
       const { page, limit } = req.query;
       const result = await this.serviceInstance.getAllCars(
         Number(page),
-        Number(limit)
+        Number(limit),
       );
       if (!result) {
         res.status(404).json({ message: "No cars found" });
@@ -125,7 +125,7 @@ class CarController {
   async downloadCertificate(req: Request, res: Response): Promise<void> {
     try {
       const { id } = req.params;
-      const pdfStream = await this.serviceInstance.generateCertificate(id);
+      const pdfStream = await this.serviceInstance.generateCertificate(id, res);
       if (!pdfStream || pdfStream.length === 0) {
         res.status(400).json({ message: "Error generating PDF" });
         return;
@@ -133,7 +133,7 @@ class CarController {
       res.setHeader("Content-Type", "application/pdf");
       res.setHeader(
         "Content-Disposition",
-        `attachment; filename="Certificate_${id}.pdf"`
+        `attachment; filename="Certificate_${id}.pdf"`,
       );
       res.send(pdfStream);
     } catch (error) {
@@ -145,7 +145,7 @@ class CarController {
   async ViewCertificate(req: Request, res: Response): Promise<void> {
     try {
       const { id } = req.params;
-      const pdfStream = await this.serviceInstance.generateCertificate(id);
+      const pdfStream = await this.serviceInstance.generateCertificate(id, res);
       if (!pdfStream || pdfStream.length === 0) {
         res.status(400).json({ message: "Error view PDF" });
         return;
@@ -153,7 +153,7 @@ class CarController {
       res.setHeader("Content-Type", "application/pdf");
       res.setHeader(
         "Content-Disposition",
-        `inline; filename="Certificate_${id}.pdf"`
+        `inline; filename="Certificate_${id}.pdf"`,
       );
       res.send(pdfStream);
     } catch (error) {
