@@ -5,6 +5,7 @@ import {
   getCoreRowModel,
   getSortedRowModel,
   getPaginationRowModel,
+  getFilteredRowModel,
   useReactTable,
   SortingState,
 } from "@tanstack/react-table";
@@ -27,67 +28,98 @@ import NoDataImg from "/images/Nodata.webp";
 import { CarsData } from "@/types/CarsData";
 import { GrNext, GrPrevious } from "react-icons/gr";
 import Navbar from "@/Components/Navbar";
+import ConfirmDelete from "@/Components/ConfirmDelete";
+import { handleDownloadPdf } from "@/utils";
 
 export default function Dashboard() {
   const [sorting, setSorting] = useState<SortingState>([]);
-  const [globalFilter, setGlobalFilter] = useState("");
+  const [globalFilter, setGlobalFilter] = useState(""); // ✅ Global search state
   const [data, setData] = useState<CarsData[]>([]);
-  const [loadingStatus, setLoadingStatus] = useState<string>("");
+  const [loadingStatus, setLoadingStatus] = useState<string>("loading");
   const [pageNumber, setPageNumber] = useState<number>(1);
+  const [deleteItemId, setDeleteItemId] = useState<number | null>(null);
+  const pageSize = 4; // Number of rows per page
 
-  // Fetch cars data
+  // ✅ Fetch cars data with pagination
   const fetchCars = async () => {
     setLoadingStatus("loading");
     try {
-      const response = await getAll("car", pageNumber);
-      if (response?.status === 200) {
-        setData(response?.data?.data);
+      const response = await getAll("car", pageNumber, pageSize);
+      if (response?.status === 200 && response?.data?.data) {
+        setData(response.data.data);
         setLoadingStatus("success");
+      } else {
+        setLoadingStatus("failed");
       }
     } catch (error) {
-      console.log(error);
+      console.error("Error fetching cars:", error);
       setLoadingStatus("failed");
     }
   };
 
-  // Handle delete car
-  // const handleDelete = async (id: string) => {
-  //   try {
-  //     await deleteCar(id);
-  //     fetchCars(); // Refresh the data after deletion
-  //   } catch (error) {
-  //     console.error("Failed to delete car:", error);
-  //   }
-  // };
-
   useEffect(() => {
     fetchCars();
-  }, [pageNumber]); // Refetch data when pageNumber changes
+  }, [pageNumber, deleteItemId]); // ✅ Refetch data when pageNumber changes or item is deleted
 
-  // Initialize the table
+  // ✅ Handle delete confirmation
+  const handleDelete = (id: number) => {
+    setDeleteItemId(id);
+  };
+
+  // ✅ Global search filter function (searches all columns)
+  const globalSearchFilter = (row: any, filterValue: string) => {
+    return row.getAllCells().some((cell: any) =>
+      String(cell.getValue() ?? "")
+        .toLowerCase()
+        .includes(filterValue.toLowerCase())
+    );
+  };
+
   const table = useReactTable({
     data,
-    columns: carTablecolumns,
-    state: { sorting, globalFilter },
+    columns: carTablecolumns(handleDelete, handleDownloadPdf),
+    state: { sorting, globalFilter }, // ✅ Include globalFilter
     onSortingChange: setSorting,
     onGlobalFilterChange: setGlobalFilter,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    globalFilterFn: (row, _, filterValue) =>
+      globalSearchFilter(row, filterValue),
   });
 
   return (
     <>
       <Navbar />
+      {deleteItemId && (
+        <ConfirmDelete
+          path="car/remove"
+          deletedItemId={deleteItemId}
+          onClose={() => setDeleteItemId(null)}
+        />
+      )}
       <div>
-        {loadingStatus === "loading" && data?.length === 0 ? (
+        {/* ✅ Loading State */}
+        {loadingStatus === "loading" ? (
           <div className="flex items-center justify-center h-screen">
             <span className="flex flex-col items-center gap-1">
               <ImSpinner8 size={24} className="animate-spin" />
               <p className="font-medium">... جاري التحميل</p>
             </span>
           </div>
-        ) : loadingStatus === "success" && data?.length === 0 ? (
+        ) : loadingStatus === "failed" ? (
+          <div className="flex flex-col items-center justify-center h-screen">
+            <img
+              src={failedLoadImg}
+              className="w-24 h-24"
+              alt="Failed to load"
+            />
+            <p className="text-lg text-red-600 font-semibold">
+              فشل التحميل، حاول مرة أخرى لاحقًا
+            </p>
+          </div>
+        ) : data.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-screen">
             <img src={NoDataImg} className="w-24 h-24" alt="No data" />
             <p className="text-lg font-semibold text-gray-800">
@@ -99,24 +131,27 @@ export default function Dashboard() {
               </Button>
             </Link>
           </div>
-        ) : loadingStatus === "success" && data?.length > 0 ? (
+        ) : (
           <div className="p-4 container mx-auto">
-            <div className="flex md:flex-row flex-col-reverse items-end gap-2  md:justify-between md:items-center mb-4">
+            {/* ✅ Search Bar */}
+            <div className="flex md:flex-row flex-col-reverse items-end gap-2 md:justify-between md:items-center mb-4">
               <Input
                 placeholder="Search..."
-                name="Search"
+                name="search"
                 type="text"
                 value={globalFilter}
                 onChange={(e) => setGlobalFilter(e.target.value)}
                 className="max-w-sm"
               />
+
               <Link to="/addnew">
                 <Button>
-                  <MdAdd size={24} /> إضافه سيارة
+                  <MdAdd size={24} /> New Car Info
                 </Button>
               </Link>
             </div>
 
+            {/* ✅ Data Table */}
             <div className="rounded-md border overflow-x-auto pb-4 sm:text-sm">
               <Table>
                 <TableHeader>
@@ -150,39 +185,25 @@ export default function Dashboard() {
               </Table>
             </div>
 
+            {/* ✅ Pagination Controls */}
             <div className="flex justify-end space-x-2 py-4">
               <Button
                 variant="outline"
                 size="sm"
-                className="bg-gray-200 hover:bg-gray-700 transition-all duration-300 ease-in-out hover:text-white leading-relaxed"
-                onClick={() => setPageNumber(pageNumber - 1)}
+                onClick={() => setPageNumber((prev) => Math.max(prev - 1, 1))}
                 disabled={pageNumber === 1}
               >
-                <GrPrevious />
-                السابق
+                <GrPrevious /> Prev
               </Button>
               <Button
                 variant="outline"
                 size="sm"
-                className="bg-gray-200 hover:bg-gray-700 transition-all duration-300 ease-in-out hover:text-white leading-relaxed"
-                onClick={() => setPageNumber(pageNumber + 1)}
-                disabled={data.length < 10} // Assuming 10 items per page
+                onClick={() => setPageNumber((prev) => prev + 1)}
+                disabled={data.length < pageSize}
               >
-                القادم
-                <GrNext />
+                Next <GrNext />
               </Button>
             </div>
-          </div>
-        ) : (
-          <div className="flex flex-col items-center justify-center h-screen">
-            <img
-              src={failedLoadImg}
-              className="w-24 h-24"
-              alt="Failed to load"
-            />
-            <p className="text-lg text-red-600 font-semibold">
-              فشل التحميل، حاول مرة أخرى لاحقًا
-            </p>
           </div>
         )}
       </div>

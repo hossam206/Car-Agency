@@ -73,12 +73,13 @@ export const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
   // handle Logout service
   const handleLogout = async () => {
     try {
-      const response = await axios.get(`${api}/user/logout`);
+      const response = await axios.get(`${api}/user/logout`, {
+        withCredentials: true,
+      });
       if (response.status == 200) {
         Cookies.remove("AuthToken");
         navigate("/Login");
       }
-      console.log(response);
     } catch (error) {
       console.log(error);
     }

@@ -42,7 +42,7 @@ export const CarDtoRetrieved = z.object({
   chassisNumber: z.string().optional(),
   registrationDate: z.string().optional(),
   registrationExpiryDate: z.string().optional(),
-  category: z.string().optional(),
+  driverNationality: z.string().optional(),
   driverName: z.string().optional(),
 });
 

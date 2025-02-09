@@ -33,6 +33,7 @@ class CarService {
   async addCar(carData: CarTypeDto): Promise<boolean> {
     try {
       const parsed = CarDto.safeParse(carData);
+ 
       if (!parsed.success) {
         throw new Error("Car validation failed");
       }
@@ -130,191 +131,6 @@ class CarService {
     }
   }
 
-  // async generateCertificate(car: any, res: Response): Promise<Buffer> {
-  //   const carRetrieved = await this.getCarById(car);
-  //   if (!carRetrieved) {
-  //     throw new Error("Car not found.");
-  //   }
-
-  //   const translatedCar = await this.TranslatedCar(carRetrieved);
-
-  //   //#region  Pdf properties
-
-  //   // Url
-  //   const TemplateBytes = fs.readFileSync(
-  //     String(process.env.PATH_LOCATION_PDF)
-  //   );
-  //   const url = `http://localhost:8080/api/car/view/${car}`;
-
-  //   // Font
-  //   const FontBytes = fs.readFileSync(String(process.env.PATH_FONT));
-  //   const LargeFontSize = 16;
-  //   const SmallFontSize = 13;
-
-  //   // Color
-  //   const BlueColor = rgb(53 / 255, 60 / 255, 145 / 255);
-  //   const WhiteColor = rgb(240 / 255, 248 / 250, 1);
-
-  //   //#endregion
-
-  //   // Generate QR code
-  //   const qrDataUrl = await QRCode.toDataURL(url, { width: 150, margin: 1 });
-  //   const base64Data = qrDataUrl.split(",")[1];
-  //   const qrImageBytes = Buffer.from(base64Data, "base64");
-
-  //   // Create a new PDF document.
-  //   const pdfDoc = await PDFDocument.create();
-  //   pdfDoc.registerFontkit(fontkit);
-  //   const page = pdfDoc.addPage([850, 1000]);
-
-  //   // Font and image as the background.
-  //   const font = await pdfDoc.embedFont(FontBytes);
-  //   const backgroundImage = await pdfDoc.embedJpg(TemplateBytes);
-
-  //   // prettier-ignore
-  //   page.drawImage(backgroundImage, {x: 0,y: 0,width: page.getWidth(),height: page.getHeight(),});
-
-  //   // prettier-ignore
-  //   // Embed the QR code image (PNG).
-  //   const qrImage = await pdfDoc.embedPng(qrImageBytes);
-  //   page.drawImage(qrImage, { x: 360, y: 482, width: 73, height: 67 });
-
-  //   // prettier-ignore
-  //   // Add text to the page.
-  //   const addText = (text: string,x: number,y: number,fontSize: number,color: any) => {
-  //     page.drawText(text, { x, y, size: fontSize, font, color });
-  //   };
-
-  //   // prettier-ignore
-  //   // Define [ English ]
-  //   const textEnglish: [string, number, number, number, any][] = [
-  //     [carRetrieved.exportCountryTo       ?? "",  217, 772, LargeFontSize, WhiteColor],
-  //     [carRetrieved.vehicleType           ?? "",  816, 880, LargeFontSize, BlueColor],
-  //     [carRetrieved.vehicleType           ?? "",  484, 880, LargeFontSize, BlueColor],
-  //     [carRetrieved.exportPlateNumber     ?? "",  485, 841, LargeFontSize, BlueColor],
-  //     [carRetrieved.registrationPlateNumber ?? "",485, 805, LargeFontSize, BlueColor],
-  //     [this.DateConvertEnglish(carRetrieved.registrationDate ?? ""),  485, 764, LargeFontSize, BlueColor],
-  //     [this.DateConvertEnglish(carRetrieved.registrationExpiryDate ?? ""), 485, 723, LargeFontSize, BlueColor],
-  //     [carRetrieved.vehicleMake           ?? "",  485, 685, LargeFontSize, BlueColor],
-  //     [carRetrieved.category              ?? "",  485, 645, LargeFontSize, BlueColor],
-  //     [carRetrieved.modelYear             ?? "",  485, 600, LargeFontSize, BlueColor],
-  //     [carRetrieved.countryOfOrigin       ?? "",  485, 565, LargeFontSize, BlueColor],
-  //     [carRetrieved.vehicleColor          ?? "",  485, 527, LargeFontSize, BlueColor],
-  //     [carRetrieved.chassisNumber         ?? "",  485, 485, LargeFontSize, BlueColor],
-  //     [carRetrieved.engineNumber          ?? "",  485, 445, LargeFontSize, BlueColor],
-  //     [String(carRetrieved.numberOfDoors  ?? "N/A"), 485, 408, LargeFontSize, BlueColor],
-  //     [carRetrieved.fuelType              ?? "",  485, 365, LargeFontSize, BlueColor],
-  //     [String(carRetrieved.numberOfSeats  ?? "N/A"),  485, 329, LargeFontSize, BlueColor],
-  //     [String(carRetrieved.emptyWeight    ?? "N/A"),  485, 288, LargeFontSize, BlueColor],
-  //     [carRetrieved.insuranceCompany      ?? "",  485, 250, LargeFontSize, BlueColor],
-  //     [carRetrieved.insuranceType         ?? "",  485, 210, LargeFontSize, BlueColor],
-  //     [carRetrieved.insurancePolicyNumber ?? "",  485, 172, LargeFontSize, BlueColor],
-  //     [this.DateConvertEnglish(carRetrieved.insuranceExpiryDate ?? ""),  485, 134, LargeFontSize, BlueColor],
-  //     [carRetrieved.ownerName             ?? "",  36,  418, LargeFontSize, BlueColor],
-  //     [carRetrieved.nationality           ?? "",  36,  383, LargeFontSize, BlueColor],
-  //     [carRetrieved.passportNumber        ?? "",  200, 348, LargeFontSize, BlueColor],
-  //     [carRetrieved.trafficCodeNumber     ?? "",  200, 320, LargeFontSize, BlueColor],
-  //     [carRetrieved.emiratesIdNumber      ?? "",  200, 285, LargeFontSize, BlueColor],
-  //     [carRetrieved.driverName            ?? "",  117, 238, LargeFontSize, BlueColor],
-  //     [carRetrieved.licenseNumber         ?? "",  200, 216, LargeFontSize, BlueColor],
-  //     [carRetrieved.driverNationality     ?? "",  200, 190, LargeFontSize, BlueColor],
-  //     [carRetrieved.licenseSource         ?? "",  200, 150, LargeFontSize, BlueColor],
-  //     [this.DateConvertEnglish(carRetrieved.certificateIssueDate  ?? ""),  30,  615, SmallFontSize, WhiteColor],
-  //     [carRetrieved.certificateReferenceNumber ?? "",  370, 556, SmallFontSize, WhiteColor]
-  // ];
-
-  //   // prettier-ignore
-  //   // Define [ Arabic ]
-  //   const textArabic: [string, number, number, number, any][] = [
-  //     [translatedCar.exportCountryTo ?? "", 260, 892, LargeFontSize, WhiteColor],
-  //     [translatedCar.vehicleType ?? "", 816, 880, LargeFontSize, BlueColor],
-  //     [carRetrieved.exportPlateNumber ?? "", 816, 841, LargeFontSize, BlueColor],
-  //     [carRetrieved.registrationPlateNumber ?? "", 816, 805, LargeFontSize, BlueColor],
-  //     [ this.DateConvertArabic(carRetrieved.registrationDate ?? ""), 816, 764, LargeFontSize, BlueColor],
-  //     [ this.DateConvertArabic(carRetrieved.registrationExpiryDate ?? ""), 816, 723, LargeFontSize, BlueColor],
-  //     [carRetrieved.vehicleMake ?? "", 816, 685, LargeFontSize, BlueColor],
-  //     [translatedCar.category ?? "", 816, 645, LargeFontSize, BlueColor],
-  //     [carRetrieved.modelYear ?? "", 816, 600, LargeFontSize, BlueColor],
-  //     [translatedCar.countryOfOrigin ?? "", 816, 565, LargeFontSize, BlueColor],
-  //     [translatedCar.vehicleColor ?? "", 816, 527, LargeFontSize, BlueColor],
-  //     [carRetrieved.chassisNumber ?? "", 816, 485, LargeFontSize, BlueColor],
-  //     [carRetrieved.engineNumber ?? "", 816, 445, LargeFontSize, BlueColor],
-  //     [String(carRetrieved.numberOfDoors ?? "N/A"), 816, 408, LargeFontSize, BlueColor],
-  //     [translatedCar.fuelType ?? "", 816, 365, LargeFontSize, BlueColor],
-  //     [String(carRetrieved.numberOfSeats ?? "N/A"), 816, 329, LargeFontSize, BlueColor],
-  //     [String(carRetrieved.emptyWeight ?? "N/A"), 816, 288, LargeFontSize, BlueColor],
-  //     [translatedCar.insuranceCompany ?? "", 816, 250, LargeFontSize, BlueColor],
-  //     [translatedCar.insuranceType ?? "", 816, 210, LargeFontSize, BlueColor],
-  //     [carRetrieved.insurancePolicyNumber ?? "", 816, 172, LargeFontSize, BlueColor],
-  //     [ this.DateConvertArabic(carRetrieved.insuranceExpiryDate ?? ""), 816, 134, LargeFontSize, BlueColor],
-  //     [translatedCar.ownerName ?? "", 380, 450, LargeFontSize, BlueColor],
-  //     [translatedCar.driverName ?? "", 320, 264, LargeFontSize, BlueColor],
-  //     [ this.DateConvertArabic(carRetrieved.certificateIssueDate ?? ""), 150, 608, SmallFontSize, WhiteColor]
-  //   ];
-
-  //   // Write in pdf [ English ]
-  //   textEnglish.forEach(([text, x, y, fontSize, color]) => {
-  //     addText(text, x, y, fontSize, color);
-  //   });
-
-  //   // Write in pdf [ Arabic ]
-  //   textArabic.forEach(([text, x, y, fontSize, color]) => {
-  //     addText(text, x, y, fontSize, color);
-  //   });
-
-  //   // Save PDF and return as buffer
-  //   const updatedPdfBytes = await pdfDoc.save();
-  //   return Buffer.from(updatedPdfBytes);
-  // }
-
-  // DateConvertArabic(dateString: string): string {
-  //   const date = new Date(dateString);
-  //   if (isNaN(date.getTime())) {
-  //     return "Invalid Date";
-  //   }
-  //   const formattedDate = date
-  //     .toLocaleString("ar-EG", {
-  //       day: "2-digit",
-  //       month: "long",
-  //       year: "numeric",
-  //       hour: "2-digit",
-  //       minute: "2-digit",
-  //       second: "2-digit",
-  //       hour12: true,
-  //     })
-  //     .replace("،", "")
-  //     .replace("صباحًا", "ص")
-  //     .replace("مساءً", "م")
-  //     .replace(" في ", " ");
-
-  //   return formattedDate;
-  // }
-
-  // DateConvertEnglish(dateString: string): string {
-  //   const date = new Date(dateString);
-  //   if (isNaN(date.getTime())) {
-  //     return "Invalid Date";
-  //   }
-  //   const formattedDate = date.toLocaleString("EG", {
-  //     day: "2-digit",
-  //     month: "long",
-  //     year: "numeric",
-  //   });
-  //   return formattedDate;
-  // }
-
-  // async TranslatedCar(carRetrieved: any): Promise<any> {
-  //   return Object.fromEntries(
-  //     await Promise.all(
-  //       Object.entries(carRetrieved).map(async ([key, value]) => [
-  //         key,
-  //         key.includes("Date") && typeof value === "string"
-  //           ? await translate(value, { to: "ar" })
-  //           : value,
-  //       ])
-  //     )
-  //   );
-  // }
 
   async generateCertificate(car: any, res: Response): Promise<Buffer> {
     // Retrieve the car details
@@ -322,7 +138,6 @@ class CarService {
     if (!carRetrieved) {
       throw new Error("Car not found.");
     }
-
     // Translate car details for Arabic fields
     const translatedCar = await this.TranslatedCar(carRetrieved);
 
@@ -339,7 +154,6 @@ class CarService {
     const BlueColor = rgb(53 / 255, 60 / 255, 145 / 255);
     const WhiteColor = rgb(240 / 255, 248 / 255, 1);
     //#endregion
-
     // Generate the QR code image for the URL
     const url = `http://localhost:8080/api/car/view/${car}`;
     const qrDataUrl = await QRCode.toDataURL(url, { width: 150, margin: 1 });

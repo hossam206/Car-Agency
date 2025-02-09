@@ -25,7 +25,7 @@ const apiCall = async ({
 }: apiProps) => {
   const config = {
     method,
-    url: `${api}/${path}/${page && limit ? `page=${page}` : ""}`,
+    url: `${api}/${path}${page && limit ? `?page=${page}&limit=${limit}` : ""}`,
     data,
     headers: { ...headers },
     withCredentials: true,
@@ -34,13 +34,14 @@ const apiCall = async ({
     const response = await axios(config);
     return response;
   } catch (error) {
+    console.log(error);
     handleError(error, method);
   }
 };
 // get all items
 
-export const getAll = async (path: string, page?: number) => {
-  return apiCall({ method: "GET", path, page });
+export const getAll = async (path: string, page?: number, limit?: number) => {
+  return apiCall({ method: "GET", path, page, limit });
 };
 // add item
 export const addItem = async (path: string, data: object) => {
@@ -56,20 +57,14 @@ export const addItem = async (path: string, data: object) => {
   });
 };
 // get one item
-export const getItem = async (itemId: number, path: string) => {
+export const getItem = async (path: string, itemId: any) => {
   return apiCall({ method: "GET", path: `${path}/${itemId}` });
 };
 // Update item
-export const updateItem = async (
-  itemId: number,
-  path: string,
-  data: object
-) => {
+export const updateItem = async (path: string, itemId: any, data: object) => {
   return apiCall({ method: "PUT", path: `${path}/${itemId}`, data });
 };
 // delete Item
 export const deleteItem = (path: string, itemId: number) => {
   return apiCall({ method: "DELETE", path: `${path}/${itemId}` });
 };
-
-

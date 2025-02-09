@@ -1,4 +1,5 @@
 export type CarsData = {
+  _id: any;
   category: string;
   certificateIssueDate: string;
   certificateReferenceNumber: string;
