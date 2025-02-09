@@ -3,7 +3,6 @@ import { Suspense, lazy } from "react";
 import Loader from "./Components/Loader";
 import ProtectRoutes from "./routes/protectRoutes";
 import { AuthContextProvider } from "./Context/AuthProvider.tsx";
-
 const Login = lazy(() => import("./pages/Auth/Login"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
 const DisplayDocument = lazy(() => import("./pages/DisplayDocument"));
@@ -31,7 +30,6 @@ function App() {
               </Suspense>
             }
           />
-
           {/* Protected Routes */}
           <Route element={<ProtectRoutes />}>
             <Route
@@ -56,5 +54,6 @@ function App() {
     </BrowserRouter>
   );
 }
+
 
 export default App;

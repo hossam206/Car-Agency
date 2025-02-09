@@ -15,7 +15,7 @@ router.get(
   AuthenticationMiddleware.authenticate,
   async (req: Request, res: Response) => {
     await userController.logout(req, res);
-  }
+  },
 );
 
 export default router;

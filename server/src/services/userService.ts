@@ -28,7 +28,7 @@ class UserService {
       return parsed.data;
     } catch (error) {
       throw new Error(
-        error instanceof Error ? error.message : "Error logging in"
+        error instanceof Error ? error.message : "Error logging in",
       );
     }
   }
