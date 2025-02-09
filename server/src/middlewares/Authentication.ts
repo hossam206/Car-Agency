@@ -9,7 +9,7 @@ class AuthenticationMiddleware {
   static authenticate(
     req: AuthenticatedRequest,
     res: Response,
-    next: NextFunction
+    next: NextFunction,
   ): void {
     try {
       const token = req.cookies?.AuthToken;

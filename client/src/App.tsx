@@ -3,6 +3,7 @@ import { ComponentType, Suspense, lazy } from "react";
 import Loader from "./Components/Loader";
 import ProtectRoutes from "./routes/protectRoutes";
 import Addnew from "./pages/Addnew";
+import ViewCar from "./pages/ViewCar";
 
 // Lazy-loaded components
 const Login = lazy(() => import("./pages/Auth/Login"));
@@ -23,6 +24,7 @@ const router = createBrowserRouter([
   },
   { path: "/", element: withSuspense(Login) },
   { path: "dashboard", element: <Dashboard /> },
+  { path: "document/view/:car", element: <ViewCar /> },
   // {
   //   path: "dashboard",
   //   element: (
