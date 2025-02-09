@@ -10,10 +10,10 @@ dotenv.config();
 const app: Application = express();
 
 const corsOptions = {
-  origin: "http://localhost:5173",
+  origin: "http://localhost:5173", // ✅ Replace "*" with the exact frontend origin
+  credentials: true, // ✅ Allows cookies/session tokens
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: true,
 };
 
 app.use(cors(corsOptions));

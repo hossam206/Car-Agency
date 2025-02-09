@@ -1,46 +1,59 @@
-import { createBrowserRouter } from "react-router-dom";
-import { ComponentType, Suspense, lazy } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Suspense, lazy } from "react";
 import Loader from "./Components/Loader";
 import ProtectRoutes from "./routes/protectRoutes";
-import Addnew from "./pages/Addnew";
-import ViewCar from "./pages/ViewCar";
-
-// Lazy-loaded components
+import { AuthContextProvider } from "./Context/AuthProvider.tsx";
 const Login = lazy(() => import("./pages/Auth/Login"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
-// const AddNew = lazy(() => import("./pages/Addnew"));
 const DisplayDocument = lazy(() => import("./pages/DisplayDocument"));
+const AddNew = lazy(() => import("./pages/Addnew"));
 
-const withSuspense = (Component: ComponentType) => (
-  <Suspense fallback={<Loader />}>
-    <Component />
-  </Suspense>
-);
+function App() {
+  return (
+    <BrowserRouter>
+      <AuthContextProvider>
+        <Routes>
+          {/* Public Routes */}
+          <Route
+            path="/Login"
+            element={
+              <Suspense fallback={<Loader />}>
+                <Login />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/document"
+            element={
+              <Suspense fallback={<Loader />}>
+                <DisplayDocument />
+              </Suspense>
+            }
+          />
+          {/* Protected Routes */}
+          <Route element={<ProtectRoutes />}>
+            <Route
+              path="/"
+              element={
+                <Suspense fallback={<Loader />}>
+                  <Dashboard />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/addnew"
+              element={
+                <Suspense fallback={<Loader />}>
+                  <AddNew />
+                </Suspense>
+              }
+            />
+          </Route>
+        </Routes>
+      </AuthContextProvider>
+    </BrowserRouter>
+  );
+}
 
-const router = createBrowserRouter([
-  {
-    path: "/document",
-    element: withSuspense(DisplayDocument),
-  },
-  { path: "/", element: withSuspense(Login) },
-  { path: "dashboard", element: <Dashboard /> },
-  { path: "document/view/:car", element: <ViewCar /> },
-  // {
-  //   path: "dashboard",
-  //   element: (
-  //     <ProtectRoutes allowedTo={["admin"]}>
-  //       {withSuspense(Dashboard)}
-  //     </ProtectRoutes>
-  //   ),
-  // },
-  // {
-  //   path: "addnew",
-  //   element: (
-  //     <ProtectRoutes allowedTo={["admin"]}>
-  //       {withSuspense(AddNew)}
-  //     </ProtectRoutes>
-  //   ),
-  // },
-]);
 
-export default router;
+export default App;

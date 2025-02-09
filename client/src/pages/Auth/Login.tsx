@@ -10,6 +10,11 @@ import { Button } from "@/Components/ui/button";
 import { useAuth } from "@/Context/AuthProvider";
 
 const Login: React.FC = () => {
+  type ApiResponse = {
+    status: number;
+    data: any; // Adjust this type according to your actual API response
+  };
+
   const { loginService, loading } = useAuth();
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [loginError, setLoginError] = useState<boolean>(false);
@@ -24,12 +29,16 @@ const Login: React.FC = () => {
       email: Yup.string().required("email is required"),
       password: Yup.string().required("Password is required"),
     }),
-    onSubmit: async (values) => {
+    onSubmit: async (values): Promise<void> => {
       try {
-        const response = await loginService(values);
-        console.log(response);
+        const response: ApiResponse = await loginService(values);
+        if (response?.status == 200) {
+          setLoginError(false);
+        } else {
+          setLoginError(true);
+        }
       } catch (error) {
-        console.log("error happen while login", error);
+        console.error("Error while logging in", error);
       }
     },
   });
@@ -40,8 +49,8 @@ const Login: React.FC = () => {
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className={loginStyles.HeadingStyles}>Welcome Login</h1>
             {loginError && (
-              <div className="p-2 bg-red-300 text-red-600 rounded-lg m-0">
-                <span>email or password is incorrect</span>
+              <div className="p-2 bg-red-200 font-medium text-red-600 rounded-md m-0">
+                <span>email or password is incorrect,Try again</span>
               </div>
             )}
             <form
@@ -117,8 +126,15 @@ const Login: React.FC = () => {
                 type="submit"
                 size="lg"
                 className="w-full"
+                // disabled={formik.errors || formik.isValid}
               >
-                <span>{loading ? <ImSpinner8 /> : <IoIosLock />}</span>
+                <span>
+                  {loading ? (
+                    <ImSpinner8 className="animate-spin transition-all duration-500 ease-in-out" />
+                  ) : (
+                    <IoIosLock />
+                  )}
+                </span>
                 {loading ? "loading.." : "Login"}
               </Button>
             </form>

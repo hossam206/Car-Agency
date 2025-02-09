@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
@@ -6,7 +6,8 @@ import { Button } from "@/Components/ui/button";
 import { ImSpinner8 } from "react-icons/im";
 import { MdAdd } from "react-icons/md";
 import { addItem } from "@/services/globalService";
-import { Input } from "@/Components/ui/Input";
+import { Input } from "@/Components/ui/input";
+import Navbar from "@/Components/Navbar";
 
 // Yup validation schema
 const validationSchema = Yup.object({
@@ -84,9 +85,11 @@ export default function Addnew() {
     validationSchema,
     onSubmit: async (values) => {
       setLoading(true);
+      console.log(values);
       try {
-        const response = await addItem("", values);
-        if (response.status === 2000) {
+        const response = await addItem("car/add", values);
+        console.log(response);
+        if (response?.status === 201) {
           setLoading(false);
         }
       } catch (error) {}
@@ -95,10 +98,11 @@ export default function Addnew() {
 
   return (
     <>
-      <div className="container py-10">
+      <Navbar />
+      <div className="container py-8  ">
         <h1 className="font-bold text-2xl my-4">Add New Car Info</h1>
         <form onSubmit={formik.handleSubmit}>
-          <div className="grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 border border-solid rounded-lg p-4">
+          <div className="grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 border border-solid rounded-lg p-4 my-4">
             {/* Export Country To */}
             <Input
               labelName="Export Country To"
@@ -144,27 +148,43 @@ export default function Addnew() {
             />
 
             {/* Registration Date */}
-            <Input
-              labelName="Registration Date"
-              name="RegistrationDate"
-              placeholder="e.g 00/00/0000"
-              id="Registration Date"
-              type="date"
-              value={formik.values.RegistrationDate}
-              onChange={formik.handleChange}
-            />
+            <div className="flex flex-col gap-2">
+              <label
+                htmlFor="registration-date"
+                className="text-sm font-medium text-gray-700"
+              >
+                Registration Date
+              </label>
+              <input
+                id="registration-date"
+                name="RegistrationDate"
+                type="date"
+                placeholder="MM/DD/YYYY"
+                value={formik.values.RegistrationDate}
+                onChange={formik.handleChange}
+                className="h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-gray-900 text-base shadow-sm transition-all focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+              />
+            </div>
 
             {/* Registration Expiry Date */}
-            <Input
-              labelName="Registration Expiry Date"
-              name="RegistrationExpiryDate"
-              placeholder="e.g 00/00/0000"
-              id="Registration Expiry Date"
-              type="date"
-              value={formik.values.RegistrationExpiryDate}
-              onChange={formik.handleChange}
-            />
 
+            <div className="flex flex-col gap-2">
+              <label
+                htmlFor="registration-date"
+                className="text-sm font-medium text-gray-700"
+              >
+                "Registration Expiry Date
+              </label>
+              <input
+                id="Registration Expiry Date"
+                name="RegistrationExpiryDate"
+                type="date"
+                placeholder="MM/DD/YYYY"
+                value={formik.values.RegistrationExpiryDate}
+                onChange={formik.handleChange}
+                className="h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-gray-900 text-base shadow-sm transition-all focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+              />
+            </div>
             {/* Vehicle Make */}
             <Input
               labelName="Vehicle Make"
@@ -320,16 +340,24 @@ export default function Addnew() {
             />
 
             {/* Insurance Expiry Date */}
-            <Input
-              labelName="Insurance Expiry Date"
-              name="InsuranceExpiryDate"
-              placeholder="e.g 00/00/0000"
-              id="Insurance Expiry Date"
-              type="date"
-              value={formik.values.InsuranceExpiryDate}
-              onChange={formik.handleChange}
-            />
 
+            <div className="flex flex-col gap-2">
+              <label
+                htmlFor="Insurance Expiry Date"
+                className="text-sm font-medium text-gray-700"
+              >
+                Insurance Expiry Date
+              </label>
+              <input
+                id="Insurance Expiry Date"
+                name="InsuranceExpiryDate"
+                type="date"
+                placeholder="MM/DD/YYYY"
+                value={formik.values.InsuranceExpiryDate}
+                onChange={formik.handleChange}
+                className="h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-gray-900 text-base shadow-sm transition-all focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+              />
+            </div>
             {/* Owner Name */}
             <Input
               labelName="Owner Name"
@@ -430,24 +458,42 @@ export default function Addnew() {
             />
 
             {/* Certificate Issue Date */}
-            <Input
-              labelName="Certificate Issue Date"
-              name="CertificateIssueDate"
-              placeholder="e.g xyz"
-              id="Certificate Issue Date"
-              type="date"
-              value={formik.values.LicenseSource}
-              onChange={formik.handleChange}
-            />
-            <Input
-              labelName="Certificate Reference Number"
-              name="CertificateReferenceNumber"
-              placeholder="e.g xyz"
-              id="Certificate Reference Number"
-              type="date"
-              value={formik.values.CertificateReferenceNumber}
-              onChange={formik.handleChange}
-            />
+
+            <div className="flex flex-col gap-2">
+              <label
+                htmlFor="Insurance Expiry Date"
+                className="text-sm font-medium text-gray-700"
+              >
+                Certificate Issue Date
+              </label>
+              <input
+                id="Certificate Issue Date"
+                name="CertificateIssueDate"
+                type="date"
+                placeholder="MM/DD/YYYY"
+                value={formik.values.CertificateIssueDate}
+                onChange={formik.handleChange}
+                className="h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-gray-900 text-base shadow-sm transition-all focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+              />
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label
+                htmlFor="Insurance Expiry Date"
+                className="text-sm font-medium text-gray-700"
+              >
+                Certificate Reference Number
+              </label>
+              <input
+                id="Certificate Reference Number"
+                name="CertificateReferenceNumber"
+                type="date"
+                placeholder="MM/DD/YYYY"
+                value={formik.values.CertificateReferenceNumber}
+                onChange={formik.handleChange}
+                className="h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-gray-900 text-base shadow-sm transition-all focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+              />
+            </div>
           </div>
           <div className="flex flex-row item-center justify-center">
             <Button
@@ -456,7 +502,13 @@ export default function Addnew() {
               size="lg"
               className="mx-auto "
             >
-              <span>{loading ? <ImSpinner8 /> : <MdAdd />}</span>
+              <span>
+                {loading ? (
+                  <ImSpinner8 className="animate-spin transition-all duration-200 ease-in-out" />
+                ) : (
+                  <MdAdd />
+                )}
+              </span>
               {loading ? "Adding.." : "Add new"}
             </Button>
           </div>
