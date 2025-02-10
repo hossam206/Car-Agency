@@ -10,11 +10,6 @@ import { Button } from "@/Components/ui/button";
 import { useAuth } from "@/Context/AuthProvider";
 
 const Login: React.FC = () => {
-  type ApiResponse = {
-    status: number;
-    data: any; // Adjust this type according to your actual API response
-  };
-
   const { loginService, loading } = useAuth();
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [loginError, setLoginError] = useState<boolean>(false);
@@ -30,15 +25,12 @@ const Login: React.FC = () => {
       password: Yup.string().required("Password is required"),
     }),
     onSubmit: async (values): Promise<void> => {
-      try {
-        const response: ApiResponse = await loginService(values);
-        if (response?.status == 200) {
-          setLoginError(false);
-        } else {
-          setLoginError(true);
-        }
-      } catch (error) {
-        console.error("Error while logging in", error);
+      const response = await loginService(values);
+
+      if (response.status === 200) {
+        setLoginError(false);
+      } else {
+        setLoginError(true);
       }
     },
   });

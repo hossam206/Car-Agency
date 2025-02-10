@@ -33,7 +33,7 @@ class CarService {
   async addCar(carData: CarTypeDto): Promise<boolean> {
     try {
       const parsed = CarDto.safeParse(carData);
- 
+
       if (!parsed.success) {
         throw new Error("Car validation failed");
       }
@@ -90,7 +90,7 @@ class CarService {
         if (!parsed.success) {
           throw new Error("Car validation failed");
         }
-        return parsed.data;
+        return { _id: _id.toString(), ...parsed.data };
       });
       return carsDto;
     } catch (error) {
@@ -130,7 +130,6 @@ class CarService {
       );
     }
   }
-
 
   async generateCertificate(car: any, res: Response): Promise<Buffer> {
     // Retrieve the car details

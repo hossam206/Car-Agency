@@ -38,7 +38,14 @@ export default function Dashboard() {
   const [loadingStatus, setLoadingStatus] = useState<string>("loading");
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [deleteItemId, setDeleteItemId] = useState<number | null>(null);
-  const pageSize = 4; // Number of rows per page
+  const pageSize = 10; // Number of rows per page
+  const [downloadStatus, setDownloadStatus] = useState<Record<number, string>>(
+    {}
+  );
+
+  const updateDownloadStatus = (id: number, status: string) => {
+    setDownloadStatus((prev) => ({ ...prev, [id]: status }));
+  };
 
   // ✅ Fetch cars data with pagination
   const fetchCars = async () => {
@@ -77,7 +84,13 @@ export default function Dashboard() {
 
   const table = useReactTable({
     data,
-    columns: carTablecolumns(handleDelete, handleDownloadPdf),
+    columns: carTablecolumns(
+      handleDelete,
+      handleDownloadPdf,
+      updateDownloadStatus,
+      downloadStatus
+    ),
+
     state: { sorting, globalFilter }, // ✅ Include globalFilter
     onSortingChange: setSorting,
     onGlobalFilterChange: setGlobalFilter,
@@ -100,6 +113,7 @@ export default function Dashboard() {
         />
       )}
       <div>
+  
         {/* ✅ Loading State */}
         {loadingStatus === "loading" ? (
           <div className="flex items-center justify-center h-screen">

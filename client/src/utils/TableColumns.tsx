@@ -4,10 +4,17 @@ import { Link } from "react-router-dom";
 import { MdModeEdit } from "react-icons/md";
 import { IoCloudDownloadOutline } from "react-icons/io5";
 import { FaRegTrashCan } from "react-icons/fa6";
+import { PiSpinnerGapBold } from "react-icons/pi";
 
 export const carTablecolumns = (
   handleDelete: (id: number) => void,
-  handleDownloadPdf: (id: number, path: string) => void
+  handleDownloadPdf: (
+    id: number,
+    path: string,
+    setDownloadStatus: (id: number, status: string) => void
+  ) => void,
+  updateDownloadStatus: (id: number, status: string) => void,
+  downloadStatus: Record<number, string> // Track status for each car
 ): ColumnDef<CarsData>[] => [
   {
     accessorKey: "vehicleType",
@@ -49,11 +56,10 @@ export const carTablecolumns = (
     header: "Actions",
     cell: ({ row }) => {
       const car = row.original;
+      const isLoading = downloadStatus[car._id] === "loading";
 
       return (
         <div className="flex gap-3 text-lg items-center justify-start">
-          {/* View Button */}
-
           {/* Edit Button */}
           <Link
             to={`/cars/editCar/${car._id}`}
@@ -69,11 +75,19 @@ export const carTablecolumns = (
           >
             <FaRegTrashCan />
           </button>
+
+          {/* Download Button */}
           <button
             className="bg-[#D6F4F9] text-[#1A7DA7] hover:bg-[#1A7DA7] hover:text-white text-[14px] w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ease-in-out cursor-pointer"
-            onClick={() => handleDownloadPdf(car._id, "car/download")}
+            onClick={() =>
+              handleDownloadPdf(car._id, "car/download", updateDownloadStatus)
+            }
           >
-            <IoCloudDownloadOutline className="w-5 h-5" />
+            {isLoading ? (
+              <PiSpinnerGapBold className="w-5 h-5 animate-spin transition-all duration-500 ease-in-out" />
+            ) : (
+              <IoCloudDownloadOutline className="w-5 h-5" />
+            )}
           </button>
         </div>
       );
