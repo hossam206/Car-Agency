@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState } from "react";
-import { jwtDecode, JwtPayload } from "jwt-decode";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
@@ -7,17 +6,12 @@ import { useNavigate } from "react-router-dom";
 const api = import.meta.env.VITE_API_URL || "http://localhost:8080/api";
 
 interface AuthContextType {
-  user: JwtPayload | null;
   loading: boolean;
   loginService: (credentials: {
     email: string;
     password: string;
-  }) => Promise<void>;
+  }) => Promise<{ status: number; data: any }>;
   handleLogout: () => void;
-}
-
-interface CustomJwtPayload extends JwtPayload {
-  role?: string;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -26,22 +20,8 @@ export const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const navigate = useNavigate(); // ✅ Correct usage inside `BrowserRouter`
-  const [user, setUser] = useState<CustomJwtPayload | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const decodeToken = ({
-    Token,
-  }: {
-    Token?: string;
-  }): CustomJwtPayload | null => {
-    if (!Token) return null;
-    try {
-      return jwtDecode<CustomJwtPayload>(Token);
-    } catch (error) {
-      console.log("Error during token decoding:", error);
-      return null;
-    }
-  };
   // handle Login service
   const loginService = async (credentials: {
     email: string;
@@ -56,20 +36,26 @@ export const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
 
       if (response.status === 200) {
         const tokenString = Cookies.get("AuthToken");
-        const Token = tokenString ? decodeToken({ Token: tokenString }) : null;
-        if (Token) {
-          setUser(Token);
+        if (!tokenString) {
+          navigate("/Login");
           setLoading(false);
-          return navigate("/");
-        } else {
+          return { status: 401, data: "No AuthToken found" };
+        }
+        if (tokenString) {
           setLoading(false);
+          navigate("/");
         }
       }
-    } catch (error) {
-      // console.error("Error occurred while logging in:", error);
+
       setLoading(false);
+      return { status: response.status, data: response.data };
+    } catch (error) {
+      setLoading(false);
+      console.error("Login failed:", error);
+      return { status: 500, data: "Login error" };
     }
   };
+
   // handle Logout service
   const handleLogout = async () => {
     try {
@@ -85,7 +71,7 @@ export const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   };
   return (
-    <AuthContext.Provider value={{ loginService, handleLogout, user, loading }}>
+    <AuthContext.Provider value={{ loginService, handleLogout, loading }}>
       {children}
     </AuthContext.Provider>
   );
