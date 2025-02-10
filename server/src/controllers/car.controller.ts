@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import CarService from "../services/carService";
+const { validationResult } = require("express-validator");
 
 class CarController {
   private serviceInstance: CarService;
@@ -31,6 +32,13 @@ class CarController {
   // Add Car
   async addCar(req: Request, res: Response): Promise<void> {
     try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        res
+          .status(400)
+          .json({ message: "Something went wrong", error: errors.array() });
+        return;
+      }
       const result = await this.serviceInstance.addCar(req.body);
       if (!result) {
         res.status(400).json({ message: "Something went wrong" });
@@ -60,6 +68,13 @@ class CarController {
   // Update Car
   async updateCar(req: Request, res: Response): Promise<void> {
     try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        res
+          .status(400)
+          .json({ message: "Something went wrong", error: errors.array() });
+        return;
+      }
       const { carId } = req.params;
       const result = await this.serviceInstance.updateCar(carId, req.body);
       if (!result) {
@@ -137,7 +152,11 @@ class CarController {
       );
       res.send(pdfStream);
     } catch (error) {
-      this.handleError(res, "Failed to download please try again", error);
+      this.handleError(
+        res,
+        "Failed to download please try again",
+        "Internal Server Error"
+      );
     }
   }
 
@@ -157,7 +176,11 @@ class CarController {
       );
       res.send(pdfStream);
     } catch (error) {
-      this.handleError(res, "Failed to download please try again", error);
+      this.handleError(
+        res,
+        "Failed to download please try again",
+        "Internal Server Error"
+      );
     }
   }
 }

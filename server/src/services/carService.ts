@@ -151,8 +151,8 @@ class CarService {
 
     // Font
     const fontBytes = fs.readFileSync(String(process.env.PATH_FONT));
-    const LargeFontSize = 13.55;
-    const SmallFontSize = 10.55;
+    const LargeFontSize = 14;
+    const SmallFontSize = 12;
 
     // Define colors
     const BlueColor = rgb(53 / 255, 60 / 255, 145 / 255);
@@ -213,7 +213,7 @@ class CarService {
     // prettier-ignore
     // English text data
     const textEnglish: [string, number, number, number, any][] = [
-      [carRetrieved.exportCountryTo       ?? "",  217, 772, LargeFontSize, WhiteColor],
+      [carRetrieved.exportCountryTo       ?? "",  217, 771, LargeFontSize, WhiteColor],
       [carRetrieved.vehicleType           ?? "",  484, 880, LargeFontSize, BlueColor],
       [carRetrieved.exportPlateNumber     ?? "",  485, 841, LargeFontSize, BlueColor],
       [carRetrieved.registrationPlateNumber ?? "",485, 805, LargeFontSize, BlueColor],
@@ -250,7 +250,7 @@ class CarService {
     // prettier-ignore
     // Arabic text data
     const textArabic: [string, number, number, number, any][] = [
-      [translatedCar.exportCountryTo ?? "", 293, 894, LargeFontSize, WhiteColor],
+      [translatedCar.exportCountryTo ?? "", 291, 892, LargeFontSize, WhiteColor],
       [translatedCar.vehicleType ?? "", 816, 880, LargeFontSize, BlueColor],
       [carRetrieved.exportPlateNumber ?? "", 816, 841, LargeFontSize, BlueColor],
       [carRetrieved.registrationPlateNumber ?? "", 816, 805, LargeFontSize, BlueColor],

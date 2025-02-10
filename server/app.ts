@@ -4,6 +4,8 @@ import connectToMongoDB from "./src/config/mongoDBConnect";
 import router from "./src/router";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import rateLimit from "express-rate-limit";
+import helmet from "helmet";
 import bodyParser from "body-parser";
 dotenv.config();
 
@@ -15,13 +17,30 @@ const corsOptions = {
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
 };
-
 app.use(cors(corsOptions));
+
+// Headers Helmet
+app.use(helmet());
+app.use(helmet.hidePoweredBy());
+app.use(helmet.frameguard({ action: "deny" }));
+app.use(helmet.noSniff());
+app.use(helmet.xssFilter());
+
+// MiddleWares
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
+
+// Rate Limiter
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  message:
+    "You have exceeded the allowed request limit. Please try again later.",
+});
+app.use(limiter);
 
 app.use("/api", router);
 

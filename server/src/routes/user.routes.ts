@@ -1,13 +1,14 @@
 import express from "express";
 import { Request, Response } from "express";
 import UserController from "../controllers/user.controller";
+import validUser from "../valid/userValid";
 import AuthenticationMiddleware from "../middlewares/Authentication";
 
 const router = express.Router();
 const userController = UserController.getControllerInstance();
 
-router.post("/login", async (req: Request, res: Response) => {
-  const result = await userController.login(req, res);
+router.post("/login", validUser(), async (req: Request, res: Response) => {
+  await userController.login(req, res);
 });
 
 router.get(
@@ -15,7 +16,7 @@ router.get(
   AuthenticationMiddleware.authenticate,
   async (req: Request, res: Response) => {
     await userController.logout(req, res);
-  },
+  }
 );
 
 export default router;
