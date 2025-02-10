@@ -12,7 +12,7 @@ interface AuthContextType {
   loginService: (credentials: {
     email: string;
     password: string;
-  }) => Promise<void>;
+  }) => Promise<{ status: number; data: any }>;
   handleLogout: () => void;
 }
 
@@ -56,20 +56,31 @@ export const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
 
       if (response.status === 200) {
         const tokenString = Cookies.get("AuthToken");
-        const Token = tokenString ? decodeToken({ Token: tokenString }) : null;
+
+        if (!tokenString) {
+          setLoading(false);
+          return { status: 401, data: "No AuthToken found" };
+        }
+
+        const Token = decodeToken({ Token: tokenString });
+
         if (Token) {
           setUser(Token);
           setLoading(false);
-          return navigate("/");
-        } else {
-          setLoading(false);
+          navigate("/");
+          return { status: 200, data: Token };
         }
       }
-    } catch (error) {
-      // console.error("Error occurred while logging in:", error);
+
       setLoading(false);
+      return { status: response.status, data: response.data };
+    } catch (error) {
+      setLoading(false);
+      console.error("Login failed:", error);
+      return { status: 500, data: "Login error" };
     }
   };
+
   // handle Logout service
   const handleLogout = async () => {
     try {

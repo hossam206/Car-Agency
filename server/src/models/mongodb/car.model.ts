@@ -10,7 +10,7 @@ const carSchema = new mongoose.Schema(
     driverName: String,
     driverNationality: String,
     emiratesIdNumber: String,
-    emptyWeight: Number,
+    emptyWeight: String,
     engineNumber: String,
     exportCountryTo: String,
     exportPlateNumber: String,
@@ -23,8 +23,8 @@ const carSchema = new mongoose.Schema(
     licenseSource: String,
     modelYear: String,
     nationality: String,
-    numberOfDoors: Number,
-    numberOfSeats: Number,
+    numberOfDoors: String,
+    numberOfSeats: String,
     ownerName: String,
     passportNumber: String,
     registrationDate: String,
@@ -37,7 +37,7 @@ const carSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-  },
+  }
 );
 
 const Car = mongoose.model("Car", carSchema);
