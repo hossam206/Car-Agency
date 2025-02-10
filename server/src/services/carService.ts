@@ -5,7 +5,7 @@ import {
   CarDtoRetrieved,
   CarDtoRetrievedType,
 } from "../dto/car.dto";
-import { PDFDocument, rgb, StandardFonts } from "pdf-lib";
+import { PDFDocument, rgb } from "pdf-lib";
 import fs from "fs";
 import QRCode from "qrcode";
 import dotenv from "dotenv";
@@ -15,11 +15,13 @@ dotenv.config();
 import translate from "translate-google";
 import { Response } from "express";
 import fontkit from "@pdf-lib/fontkit";
-import { date, object, string } from "zod";
-import { promises } from "dns";
 
 class CarService {
   private static instance: CarService;
+  private readonly LargeFontSize = 13.55;
+  private readonly SmallFontSize = 10.55;
+  private readonly BlueColor = rgb(53 / 255, 60 / 255, 145 / 255);
+  private readonly WhiteColor = rgb(240 / 255, 248 / 255, 1);
 
   private constructor() {}
 
@@ -33,7 +35,6 @@ class CarService {
   async addCar(carData: CarTypeDto): Promise<boolean> {
     try {
       const parsed = CarDto.safeParse(carData);
-
       if (!parsed.success) {
         throw new Error("Car validation failed");
       }
@@ -134,9 +135,11 @@ class CarService {
   async generateCertificate(car: any, res: Response): Promise<Buffer> {
     // Retrieve the car details
     const carRetrieved = await this.getCarById(car);
+
     if (!carRetrieved) {
       throw new Error("Car not found.");
     }
+
     // Translate car details for Arabic fields
     const translatedCar = await this.TranslatedCar(carRetrieved);
 
@@ -145,16 +148,20 @@ class CarService {
     const templateBytes = fs.readFileSync(
       String(process.env.PATH_LOCATION_PDF)
     );
+
+    // Font
     const fontBytes = fs.readFileSync(String(process.env.PATH_FONT));
-    const LargeFontSize = 13;
-    const SmallFontSize = 10;
+    const LargeFontSize = 13.55;
+    const SmallFontSize = 10.55;
 
     // Define colors
     const BlueColor = rgb(53 / 255, 60 / 255, 145 / 255);
     const WhiteColor = rgb(240 / 255, 248 / 255, 1);
+
     //#endregion
+
     // Generate the QR code image for the URL
-    const url = `http://localhost:8080/api/car/view/${car}`;
+    const url = `${process.env.API}/car/view/${car}`;
     const qrDataUrl = await QRCode.toDataURL(url, { width: 150, margin: 1 });
     const base64Data = qrDataUrl.split(",")[1];
     const qrImageBytes = Buffer.from(base64Data, "base64");

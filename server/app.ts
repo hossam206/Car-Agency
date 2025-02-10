@@ -10,8 +10,8 @@ dotenv.config();
 const app: Application = express();
 
 const corsOptions = {
-  origin: "http://localhost:5173", // ✅ Replace "*" with the exact frontend origin
-  credentials: true, // ✅ Allows cookies/session tokens
+  origin: process.env.FRONTEND_URL,
+  credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
 };
