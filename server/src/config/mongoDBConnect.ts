@@ -6,7 +6,7 @@ const uri = process.env.MONGODB_URI;
 
 if (!uri) {
   throw new Error(
-    "Please define the MONGODB_URI environment variable in your .env file",
+    "Please define the MONGODB_URI environment variable in your .env file"
   );
 }
 
@@ -25,5 +25,11 @@ const connectToMongoDB = async () => {
     throw error;
   }
 };
+
+process.on("SIGINT", async () => {
+  console.log("Closing MongoDB connection...");
+  await mongoose.connection.close();
+  process.exit(0);
+});
 
 export default connectToMongoDB;

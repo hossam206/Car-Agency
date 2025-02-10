@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Button } from "@/Components/ui/button";
@@ -24,10 +24,10 @@ const validationSchema = Yup.object({
   vehicleColor: Yup.string(),
   chassisNumber: Yup.string(),
   engineNumber: Yup.string(),
-  numberOfDoors: Yup.number(),
+  numberOfDoors: Yup.string(),
   fuelType: Yup.string(),
-  numberOfSeats: Yup.number(),
-  emptyWeight: Yup.number(),
+  numberOfSeats: Yup.string(),
+  emptyWeight: Yup.string(),
   insuranceCompany: Yup.string(),
   insuranceType: Yup.string(),
   insurancePolicyNumber: Yup.string(),
@@ -47,12 +47,7 @@ const validationSchema = Yup.object({
 
 export default function Addnew() {
   const [loading, setLoading] = useState<boolean>(false);
-  const [formateDate, setFormatDate] = useState("");
-  const handleDateChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const selectDate = new Date(e.target.value);
-    selectDate.setHours(14, 45, 10);
-    setFormatDate(selectDate?.toISOString()?.split(".")[0]); // Format correctly
-  };
+
   // Initialize Formik with the fetched data
   const formik = useFormik({
     initialValues: {
@@ -69,10 +64,10 @@ export default function Addnew() {
       vehicleColor: "",
       chassisNumber: "",
       engineNumber: "",
-      numberOfDoors: 0,
+      numberOfDoors: "",
       fuelType: "",
-      numberOfSeats: 0,
-      emptyWeight: 0,
+      numberOfSeats: "",
+      emptyWeight: "",
       insuranceCompany: "",
       insuranceType: "",
       insurancePolicyNumber: "",
@@ -92,7 +87,6 @@ export default function Addnew() {
     validationSchema,
     // Reinitialize the form when initialData changes
     onSubmit: async (values) => {
-      console.log(values);
       setLoading(true);
       try {
         const response = await addItem("car/add", values);

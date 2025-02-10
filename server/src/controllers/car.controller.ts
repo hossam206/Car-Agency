@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import CarService from "../services/carService";
+const { validationResult } = require("express-validator");
 
 class CarController {
   private serviceInstance: CarService;
@@ -20,7 +21,7 @@ class CarController {
     res: Response,
     message: string,
     error: unknown,
-    status = 500,
+    status = 500
   ): void {
     res.status(status).send({
       message,
@@ -31,6 +32,13 @@ class CarController {
   // Add Car
   async addCar(req: Request, res: Response): Promise<void> {
     try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        res
+          .status(400)
+          .json({ message: "Something went wrong", error: errors.array() });
+        return;
+      }
       const result = await this.serviceInstance.addCar(req.body);
       if (!result) {
         res.status(400).json({ message: "Something went wrong" });
@@ -60,6 +68,13 @@ class CarController {
   // Update Car
   async updateCar(req: Request, res: Response): Promise<void> {
     try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        res
+          .status(400)
+          .json({ message: "Something went wrong", error: errors.array() });
+        return;
+      }
       const { carId } = req.params;
       const result = await this.serviceInstance.updateCar(carId, req.body);
       if (!result) {
@@ -78,7 +93,7 @@ class CarController {
       const { page, limit } = req.query;
       const result = await this.serviceInstance.getAllCars(
         Number(page),
-        Number(limit),
+        Number(limit)
       );
       if (!result) {
         res.status(404).json({ message: "No cars found" });
@@ -133,11 +148,15 @@ class CarController {
       res.setHeader("Content-Type", "application/pdf");
       res.setHeader(
         "Content-Disposition",
-        `attachment; filename="Certificate_${id}.pdf"`,
+        `attachment; filename="Certificate_${id}.pdf"`
       );
       res.send(pdfStream);
     } catch (error) {
-      this.handleError(res, "Failed to generate certificate", error);
+      this.handleError(
+        res,
+        "Failed to download please try again",
+        "Internal Server Error"
+      );
     }
   }
 
@@ -153,11 +172,15 @@ class CarController {
       res.setHeader("Content-Type", "application/pdf");
       res.setHeader(
         "Content-Disposition",
-        `inline; filename="Certificate_${id}.pdf"`,
+        `inline; filename="Certificate_${id}.pdf"`
       );
       res.send(pdfStream);
     } catch (error) {
-      this.handleError(res, "Failed to generate certificate", error);
+      this.handleError(
+        res,
+        "Failed to download please try again",
+        "Internal Server Error"
+      );
     }
   }
 }

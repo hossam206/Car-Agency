@@ -1,6 +1,6 @@
 import { useAuth } from "@/Context/AuthProvider";
 import { IoIosLogOut } from "react-icons/io";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const { handleLogout } = useAuth();

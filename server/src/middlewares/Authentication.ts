@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
-
 interface AuthenticatedRequest extends Request {
   user?: any;
 }
@@ -9,15 +8,18 @@ class AuthenticationMiddleware {
   static authenticate(
     req: AuthenticatedRequest,
     res: Response,
-    next: NextFunction,
+    next: NextFunction
   ): void {
     try {
       const token = req.cookies?.AuthToken;
-      if (!token) {
+      const decryptedToken = Buffer.from(token, "base64").toString("utf-8");
+      if (!decryptedToken) {
         res.status(401).json({ message: "Unauthorized: No token provided." });
         return;
       }
-      const user = jwt.verify(token, "slat", { algorithms: ["HS256"] });
+      const user = jwt.verify(decryptedToken, "slat", {
+        algorithms: ["HS256"],
+      });
       if (!user) {
         res.status(401).json({ message: "Invalid Auth Token." });
         return;

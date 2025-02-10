@@ -15,10 +15,10 @@ export const CarDto = z.object({
   vehicleColor: z.string().optional(),
   chassisNumber: z.string().optional(),
   engineNumber: z.string().optional(),
-  numberOfDoors: z.number().optional(),
+  numberOfDoors: z.string().optional(),
   fuelType: z.string().optional(),
-  numberOfSeats: z.number().optional(),
-  emptyWeight: z.number().optional(),
+  numberOfSeats: z.string().optional(),
+  emptyWeight: z.string().optional(),
   insuranceCompany: z.string().optional(),
   insuranceType: z.string().optional(),
   insurancePolicyNumber: z.string().optional(),
@@ -37,6 +37,7 @@ export const CarDto = z.object({
 });
 
 export const CarDtoRetrieved = z.object({
+  _id: z.string().optional(),
   ownerName: z.string().optional(),
   vehicleType: z.string().optional(),
   chassisNumber: z.string().optional(),

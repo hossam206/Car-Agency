@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import UserService from "../services/userService";
+const { validationResult } = require("express-validator");
 
 class UserController {
   private serviceInstance: UserService;
@@ -18,6 +19,11 @@ class UserController {
 
   async login(req: Request, res: Response): Promise<void> {
     try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        res.status(400).json({ message: "Something wrong!!" });
+        return;
+      }
       const { email, password } = req.body;
 
       const user = await this.serviceInstance
@@ -32,7 +38,8 @@ class UserController {
       }
 
       const token = this.serviceInstance.generateJwtToken(user);
-      res.cookie("AuthToken", token, {
+      const encryptedToken = Buffer.from(token).toString("base64");
+      res.cookie("AuthToken", encryptedToken, {
         httpOnly: false,
         secure: process.env.NODE_ENV === "production",
         sameSite: "strict",
