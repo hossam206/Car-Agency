@@ -37,6 +37,7 @@ export const CarDto = z.object({
 });
 
 export const CarDtoRetrieved = z.object({
+  _id: z.string().optional(),
   ownerName: z.string().optional(),
   vehicleType: z.string().optional(),
   chassisNumber: z.string().optional(),
