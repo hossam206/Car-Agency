@@ -45,6 +45,7 @@ export const CarDtoRetrieved = z.object({
   registrationExpiryDate: z.string().optional(),
   driverNationality: z.string().optional(),
   driverName: z.string().optional(),
+  count: z.number().optional(),
 });
 
 export type CarTypeDto = z.infer<typeof CarDto>;

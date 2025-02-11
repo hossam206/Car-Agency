@@ -79,7 +79,7 @@ class CarService {
       const retrievedCars = await Car.find({})
         .skip((page - 1) * limit)
         .limit(limit);
-
+      // const count = await Car.countDocuments();
       if (!retrievedCars.length) {
         throw new Error("No cars found!");
       }
@@ -91,7 +91,7 @@ class CarService {
         if (!parsed.success) {
           throw new Error("Car validation failed");
         }
-        return { _id: _id.toString(), ...parsed.data };
+        return { _id: _id.toString(), ...parsed.data,  };
       });
       return carsDto;
     } catch (error) {
@@ -151,8 +151,8 @@ class CarService {
 
     // Font
     const fontBytes = fs.readFileSync(String(process.env.PATH_FONT));
-    const LargeFontSize = 14;
-    const SmallFontSize = 12;
+    const LargeFontSize = 13;
+    const SmallFontSize = 11;
 
     // Define colors
     const BlueColor = rgb(53 / 255, 60 / 255, 145 / 255);
@@ -161,7 +161,7 @@ class CarService {
     //#endregion
 
     // Generate the QR code image for the URL
-    const url = `${process.env.API}/car/view/${car}`;
+    const url = `${process.env.FORNTEND_URL}/car/view/${car}`;
     const qrDataUrl = await QRCode.toDataURL(url, { width: 150, margin: 1 });
     const base64Data = qrDataUrl.split(",")[1];
     const qrImageBytes = Buffer.from(base64Data, "base64");

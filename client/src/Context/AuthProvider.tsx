@@ -1,13 +1,11 @@
 import React, { createContext, useContext, useState } from "react";
-import { jwtDecode, JwtPayload } from "jwt-decode";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 
-const api = import.meta.env.VITE_API_URL || "http://localhost:8080/api";
+const api = import.meta.env.VITE_API_URL || "https://trafccate.com/api";
 
 interface AuthContextType {
-  user: JwtPayload | null;
   loading: boolean;
   loginService: (credentials: {
     email: string;
@@ -16,32 +14,14 @@ interface AuthContextType {
   handleLogout: () => void;
 }
 
-interface CustomJwtPayload extends JwtPayload {
-  role?: string;
-}
-
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const navigate = useNavigate(); // ✅ Correct usage inside `BrowserRouter`
-  const [user, setUser] = useState<CustomJwtPayload | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const decodeToken = ({
-    Token,
-  }: {
-    Token?: string;
-  }): CustomJwtPayload | null => {
-    if (!Token) return null;
-    try {
-      return jwtDecode<CustomJwtPayload>(Token);
-    } catch (error) {
-      console.log("Error during token decoding:", error);
-      return null;
-    }
-  };
   // handle Login service
   const loginService = async (credentials: {
     email: string;
@@ -56,19 +36,14 @@ export const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
 
       if (response.status === 200) {
         const tokenString = Cookies.get("AuthToken");
-
         if (!tokenString) {
+          navigate("/Login");
           setLoading(false);
           return { status: 401, data: "No AuthToken found" };
         }
-
-        const Token = decodeToken({ Token: tokenString });
-
-        if (Token) {
-          setUser(Token);
+        if (tokenString) {
           setLoading(false);
           navigate("/");
-          return { status: 200, data: Token };
         }
       }
 
@@ -96,7 +71,7 @@ export const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   };
   return (
-    <AuthContext.Provider value={{ loginService, handleLogout, user, loading }}>
+    <AuthContext.Provider value={{ loginService, handleLogout, loading }}>
       {children}
     </AuthContext.Provider>
   );

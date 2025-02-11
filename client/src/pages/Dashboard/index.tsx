@@ -37,13 +37,11 @@ export default function Dashboard() {
   const [data, setData] = useState<CarsData[]>([]);
   const [loadingStatus, setLoadingStatus] = useState<string>("loading");
   const [pageNumber, setPageNumber] = useState<number>(1);
-
-  const [deleteItemId, setDeleteItemId] = useState<number | null>(null);
-  const pageSize = 10; // Number of rows per page
+  const [deleteItemId, setDeleteItemId] = useState<number | null>(null); // Number of rows per page
   const [downloadStatus, setDownloadStatus] = useState<Record<number, string>>(
     {}
   );
-
+  const [carCount, setCarsCount] = useState<number>(0);
   const updateDownloadStatus = (id: number, status: string) => {
     setDownloadStatus((prev) => ({ ...prev, [id]: status }));
   };
@@ -53,6 +51,8 @@ export default function Dashboard() {
     setLoadingStatus("loading");
     try {
       const response = await getAll("car", pageNumber, pageSize);
+      setCarsCount(response?.data?.count);
+
       if (response?.status === 200 && response?.data?.data) {
         setData(response.data.data);
         setLoadingStatus("success");
@@ -64,7 +64,7 @@ export default function Dashboard() {
       setLoadingStatus("failed");
     }
   };
-
+  // console.log(data, data.length);
   useEffect(() => {
     fetchCars();
   }, [pageNumber, deleteItemId]); // ✅ Refetch data when pageNumber changes or item is deleted
@@ -114,7 +114,6 @@ export default function Dashboard() {
         />
       )}
       <div>
-  
         {/* ✅ Loading State */}
         {loadingStatus === "loading" ? (
           <div className="flex items-center justify-center h-screen">
@@ -214,7 +213,7 @@ export default function Dashboard() {
                 variant="outline"
                 size="sm"
                 onClick={() => setPageNumber((prev) => prev + 1)}
-                disabled={data.length < pageSize}
+                disabled={pageNumber * pageSize >= carCount}
               >
                 Next <GrNext />
               </Button>
