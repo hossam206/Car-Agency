@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 
-const api = import.meta.env.VITE_API_URL || "https://trafccate.com/api";
+const api = import.meta.env.VITE_API_URL;
 
 // Use local worker from installed package
 

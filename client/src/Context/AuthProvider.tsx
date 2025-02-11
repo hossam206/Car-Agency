@@ -3,8 +3,8 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 
-const api = import.meta.env.VITE_API_URL || "https://trafccate.com/api";
-
+const api = import.meta.env.VITE_API_URL;
+console.log(api);
 interface AuthContextType {
   loading: boolean;
   loginService: (credentials: {
@@ -32,8 +32,7 @@ export const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
       const response = await axios.post(`${api}/user/login`, credentials, {
         withCredentials: true,
         headers: { "Content-Type": "application/json" },
-      });
-
+      });console.log(response);
       if (response.status === 200) {
         const tokenString = Cookies.get("AuthToken");
         if (!tokenString) {

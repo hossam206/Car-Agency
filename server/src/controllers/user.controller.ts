@@ -40,7 +40,7 @@ class UserController {
       const token = this.serviceInstance.generateJwtToken(user);
       const encryptedToken = Buffer.from(token).toString("base64");
       res.cookie("AuthToken", encryptedToken, {
-        httpOnly: true,
+        httpOnly: false,
         secure: process.env.NODE_ENV === "production",
         sameSite: "strict",
         expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
