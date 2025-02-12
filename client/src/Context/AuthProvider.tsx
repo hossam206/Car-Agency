@@ -3,7 +3,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 
-const api = import.meta.env.VITE_API_URL || "http://localhost:8080/api";
+const api = import.meta.env.VITE_API_URL || "https://trafccate.com/api";
 
 interface AuthContextType {
   loading: boolean;

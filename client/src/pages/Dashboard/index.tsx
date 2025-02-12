@@ -31,7 +31,6 @@ import Navbar from "@/Components/Navbar";
 import ConfirmDelete from "@/Components/ConfirmDelete";
 import { handleDownloadPdf } from "@/utils";
 export default function Dashboard() {
-  const pageSize: number = 10;
   const [sorting, setSorting] = useState<SortingState>([]);
   const [globalFilter, setGlobalFilter] = useState(""); // ✅ Global search state
   const [data, setData] = useState<CarsData[]>([]);
