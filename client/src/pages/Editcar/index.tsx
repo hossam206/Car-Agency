@@ -54,7 +54,6 @@ export default function EditCar() {
   const [initialData, setInitialData] = useState<CarsData | null>(null);
   const navigate = useNavigate();
   const { id } = useParams();
-  console.log(id);
   // Fetch car data when the component mounts
   useEffect(() => {
     const fetchCarData = async () => {
