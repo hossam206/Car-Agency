@@ -38,7 +38,6 @@ export default function Dashboard() {
   const [pageNumber, setPageNumber] = useState<number>(1);
 
   const [deleteItemId, setDeleteItemId] = useState<number | null>(null);
-  const pageSize = 10; // Number of rows per page
   const [downloadStatus, setDownloadStatus] = useState<Record<number, string>>(
     {}
   );

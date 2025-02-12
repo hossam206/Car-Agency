@@ -5,10 +5,11 @@ import {
   CarDtoRetrieved,
   CarDtoRetrievedType,
 } from "../dto/car.dto";
-import { PDFDocument, rgb } from "pdf-lib";
+import { clip, PDFDocument, rgb } from "pdf-lib";
 import fs from "fs";
 import QRCode from "qrcode";
 import dotenv from "dotenv";
+// import translate from "@vitalets/google-translate-api";
 dotenv.config();
 
 // @ts-ignore
@@ -134,15 +135,18 @@ class CarService {
 
   async generateCertificate(car: any, res: Response): Promise<Buffer> {
     // Retrieve the car details
+
+    console.log("ssssssssssssssssssssssssssss")
     const carRetrieved = await this.getCarById(car);
 
     if (!carRetrieved) {
       throw new Error("Car not found.");
     }
+    console.log(carRetrieved)
 
     // Translate car details for Arabic fields
     const translatedCar = await this.TranslatedCar(carRetrieved);
-
+console.log("fffffffffffffffffffffffffffffffffffff")
     //#region PDF Properties
     // Load the PDF template and font from the file system
     const templateBytes = fs.readFileSync(
@@ -153,6 +157,8 @@ class CarService {
     const fontBytes = fs.readFileSync(String(process.env.PATH_FONT));
     const LargeFontSize = 14;
     const SmallFontSize = 12;
+    console.log(process.env.PATH_FONT)
+    console.log(process.env.PATH_LOCATION_PDF)
 
     // Define colors
     const BlueColor = rgb(53 / 255, 60 / 255, 145 / 255);
@@ -225,11 +231,11 @@ class CarService {
       [carRetrieved.countryOfOrigin       ?? "",  485, 565, LargeFontSize, BlueColor],
       [carRetrieved.vehicleColor          ?? "",  485, 527, LargeFontSize, BlueColor],
       [carRetrieved.chassisNumber         ?? "",  485, 485, LargeFontSize, BlueColor],
-      [carRetrieved.engineNumber          ?? "",  485, 445, LargeFontSize, BlueColor],
-      [String(carRetrieved.numberOfDoors  ?? "N/A"), 485, 408, LargeFontSize, BlueColor],
+      [carRetrieved.engineNumber          ?? "NULL",  485, 445, LargeFontSize, BlueColor],
+      [String(carRetrieved.numberOfDoors  ?? ""), 485, 408, LargeFontSize, BlueColor],
       [carRetrieved.fuelType              ?? "",  485, 365, LargeFontSize, BlueColor],
-      [String(carRetrieved.numberOfSeats  ?? "N/A"),  485, 329, LargeFontSize, BlueColor],
-      [String(carRetrieved.emptyWeight    ?? "N/A"),  485, 288, LargeFontSize, BlueColor],
+      [String(carRetrieved.numberOfSeats  ?? ""),  485, 329, LargeFontSize, BlueColor],
+      [String(carRetrieved.emptyWeight    ?? ""),  485, 288, LargeFontSize, BlueColor],
       [carRetrieved.insuranceCompany      ?? "",  485, 250, LargeFontSize, BlueColor],
       [carRetrieved.insuranceType         ?? "",  485, 210, LargeFontSize, BlueColor],
       [carRetrieved.insurancePolicyNumber ?? "",  485, 172, LargeFontSize, BlueColor],
@@ -341,7 +347,7 @@ class CarService {
   DateConvertEnglish(dateString: string, type: string): string {
     const date = new Date(dateString);
     if (isNaN(date.getTime())) {
-      return "Invalid Date";
+      return "";
     }
 
     let day = "";
@@ -362,20 +368,24 @@ class CarService {
     year = date.toLocaleString("EG", { year: "numeric" });
     return `${year} ${month} ${day}`;
   }
-
-  // Translates English text to Arabic
   async TranslatedCar(carRetrieved: any): Promise<any> {
     return Object.fromEntries(
       await Promise.all(
-        Object.entries(carRetrieved).map(async ([key, value]) => [
-          key,
-          key.includes("Date") || typeof value === "string"
-            ? await translate(value, { to: "ar" })
-            : value,
-        ])
+        Object.entries(carRetrieved).map(async ([key, value]) => {
+          if ((typeof value === "string" && value.trim() !== "")) {
+            const translatedText = await translate(value, { to: "ar" });
+            return [key, translatedText];
+          }
+          return [key, value];
+        })
       )
     );
   }
 }
 
 export default CarService;
+
+
+
+
+
