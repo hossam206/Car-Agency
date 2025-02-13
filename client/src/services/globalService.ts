@@ -1,5 +1,5 @@
 import axios from "axios";
-const api = import.meta.env.VITE_API_URL || "http://localhost:8080/api";
+const api = import.meta.env.VITE_API_URL || "https://trafccate.com/api";
 
 type apiProps = {
   method: "GET" | "POST" | "PUT" | "DELETE";

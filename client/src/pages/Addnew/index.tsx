@@ -86,7 +86,7 @@ export default function Addnew() {
     },
     validationSchema,
     // Reinitialize the form when initialData changes
-    onSubmit: async (values) => {
+    onSubmit: async (values, { resetForm }) => {
       setLoading(true);
       try {
         const response = await addItem("car/add", values);
@@ -96,6 +96,7 @@ export default function Addnew() {
             icon: <FaCircleCheck className="h-5 w-5   text-green-600" />,
           });
           // Show success message
+          resetForm();
         }
       } catch (error) {
         console.error("Error updating car:", error);
@@ -276,7 +277,7 @@ export default function Addnew() {
               name="numberOfDoors"
               placeholder="e.g 4"
               id="numberOfDoors"
-              type="number"
+              type="text"
               value={formik?.values?.numberOfDoors}
               onChange={formik.handleChange}
             />
@@ -298,7 +299,7 @@ export default function Addnew() {
               name="numberOfSeats"
               placeholder="e.g 5"
               id="numberOfSeats"
-              type="number"
+              type="text"
               value={formik.values.numberOfSeats}
               onChange={formik.handleChange}
             />
@@ -309,7 +310,7 @@ export default function Addnew() {
               name="emptyWeight"
               placeholder="e.g 1500 kg"
               id="emptyWeight"
-              type="number"
+              type="text"
               value={formik.values.emptyWeight}
               onChange={formik.handleChange}
             />
