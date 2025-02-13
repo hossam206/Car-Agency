@@ -16,6 +16,8 @@ import translate from "translate-google";
 import { Response } from "express";
 import fontkit from "@pdf-lib/fontkit";
 import OpenAI from "openai";
+import axios from "axios";
+
 
 class CarService {
   private static instance: CarService;
@@ -261,7 +263,7 @@ class CarService {
       [ this.DateConvertEnglish(carRetrieved.registrationDate ?? "","ar"), 816, 764, LargeFontSize, BlueColor],
       [ this.DateConvertEnglish(carRetrieved.registrationExpiryDate ??"", "ar"), 816, 723, LargeFontSize, BlueColor],
       [carRetrieved.vehicleMake ?? "", 816, 685, LargeFontSize, BlueColor],
-      [translatedCar.category ?? "", 816, 645, LargeFontSize, BlueColor],
+      [carRetrieved.categoryArabic ?? "", 816, 645, LargeFontSize, BlueColor],
       [carRetrieved.modelYear ?? "", 816, 600, LargeFontSize, BlueColor],
       [translatedCar.countryOfOrigin ?? "", 816, 565, LargeFontSize, BlueColor],
       [translatedCar.vehicleColor ?? "", 816, 527, LargeFontSize, BlueColor],
@@ -339,7 +341,7 @@ class CarService {
 
       let partsArabic = formattedDateArabic.split(" ");
       let partsEnglish = formattedDateEnglish.split(" ");
-      partsArabic[0] = partsEnglish[1];
+      partsArabic[0] = partsEnglish[1].split("").reverse().join("").replace(",","");
       partsArabic[3] = "";
       partsArabic[2] = partsEnglish[2].split("").reverse().join("");
       partsArabic[4] = partsEnglish[4]
@@ -349,7 +351,6 @@ class CarService {
         .split("")
         .reverse()
         .join("");
-
       return partsArabic.join(" ");
     }
     return formattedDateEnglish;
@@ -381,46 +382,57 @@ class CarService {
     return `${year} ${month} ${day}`;
   }
 
-  // Translate to arabic by using translate
-  async TranslatedCar(carRetrieved: any): Promise<any> {
+  // // Translate to arabic by using translate
+  // async TranslatedCar(carRetrieved: any): Promise<any> {
+  //   return Object.fromEntries(
+  //     await Promise.all(
+  //       Object.entries(carRetrieved).map(async ([key, value]) => {
+  //         if (typeof value === "string" && value.trim() !== "") {
+  //           const translatedText = await translate(value, { to: "ar" });
+  //           // const translatedText = await translateWithOpenAI(value, "Arabic");
+  //           return [key, translatedText];
+  //         }
+  //         return [key, value];
+  //       })
+  //     )
+  //   );
+  // }
+
+  async  TranslatedCar(carRetrieved: any): Promise<any> {
     return Object.fromEntries(
-      await Promise.all(
-        Object.entries(carRetrieved).map(async ([key, value]) => {
-          if (typeof value === "string" && value.trim() !== "") {
-            const translatedText = await translate(value, { to: "ar" });
-            // const translatedText = await translateWithOpenAI(value, "Arabic");
-            return [key, translatedText];
-          }
-          return [key, value];
-        })
-      )
+        await Promise.all(
+            Object.entries(carRetrieved).map(async ([key, value]) => {
+                if (typeof value === "string" && value.trim() !== "") {
+                    try {
+                        const response = await axios.post(
+                            "https://api-free.deepl.com/v2/translate",
+                            new URLSearchParams({
+                                auth_key: "1d6dbfc0-f72f-4ea0-b851-02ec5775e52a:fx",
+                                text: value,
+                                target_lang: "AR"
+                            }).toString(),
+                            {
+                                headers: {
+                                    "Content-Type": "application/x-www-form-urlencoded"
+                                }
+                            }
+                        );
+
+                        const translatedText = response.data.translations[0].text;
+                        return [key, translatedText];
+                    } catch (error) {
+                        console.error(`Error translating key: ${key}`, error);
+                        return [key, value]; 
+                    }
+                }
+                return [key, value];
+            })
+        )
     );
-  }
 }
 
-// Translate to arabic by using openAi
-const openai = new OpenAI({
-  apiKey: "YOUR_OPENAI_API_KEY", 
-});
-
-async function translateWithOpenAI(text: string, targetLang: string = "Arabic"): Promise<string> {
-  try {
-    const response = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
-      messages: [
-        { role: "system", content: "You are a helpful translator." },
-        { role: "user", content: `Translate the following text to ${targetLang}: "${text}"` },
-      ],
-    });
-
-    return response && response.choices?.length > 0 && response.choices[0].message?.content 
-    ? response.choices[0].message.content.trim() 
-    : text;
-    } catch (error) {
-    console.error("Translation error:", error);
-    return text;
-  }
 }
+
 
 
 export default CarService;

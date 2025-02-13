@@ -16,7 +16,7 @@ const corsOptions = {
   origin: process.env.FRONTEND_URL,
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization", "application / pdf"],
+  allowedHeaders: ["Content-Type", "Authorization"],
 };
 app.use(cors(corsOptions));
 
@@ -34,6 +34,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 
+
+// app.set('trust proxy', 1); 
 // Rate Limiter
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,

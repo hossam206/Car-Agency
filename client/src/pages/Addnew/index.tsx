@@ -12,6 +12,7 @@ import { FaCircleCheck } from "react-icons/fa6";
 // Yup validation schema
 const validationSchema = Yup.object({
   exportCountryTo: Yup.string(),
+  categoryArabic: Yup.string(),
   vehicleType: Yup.string(),
   exportPlateNumber: Yup.string(),
   registrationPlateNumber: Yup.string(),
@@ -51,6 +52,7 @@ export default function Addnew() {
   // Initialize Formik with the fetched data
   const formik = useFormik({
     initialValues: {
+      categoryArabic: "",
       exportCountryTo: "",
       vehicleType: "",
       exportPlateNumber: "",
@@ -215,7 +217,16 @@ export default function Addnew() {
               value={formik.values.category}
               onChange={formik.handleChange}
             />
-
+            <Input
+              labelName="category Arabic"
+              name="categoryArabic"
+              placeholder="e.g Sedan"
+              id="categoryArabic"
+              type="text"
+              value={formik.values.categoryArabic}
+              onChange={formik.handleChange}
+             />
+            
             {/* Model Year */}
             <Input
               labelName="Model Year"

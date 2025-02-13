@@ -10,6 +10,7 @@ export const CarDto = z.object({
   registrationExpiryDate: z.string().optional(),
   vehicleMake: z.string().optional(),
   category: z.string().optional(),
+  categoryArabic: z.string().optional(),
   modelYear: z.string().optional(),
   countryOfOrigin: z.string().optional(),
   vehicleColor: z.string().optional(),

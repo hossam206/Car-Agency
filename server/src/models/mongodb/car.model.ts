@@ -3,6 +3,7 @@ import mongoose, { Types } from "mongoose";
 const carSchema = new mongoose.Schema(
   {
     category: String,
+    categoryArabic: String,
     certificateIssueDate: String,
     certificateReferenceNumber: String,
     chassisNumber: String,
