@@ -74,7 +74,6 @@ router.get(
 
 router.get(
   "/view/:id",
-  AuthenticationMiddleware.authenticate,
   async (req: Request, res: Response) => {
     await controller.ViewCertificate(req, res);
   }

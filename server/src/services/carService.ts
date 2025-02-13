@@ -9,13 +9,13 @@ import { clip, PDFDocument, rgb } from "pdf-lib";
 import fs from "fs";
 import QRCode from "qrcode";
 import dotenv from "dotenv";
-// import translate from "@vitalets/google-translate-api";
 dotenv.config();
 
 // @ts-ignore
 import translate from "translate-google";
 import { Response } from "express";
 import fontkit from "@pdf-lib/fontkit";
+import OpenAI from "openai";
 
 class CarService {
   private static instance: CarService;
@@ -136,17 +136,17 @@ class CarService {
   async generateCertificate(car: any, res: Response): Promise<Buffer> {
     // Retrieve the car details
 
-    console.log("ssssssssssssssssssssssssssss")
     const carRetrieved = await this.getCarById(car);
-
     if (!carRetrieved) {
       throw new Error("Car not found.");
     }
-    console.log(carRetrieved)
 
+    //#region
+
+    //endregion
     // Translate car details for Arabic fields
     const translatedCar = await this.TranslatedCar(carRetrieved);
-console.log("fffffffffffffffffffffffffffffffffffff")
+
     //#region PDF Properties
     // Load the PDF template and font from the file system
     const templateBytes = fs.readFileSync(
@@ -155,10 +155,8 @@ console.log("fffffffffffffffffffffffffffffffffffff")
 
     // Font
     const fontBytes = fs.readFileSync(String(process.env.PATH_FONT));
-    const LargeFontSize = 14;
-    const SmallFontSize = 12;
-    console.log(process.env.PATH_FONT)
-    console.log(process.env.PATH_LOCATION_PDF)
+    const LargeFontSize = 12;
+    const SmallFontSize = 11;
 
     // Define colors
     const BlueColor = rgb(53 / 255, 60 / 255, 145 / 255);
@@ -219,7 +217,7 @@ console.log("fffffffffffffffffffffffffffffffffffff")
     // prettier-ignore
     // English text data
     const textEnglish: [string, number, number, number, any][] = [
-      [carRetrieved.exportCountryTo       ?? "",  217, 771, LargeFontSize, WhiteColor],
+      [carRetrieved.exportCountryTo       ?? "",  217, 771, SmallFontSize, WhiteColor],
       [carRetrieved.vehicleType           ?? "",  484, 880, LargeFontSize, BlueColor],
       [carRetrieved.exportPlateNumber     ?? "",  485, 841, LargeFontSize, BlueColor],
       [carRetrieved.registrationPlateNumber ?? "",485, 805, LargeFontSize, BlueColor],
@@ -249,14 +247,14 @@ console.log("fffffffffffffffffffffffffffffffffffff")
       [carRetrieved.licenseNumber         ?? "",  200, 216, LargeFontSize, BlueColor],
       [carRetrieved.driverNationality     ?? "",  200, 190, LargeFontSize, BlueColor],
       [carRetrieved.licenseSource         ?? "",  200, 150, LargeFontSize, BlueColor],
-      [this.DateConvertArabic(carRetrieved.certificateIssueDate  ?? "","EG"),  30,  615, SmallFontSize, WhiteColor], // In block blue - edit is english
+      [this.DateConvertArabic(carRetrieved.certificateIssueDate  ?? "","EG"),  30,  615, SmallFontSize-2, WhiteColor], // In block blue - edit is english
       [carRetrieved.certificateReferenceNumber ?? "",  370, 556, SmallFontSize, WhiteColor]
     ];
 
     // prettier-ignore
     // Arabic text data
     const textArabic: [string, number, number, number, any][] = [
-      [translatedCar.exportCountryTo ?? "", 291, 892, LargeFontSize, WhiteColor],
+      [translatedCar.exportCountryTo ?? "", 291, 892, SmallFontSize, WhiteColor],
       [translatedCar.vehicleType ?? "", 816, 880, LargeFontSize, BlueColor],
       [carRetrieved.exportPlateNumber ?? "", 816, 841, LargeFontSize, BlueColor],
       [carRetrieved.registrationPlateNumber ?? "", 816, 805, LargeFontSize, BlueColor],
@@ -269,14 +267,14 @@ console.log("fffffffffffffffffffffffffffffffffffff")
       [translatedCar.vehicleColor ?? "", 816, 527, LargeFontSize, BlueColor],
       [carRetrieved.chassisNumber ?? "", 816, 485, LargeFontSize, BlueColor],
       [carRetrieved.engineNumber ?? "", 816, 445, LargeFontSize, BlueColor],
-      [String(carRetrieved.numberOfDoors ?? "N/A"), 816, 408, LargeFontSize, BlueColor],
+      [String(carRetrieved.numberOfDoors ?? ""), 816, 408, LargeFontSize, BlueColor],
       [translatedCar.fuelType ?? "", 816, 365, LargeFontSize, BlueColor],
-      [String(carRetrieved.numberOfSeats ?? "N/A"), 816, 329, LargeFontSize, BlueColor],
-      [String(carRetrieved.emptyWeight ?? "N/A"), 816, 288, LargeFontSize, BlueColor],
+      [String(carRetrieved.numberOfSeats ?? ""), 816, 329, LargeFontSize, BlueColor],
+      [String(carRetrieved.emptyWeight ?? ""), 816, 288, LargeFontSize, BlueColor],
       [translatedCar.insuranceCompany ?? "", 816, 250, LargeFontSize, BlueColor],
       [translatedCar.insuranceType ?? "", 816, 210, LargeFontSize, BlueColor],
       [carRetrieved.insurancePolicyNumber ?? "", 816, 172, LargeFontSize, BlueColor],
-      [ this.DateConvertEnglish(carRetrieved.insuranceExpiryDate ??"", "ar"), 816, 134, LargeFontSize, BlueColor],
+      [ this.DateConvertEnglish(carRetrieved.insuranceExpiryDate ??"", "ar"), 816, 134, SmallFontSize, BlueColor],
       [translatedCar.ownerName ?? "", 448, 450, LargeFontSize, BlueColor],
       [translatedCar.nationality ?? "",  448,  383, LargeFontSize, BlueColor],
       [translatedCar.driverName ?? "", 390, 264, LargeFontSize, BlueColor],
@@ -298,11 +296,12 @@ console.log("fffffffffffffffffffffffffffffffffffff")
     return Buffer.from(updatedPdfBytes);
   }
 
+  // Convert date to arabic
   DateConvertArabic(dateString: string, type: string): string {
-    // in block blue
+    // In area blue
     const date = new Date(dateString);
     if (isNaN(date.getTime())) {
-      return "Invalid Date";
+      return "";
     }
 
     date.setHours(
@@ -311,29 +310,8 @@ console.log("fffffffffffffffffffffffffffffffffffff")
       new Date().getSeconds()
     );
 
-    // Using to format =>  ٠١ ديسمبر ٥٢٠٢ ٠١:٥٤:٣٠ م
-    if (type === "ar") {
-      const formattedDate = date
-        .toLocaleString("ar-EG", {
-          day: "2-digit",
-          month: "long",
-          year: "numeric",
-          hour: "2-digit",
-          minute: "2-digit",
-          second: "2-digit",
-          hour12: true,
-        })
-        .replace("،", "")
-        .replace("صباحًا", "ص")
-        .replace("مساءً", "م")
-        .replace(" في ", " ");
-
-      let parts = formattedDate.split(" ");
-      parts[2] = parts[2].split("").reverse().join("");
-      return parts.join(" ");
-    }
     // Using to format => December 01, 2019 at 02:00:00 AM
-    return date.toLocaleString("EG", {
+    let formattedDateEnglish = date.toLocaleString("en-US", {
       day: "2-digit",
       month: "long",
       year: "numeric",
@@ -342,8 +320,42 @@ console.log("fffffffffffffffffffffffffffffffffffff")
       second: "2-digit",
       hour12: true,
     });
+
+    // Using to format =>  ٠١ ديسمبر ٥٢٠٢ ٠١:٥٤:٣٠ م
+    if (type === "ar") {
+      let formattedDateArabic = date
+        .toLocaleString("ar", {
+          day: "2-digit",
+          month: "long",
+          year: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: true,
+        })
+        .replace(",", " ")
+        .replace("صباحًا", "ص")
+        .replace("مساءً", "م");
+
+      let partsArabic = formattedDateArabic.split(" ");
+      let partsEnglish = formattedDateEnglish.split(" ");
+      partsArabic[0] = partsEnglish[1];
+      partsArabic[3] = "";
+      partsArabic[2] = partsEnglish[2].split("").reverse().join("");
+      partsArabic[4] = partsEnglish[4]
+        .split(":")
+        .reverse()
+        .join(":")
+        .split("")
+        .reverse()
+        .join("");
+
+      return partsArabic.join(" ");
+    }
+    return formattedDateEnglish;
   }
 
+  // Convert date to english
   DateConvertEnglish(dateString: string, type: string): string {
     const date = new Date(dateString);
     if (isNaN(date.getTime())) {
@@ -368,12 +380,15 @@ console.log("fffffffffffffffffffffffffffffffffffff")
     year = date.toLocaleString("EG", { year: "numeric" });
     return `${year} ${month} ${day}`;
   }
+
+  // Translate to arabic by using translate
   async TranslatedCar(carRetrieved: any): Promise<any> {
     return Object.fromEntries(
       await Promise.all(
         Object.entries(carRetrieved).map(async ([key, value]) => {
-          if ((typeof value === "string" && value.trim() !== "")) {
+          if (typeof value === "string" && value.trim() !== "") {
             const translatedText = await translate(value, { to: "ar" });
+            // const translatedText = await translateWithOpenAI(value, "Arabic");
             return [key, translatedText];
           }
           return [key, value];
@@ -383,9 +398,29 @@ console.log("fffffffffffffffffffffffffffffffffffff")
   }
 }
 
+// Translate to arabic by using openAi
+const openai = new OpenAI({
+  apiKey: "YOUR_OPENAI_API_KEY", 
+});
+
+async function translateWithOpenAI(text: string, targetLang: string = "Arabic"): Promise<string> {
+  try {
+    const response = await openai.chat.completions.create({
+      model: "gpt-3.5-turbo",
+      messages: [
+        { role: "system", content: "You are a helpful translator." },
+        { role: "user", content: `Translate the following text to ${targetLang}: "${text}"` },
+      ],
+    });
+
+    return response && response.choices?.length > 0 && response.choices[0].message?.content 
+    ? response.choices[0].message.content.trim() 
+    : text;
+    } catch (error) {
+    console.error("Translation error:", error);
+    return text;
+  }
+}
+
+
 export default CarService;
-
-
-
-
-
