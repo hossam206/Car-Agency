@@ -135,18 +135,13 @@ class CarService {
 
   async generateCertificate(car: any, res: Response): Promise<Buffer> {
     // Retrieve the car details
-
-    console.log("ssssssssssssssssssssssssssss")
     const carRetrieved = await this.getCarById(car);
 
     if (!carRetrieved) {
       throw new Error("Car not found.");
     }
-    console.log(carRetrieved)
-
     // Translate car details for Arabic fields
     const translatedCar = await this.TranslatedCar(carRetrieved);
-console.log("fffffffffffffffffffffffffffffffffffff")
     //#region PDF Properties
     // Load the PDF template and font from the file system
     const templateBytes = fs.readFileSync(

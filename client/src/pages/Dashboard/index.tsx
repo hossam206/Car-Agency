@@ -36,12 +36,11 @@ export default function Dashboard() {
   const [data, setData] = useState<CarsData[]>([]);
   const [loadingStatus, setLoadingStatus] = useState<string>("loading");
   const [pageNumber, setPageNumber] = useState<number>(1);
-
   const [deleteItemId, setDeleteItemId] = useState<number | null>(null);
   const [downloadStatus, setDownloadStatus] = useState<Record<number, string>>(
     {}
   );
-
+const pageSize = 10;
   const updateDownloadStatus = (id: number, status: string) => {
     setDownloadStatus((prev) => ({ ...prev, [id]: status }));
   };

@@ -299,7 +299,7 @@ export default function Addnew() {
               name="numberOfSeats"
               placeholder="e.g 5"
               id="numberOfSeats"
-              type="number"
+              type="text"
               value={formik.values.numberOfSeats}
               onChange={formik.handleChange}
             />
@@ -310,7 +310,7 @@ export default function Addnew() {
               name="emptyWeight"
               placeholder="e.g 1500 kg"
               id="emptyWeight"
-              type="number"
+              type="text"
               value={formik.values.emptyWeight}
               onChange={formik.handleChange}
             />
