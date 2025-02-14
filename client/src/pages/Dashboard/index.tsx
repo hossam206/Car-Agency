@@ -41,6 +41,7 @@ export default function Dashboard() {
     {}
   );
 const pageSize = 10;
+
   const updateDownloadStatus = (id: number, status: string) => {
     setDownloadStatus((prev) => ({ ...prev, [id]: status }));
   };
@@ -50,6 +51,8 @@ const pageSize = 10;
     setLoadingStatus("loading");
     try {
       const response = await getAll("car", pageNumber, pageSize);
+      setCarsCount(response?.data?.count);
+
       if (response?.status === 200 && response?.data?.data) {
         setData(response.data.data);
         setLoadingStatus("success");
@@ -61,7 +64,7 @@ const pageSize = 10;
       setLoadingStatus("failed");
     }
   };
-
+  // console.log(data, data.length);
   useEffect(() => {
     fetchCars();
   }, [pageNumber, deleteItemId]); // ✅ Refetch data when pageNumber changes or item is deleted
@@ -111,7 +114,6 @@ const pageSize = 10;
         />
       )}
       <div>
-  
         {/* ✅ Loading State */}
         {loadingStatus === "loading" ? (
           <div className="flex items-center justify-center h-screen">
@@ -211,7 +213,7 @@ const pageSize = 10;
                 variant="outline"
                 size="sm"
                 onClick={() => setPageNumber((prev) => prev + 1)}
-                disabled={data.length < pageSize}
+                disabled={pageNumber * pageSize >= carCount}
               >
                 Next <GrNext />
               </Button>

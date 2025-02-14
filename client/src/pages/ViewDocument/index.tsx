@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
-const api = import.meta.env.VITE_API_URL || "http://localhost:8080/api";
+const api = import.meta.env.VITE_API_URL;
 
 function ViewDocument() {
   const { documentId } = useParams();

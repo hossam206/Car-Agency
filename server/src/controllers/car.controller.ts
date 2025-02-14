@@ -95,13 +95,16 @@ class CarController {
         Number(page),
         Number(limit)
       );
+      const count = await this.serviceInstance.getCarCount();
       if (!result) {
         res.status(404).json({ message: "No cars found" });
         return;
       }
-      res
-        .status(200)
-        .json({ message: "Cars retrieved successfully", data: result });
+      res.status(200).json({
+        message: "Cars retrieved successfully",
+        data: result,
+        count: count
+      });
     } catch (error) {
       this.handleError(res, "Failed to retrieve cars", error);
     }
