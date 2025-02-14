@@ -23,5 +23,5 @@
     "esModuleInterop": true,
     "skipLibCheck": true
   },
-  "include": ["src", "app.ts"]
+  "include": ["src", "src/app.ts"]
 }
