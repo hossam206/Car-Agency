@@ -7,6 +7,7 @@ import cors from "cors";
 import rateLimit from "express-rate-limit";
 import helmet from "helmet";
 import bodyParser from "body-parser";
+
 dotenv.config();
 
 const app: Application = express();
@@ -33,6 +34,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 
+
+// app.set('trust proxy', 1); 
 // Rate Limiter
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,

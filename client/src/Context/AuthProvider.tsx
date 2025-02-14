@@ -3,8 +3,9 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 
+
 const api = import.meta.env.VITE_API_URL;
-console.log(api);
+
 interface AuthContextType {
   loading: boolean;
   loginService: (credentials: {

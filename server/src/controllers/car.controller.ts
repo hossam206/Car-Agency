@@ -158,7 +158,7 @@ class CarController {
       this.handleError(
         res,
         "Failed to download please try again",
-        "Internal Server Error"
+        error
       );
     }
   }
@@ -182,7 +182,7 @@ class CarController {
       this.handleError(
         res,
         "Failed to download please try again",
-        "Internal Server Error"
+        error
       );
     }
   }

@@ -5,7 +5,7 @@ import {
   CarDtoRetrieved,
   CarDtoRetrievedType,
 } from "../dto/car.dto";
-import { PDFDocument, rgb } from "pdf-lib";
+import { clip, PDFDocument, rgb } from "pdf-lib";
 import fs from "fs";
 import QRCode from "qrcode";
 import dotenv from "dotenv";
@@ -15,6 +15,9 @@ dotenv.config();
 import translate from "translate-google";
 import { Response } from "express";
 import fontkit from "@pdf-lib/fontkit";
+import OpenAI from "openai";
+import axios from "axios";
+
 
 class CarService {
   private static instance: CarService;
@@ -134,12 +137,15 @@ class CarService {
 
   async generateCertificate(car: any, res: Response): Promise<Buffer> {
     // Retrieve the car details
-    const carRetrieved = await this.getCarById(car);
 
+    const carRetrieved = await this.getCarById(car);
     if (!carRetrieved) {
       throw new Error("Car not found.");
     }
 
+    //#region
+
+    //endregion
     // Translate car details for Arabic fields
     const translatedCar = await this.TranslatedCar(carRetrieved);
 
@@ -213,7 +219,7 @@ class CarService {
     // prettier-ignore
     // English text data
     const textEnglish: [string, number, number, number, any][] = [
-      [carRetrieved.exportCountryTo       ?? "",  217, 771, LargeFontSize, WhiteColor],
+      [carRetrieved.exportCountryTo       ?? "",  217, 771, SmallFontSize, WhiteColor],
       [carRetrieved.vehicleType           ?? "",  484, 880, LargeFontSize, BlueColor],
       [carRetrieved.exportPlateNumber     ?? "",  485, 841, LargeFontSize, BlueColor],
       [carRetrieved.registrationPlateNumber ?? "",485, 805, LargeFontSize, BlueColor],
@@ -225,11 +231,11 @@ class CarService {
       [carRetrieved.countryOfOrigin       ?? "",  485, 565, LargeFontSize, BlueColor],
       [carRetrieved.vehicleColor          ?? "",  485, 527, LargeFontSize, BlueColor],
       [carRetrieved.chassisNumber         ?? "",  485, 485, LargeFontSize, BlueColor],
-      [carRetrieved.engineNumber          ?? "",  485, 445, LargeFontSize, BlueColor],
-      [String(carRetrieved.numberOfDoors  ?? "N/A"), 485, 408, LargeFontSize, BlueColor],
+      [carRetrieved.engineNumber          ?? "NULL",  485, 445, LargeFontSize, BlueColor],
+      [String(carRetrieved.numberOfDoors  ?? ""), 485, 408, LargeFontSize, BlueColor],
       [carRetrieved.fuelType              ?? "",  485, 365, LargeFontSize, BlueColor],
-      [String(carRetrieved.numberOfSeats  ?? "N/A"),  485, 329, LargeFontSize, BlueColor],
-      [String(carRetrieved.emptyWeight    ?? "N/A"),  485, 288, LargeFontSize, BlueColor],
+      [String(carRetrieved.numberOfSeats  ?? ""),  485, 329, LargeFontSize, BlueColor],
+      [String(carRetrieved.emptyWeight    ?? ""),  485, 288, LargeFontSize, BlueColor],
       [carRetrieved.insuranceCompany      ?? "",  485, 250, LargeFontSize, BlueColor],
       [carRetrieved.insuranceType         ?? "",  485, 210, LargeFontSize, BlueColor],
       [carRetrieved.insurancePolicyNumber ?? "",  485, 172, LargeFontSize, BlueColor],
@@ -243,34 +249,34 @@ class CarService {
       [carRetrieved.licenseNumber         ?? "",  200, 216, LargeFontSize, BlueColor],
       [carRetrieved.driverNationality     ?? "",  200, 190, LargeFontSize, BlueColor],
       [carRetrieved.licenseSource         ?? "",  200, 150, LargeFontSize, BlueColor],
-      [this.DateConvertArabic(carRetrieved.certificateIssueDate  ?? "","EG"),  30,  615, SmallFontSize, WhiteColor], // In block blue - edit is english
+      [this.DateConvertArabic(carRetrieved.certificateIssueDate  ?? "","EG"),  30,  615, SmallFontSize-2, WhiteColor], // In block blue - edit is english
       [carRetrieved.certificateReferenceNumber ?? "",  370, 556, SmallFontSize, WhiteColor]
     ];
 
     // prettier-ignore
     // Arabic text data
     const textArabic: [string, number, number, number, any][] = [
-      [translatedCar.exportCountryTo ?? "", 291, 892, LargeFontSize, WhiteColor],
+      [translatedCar.exportCountryTo ?? "", 291, 892, SmallFontSize, WhiteColor],
       [translatedCar.vehicleType ?? "", 816, 880, LargeFontSize, BlueColor],
       [carRetrieved.exportPlateNumber ?? "", 816, 841, LargeFontSize, BlueColor],
       [carRetrieved.registrationPlateNumber ?? "", 816, 805, LargeFontSize, BlueColor],
       [ this.DateConvertEnglish(carRetrieved.registrationDate ?? "","ar"), 816, 764, LargeFontSize, BlueColor],
       [ this.DateConvertEnglish(carRetrieved.registrationExpiryDate ??"", "ar"), 816, 723, LargeFontSize, BlueColor],
       [carRetrieved.vehicleMake ?? "", 816, 685, LargeFontSize, BlueColor],
-      [translatedCar.category ?? "", 816, 645, LargeFontSize, BlueColor],
+      [carRetrieved.categoryArabic ?? "", 816, 645, LargeFontSize, BlueColor],
       [carRetrieved.modelYear ?? "", 816, 600, LargeFontSize, BlueColor],
       [translatedCar.countryOfOrigin ?? "", 816, 565, LargeFontSize, BlueColor],
       [translatedCar.vehicleColor ?? "", 816, 527, LargeFontSize, BlueColor],
       [carRetrieved.chassisNumber ?? "", 816, 485, LargeFontSize, BlueColor],
       [carRetrieved.engineNumber ?? "", 816, 445, LargeFontSize, BlueColor],
-      [String(carRetrieved.numberOfDoors ?? "N/A"), 816, 408, LargeFontSize, BlueColor],
+      [String(carRetrieved.numberOfDoors ?? ""), 816, 408, LargeFontSize, BlueColor],
       [translatedCar.fuelType ?? "", 816, 365, LargeFontSize, BlueColor],
-      [String(carRetrieved.numberOfSeats ?? "N/A"), 816, 329, LargeFontSize, BlueColor],
-      [String(carRetrieved.emptyWeight ?? "N/A"), 816, 288, LargeFontSize, BlueColor],
+      [String(carRetrieved.numberOfSeats ?? ""), 816, 329, LargeFontSize, BlueColor],
+      [String(carRetrieved.emptyWeight ?? ""), 816, 288, LargeFontSize, BlueColor],
       [translatedCar.insuranceCompany ?? "", 816, 250, LargeFontSize, BlueColor],
       [translatedCar.insuranceType ?? "", 816, 210, LargeFontSize, BlueColor],
       [carRetrieved.insurancePolicyNumber ?? "", 816, 172, LargeFontSize, BlueColor],
-      [ this.DateConvertEnglish(carRetrieved.insuranceExpiryDate ??"", "ar"), 816, 134, LargeFontSize, BlueColor],
+      [ this.DateConvertEnglish(carRetrieved.insuranceExpiryDate ??"", "ar"), 816, 134, SmallFontSize, BlueColor],
       [translatedCar.ownerName ?? "", 448, 450, LargeFontSize, BlueColor],
       [translatedCar.nationality ?? "",  448,  383, LargeFontSize, BlueColor],
       [translatedCar.driverName ?? "", 390, 264, LargeFontSize, BlueColor],
@@ -292,11 +298,12 @@ class CarService {
     return Buffer.from(updatedPdfBytes);
   }
 
+  // Convert date to arabic
   DateConvertArabic(dateString: string, type: string): string {
-    // in block blue
+    // In area blue
     const date = new Date(dateString);
     if (isNaN(date.getTime())) {
-      return "Invalid Date";
+      return "";
     }
 
     date.setHours(
@@ -305,29 +312,8 @@ class CarService {
       new Date().getSeconds()
     );
 
-    // Using to format =>  ٠١ ديسمبر ٥٢٠٢ ٠١:٥٤:٣٠ م
-    if (type === "ar") {
-      const formattedDate = date
-        .toLocaleString("ar-EG", {
-          day: "2-digit",
-          month: "long",
-          year: "numeric",
-          hour: "2-digit",
-          minute: "2-digit",
-          second: "2-digit",
-          hour12: true,
-        })
-        .replace("،", "")
-        .replace("صباحًا", "ص")
-        .replace("مساءً", "م")
-        .replace(" في ", " ");
-
-      let parts = formattedDate.split(" ");
-      parts[2] = parts[2].split("").reverse().join("");
-      return parts.join(" ");
-    }
     // Using to format => December 01, 2019 at 02:00:00 AM
-    return date.toLocaleString("EG", {
+    let formattedDateEnglish = date.toLocaleString("en-US", {
       day: "2-digit",
       month: "long",
       year: "numeric",
@@ -336,12 +322,45 @@ class CarService {
       second: "2-digit",
       hour12: true,
     });
+
+    // Using to format =>  ٠١ ديسمبر ٥٢٠٢ ٠١:٥٤:٣٠ م
+    if (type === "ar") {
+      let formattedDateArabic = date
+        .toLocaleString("ar", {
+          day: "2-digit",
+          month: "long",
+          year: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: true,
+        })
+        .replace(",", " ")
+        .replace("صباحًا", "ص")
+        .replace("مساءً", "م");
+
+      let partsArabic = formattedDateArabic.split(" ");
+      let partsEnglish = formattedDateEnglish.split(" ");
+      partsArabic[0] = partsEnglish[1].split("").reverse().join("").replace(",","");
+      partsArabic[3] = "";
+      partsArabic[2] = partsEnglish[2].split("").reverse().join("");
+      partsArabic[4] = partsEnglish[4]
+        .split(":")
+        .reverse()
+        .join(":")
+        .split("")
+        .reverse()
+        .join("");
+      return partsArabic.join(" ");
+    }
+    return formattedDateEnglish;
   }
 
+  // Convert date to english
   DateConvertEnglish(dateString: string, type: string): string {
     const date = new Date(dateString);
     if (isNaN(date.getTime())) {
-      return "Invalid Date";
+      return "";
     }
 
     let day = "";
@@ -363,19 +382,57 @@ class CarService {
     return `${year} ${month} ${day}`;
   }
 
-  // Translates English text to Arabic
-  async TranslatedCar(carRetrieved: any): Promise<any> {
+  // // Translate to arabic by using translate
+  // async TranslatedCar(carRetrieved: any): Promise<any> {
+  //   return Object.fromEntries(
+  //     await Promise.all(
+  //       Object.entries(carRetrieved).map(async ([key, value]) => {
+  //         if (typeof value === "string" && value.trim() !== "") {
+  //           const translatedText = await translate(value, { to: "ar" });
+  //           // const translatedText = await translateWithOpenAI(value, "Arabic");
+  //           return [key, translatedText];
+  //         }
+  //         return [key, value];
+  //       })
+  //     )
+  //   );
+  // }
+
+  async  TranslatedCar(carRetrieved: any): Promise<any> {
     return Object.fromEntries(
-      await Promise.all(
-        Object.entries(carRetrieved).map(async ([key, value]) => [
-          key,
-          key.includes("Date") || typeof value === "string"
-            ? await translate(value, { to: "ar" })
-            : value,
-        ])
-      )
+        await Promise.all(
+            Object.entries(carRetrieved).map(async ([key, value]) => {
+                if (typeof value === "string" && value.trim() !== "") {
+                    try {
+                        const response = await axios.post(
+                            "https://api-free.deepl.com/v2/translate",
+                            new URLSearchParams({
+                                auth_key: "1d6dbfc0-f72f-4ea0-b851-02ec5775e52a:fx",
+                                text: value,
+                                target_lang: "AR"
+                            }).toString(),
+                            {
+                                headers: {
+                                    "Content-Type": "application/x-www-form-urlencoded"
+                                }
+                            }
+                        );
+
+                        const translatedText = response.data.translations[0].text;
+                        return [key, translatedText];
+                    } catch (error) {
+                        console.error(`Error translating key: ${key}`, error);
+                        return [key, value]; 
+                    }
+                }
+                return [key, value];
+            })
+        )
     );
-  }
 }
+
+}
+
+
 
 export default CarService;
