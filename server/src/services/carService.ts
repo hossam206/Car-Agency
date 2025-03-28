@@ -16,7 +16,7 @@ import translate from "translate-google";
 import { Response } from "express";
 import fontkit from "@pdf-lib/fontkit";
 import OpenAI from "openai";
-import axios from "axios";
+ 
 
 
 class CarService {
@@ -400,34 +400,15 @@ class CarService {
 
   async  TranslatedCar(carRetrieved: any): Promise<any> {
     return Object.fromEntries(
-        await Promise.all(
-            Object.entries(carRetrieved).map(async ([key, value]) => {
-                if (typeof value === "string" && value.trim() !== "") {
-                    try {
-                        const response = await axios.post(
-                            "https://api-free.deepl.com/v2/translate",
-                            new URLSearchParams({
-                                auth_key: "1d6dbfc0-f72f-4ea0-b851-02ec5775e52a:fx",
-                                text: value,
-                                target_lang: "AR"
-                            }).toString(),
-                            {
-                                headers: {
-                                    "Content-Type": "application/x-www-form-urlencoded"
-                                }
-                            }
-                        );
-
-                        const translatedText = response.data.translations[0].text;
-                        return [key, translatedText];
-                    } catch (error) {
-                        console.error(`Error translating key: ${key}`, error);
-                        return [key, value]; 
-                    }
-                }
-                return [key, value];
-            })
-        )
+      await Promise.all(
+        Object.entries(carRetrieved).map(async ([key, value]) => {
+          if (typeof value === "string" && value.trim() !== "") {
+            const translatedText = await translate(value, { to: "ar" });
+            return [key, translatedText];
+          }
+          return [key, value];
+        })
+      )
     );
 }
 

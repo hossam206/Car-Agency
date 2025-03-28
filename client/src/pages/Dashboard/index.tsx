@@ -22,7 +22,6 @@ import { Input } from "@/Components/ui/input";
 import { MdAdd } from "react-icons/md";
 import { carTablecolumns } from "@/utils/TableColumns";
 import { getAll } from "@/services/globalService";
-import { ImSpinner8 } from "react-icons/im";
 import failedLoadImg from "/images/failedLoad.webp";
 import NoDataImg from "/images/Nodata.webp";
 import { CarsData } from "@/types/CarsData";
@@ -30,8 +29,10 @@ import { GrNext, GrPrevious } from "react-icons/gr";
 import Navbar from "@/Components/Navbar";
 import ConfirmDelete from "@/Components/ConfirmDelete";
 import { handleDownloadPdf } from "@/utils";
+import ContentLoader from "@/Components/ContentLoader/inedx";
 export default function Dashboard() {
   const [sorting, setSorting] = useState<SortingState>([]);
+  const [carsCount, setCarsCount] = useState<number>(0); // ✅ Total cars count state
   const [globalFilter, setGlobalFilter] = useState(""); // ✅ Global search state
   const [data, setData] = useState<CarsData[]>([]);
   const [loadingStatus, setLoadingStatus] = useState<string>("loading");
@@ -40,7 +41,7 @@ export default function Dashboard() {
   const [downloadStatus, setDownloadStatus] = useState<Record<number, string>>(
     {}
   );
-const pageSize = 10;
+  const pageSize = 10;
 
   const updateDownloadStatus = (id: number, status: string) => {
     setDownloadStatus((prev) => ({ ...prev, [id]: status }));
@@ -54,7 +55,7 @@ const pageSize = 10;
       setCarsCount(response?.data?.count);
 
       if (response?.status === 200 && response?.data?.data) {
-        setData(response.data.data);
+        setData(response?.data?.data);
         setLoadingStatus("success");
       } else {
         setLoadingStatus("failed");
@@ -116,12 +117,7 @@ const pageSize = 10;
       <div>
         {/* ✅ Loading State */}
         {loadingStatus === "loading" ? (
-          <div className="flex items-center justify-center h-screen">
-            <span className="flex flex-col items-center gap-1">
-              <ImSpinner8 size={24} className="animate-spin" />
-              <p className="font-medium">... جاري التحميل</p>
-            </span>
-          </div>
+          <ContentLoader />
         ) : loadingStatus === "failed" ? (
           <div className="flex flex-col items-center justify-center h-screen">
             <img
@@ -150,7 +146,7 @@ const pageSize = 10;
             {/* ✅ Search Bar */}
             <div className="flex md:flex-row flex-col-reverse items-end gap-2 md:justify-between md:items-center mb-4">
               <Input
-                placeholder="Search..."
+                placeholder="Search here..."
                 name="search"
                 type="text"
                 value={globalFilter}
@@ -160,19 +156,22 @@ const pageSize = 10;
 
               <Link to="/addnew">
                 <Button>
-                  <MdAdd size={24} /> New Car Info
+                  <MdAdd size={24} /> Add new car
                 </Button>
               </Link>
             </div>
 
             {/* ✅ Data Table */}
-            <div className="rounded-md border overflow-x-auto pb-4 sm:text-sm">
+            <div className="rounded-md border overflow-x-auto px-2 text-center pb-4 sm:text-sm">
               <Table>
                 <TableHeader>
                   {table.getHeaderGroups().map((headerGroup) => (
                     <TableRow key={headerGroup.id}>
                       {headerGroup.headers.map((header) => (
-                        <TableHead key={header.id}>
+                        <TableHead
+                          key={header.id}
+                          className="text-center font-semibold text-gray-800"
+                        >
                           {flexRender(
                             header.column.columnDef.header,
                             header.getContext()
@@ -213,7 +212,7 @@ const pageSize = 10;
                 variant="outline"
                 size="sm"
                 onClick={() => setPageNumber((prev) => prev + 1)}
-                disabled={pageNumber * pageSize >= carCount}
+                disabled={pageNumber * pageSize >= carsCount}
               >
                 Next <GrNext />
               </Button>
