@@ -103,7 +103,7 @@ class CarController {
       res.status(200).json({
         message: "Cars retrieved successfully",
         data: result,
-        count: count
+        count: count,
       });
     } catch (error) {
       this.handleError(res, "Failed to retrieve cars", error);
@@ -155,11 +155,7 @@ class CarController {
       );
       res.send(pdfStream);
     } catch (error) {
-      this.handleError(
-        res,
-        "Failed to download please try again",
-        error
-      );
+      this.handleError(res, "Failed to download please try again", error);
     }
   }
 
@@ -179,11 +175,7 @@ class CarController {
       );
       res.send(pdfStream);
     } catch (error) {
-      this.handleError(
-        res,
-        "Failed to download please try again",
-        error
-      );
+      this.handleError(res, "Failed to download please try again", error);
     }
   }
 }

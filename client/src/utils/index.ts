@@ -1,14 +1,13 @@
 import axios from "axios";
 
 const api = import.meta.env.VITE_API_URL;
-
 export const handleDownloadPdf = async (
   documentId: number,
   path: string,
   setDownloadStatus: (id: number, status: string) => void
 ) => {
-  setDownloadStatus(documentId, "loading"); // Set status to loading
 
+  setDownloadStatus(documentId, "loading"); // Set status to loading
   try {
     const response = await axios.get(`${api}/${path}/${documentId}`, {
       responseType: "blob",

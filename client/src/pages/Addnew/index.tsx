@@ -9,85 +9,82 @@ import { Input } from "@/Components/ui/input";
 import Navbar from "@/Components/Navbar";
 import { toast } from "sonner";
 import { FaCircleCheck } from "react-icons/fa6";
+import { initialValues } from "../../utils/FormikIntials";
 // Yup validation schema
 const validationSchema = Yup.object({
   exportCountryTo: Yup.string(),
+  exportCountryToAr: Yup.string(),
   categoryArabic: Yup.string(),
   vehicleType: Yup.string(),
+  vehicleTypeAr: Yup.string(),
   exportPlateNumber: Yup.string(),
+  exportPlateNumberAr: Yup.string(),
   registrationPlateNumber: Yup.string(),
+  registrationPlateNumberAr: Yup.string(),
   registrationDate: Yup.string(),
+  registrationDateAr: Yup.string(),
   registrationExpiryDate: Yup.string(),
+  registrationExpiryDateAr: Yup.string(),
   vehicleMake: Yup.string(),
+  vehicleMakeAr: Yup.string(),
   category: Yup.string(),
+  categoryAr: Yup.string(),
   modelYear: Yup.string(),
+  modelYearAr: Yup.string(),
   countryOfOrigin: Yup.string(),
+  countryOfOriginAr: Yup.string(),
   vehicleColor: Yup.string(),
+  vehicleColorAr: Yup.string(),
   chassisNumber: Yup.string(),
+  chassisNumberAr: Yup.string(),
   engineNumber: Yup.string(),
+  engineNumberAr: Yup.string(),
   numberOfDoors: Yup.string(),
+  numberOfDoorsAr: Yup.string(),
   fuelType: Yup.string(),
+  fuelTypeAr: Yup.string(),
   numberOfSeats: Yup.string(),
+  numberOfSeatsAr: Yup.string(),
   emptyWeight: Yup.string(),
+  emptyWeightAr: Yup.string(),
   insuranceCompany: Yup.string(),
+  insuranceCompanyAr: Yup.string(),
   insuranceType: Yup.string(),
+  insuranceTypeAr: Yup.string(),
   insurancePolicyNumber: Yup.string(),
+  insurancePolicyNumberAr: Yup.string(),
   insuranceExpiryDate: Yup.string(),
+  insuranceExpiryDateAr: Yup.string(),
   ownerName: Yup.string(),
+  ownerNameAr: Yup.string(),
   nationality: Yup.string(),
+  nationalityAr: Yup.string(),
   passportNumber: Yup.string(),
+  passportNumberAr: Yup.string(),
   trafficCodeNumber: Yup.string(),
+  trafficCodeNumberAr: Yup.string(),
   emiratesIdNumber: Yup.string(),
+  emiratesIdNumberAr: Yup.string(),
   driverName: Yup.string(),
+  driverNameAr: Yup.string(),
   licenseNumber: Yup.string(),
+  licenseNumberAr: Yup.string(),
   driverNationality: Yup.string(),
+  driverNationalityAr: Yup.string(),
   licenseSource: Yup.string(),
+  licenseSourceAr: Yup.string(),
   certificateIssueDate: Yup.string(),
+  certificateIssueDateAr: Yup.string(),
   certificateReferenceNumber: Yup.string(),
+  certificateReferenceNumberAr: Yup.string(),
 });
 
 export default function Addnew() {
   const [loading, setLoading] = useState<boolean>(false);
 
-  // Initialize Formik with the fetched data
   const formik = useFormik({
-    initialValues: {
-      categoryArabic: "",
-      exportCountryTo: "",
-      vehicleType: "",
-      exportPlateNumber: "",
-      registrationPlateNumber: "",
-      registrationDate: "",
-      registrationExpiryDate: "",
-      vehicleMake: "",
-      category: "",
-      modelYear: "",
-      countryOfOrigin: "",
-      vehicleColor: "",
-      chassisNumber: "",
-      engineNumber: "",
-      numberOfDoors: "",
-      fuelType: "",
-      numberOfSeats: "",
-      emptyWeight: "",
-      insuranceCompany: "",
-      insuranceType: "",
-      insurancePolicyNumber: "",
-      insuranceExpiryDate: "",
-      ownerName: "",
-      nationality: "",
-      passportNumber: "",
-      trafficCodeNumber: "",
-      emiratesIdNumber: "",
-      driverName: "",
-      licenseNumber: "",
-      driverNationality: "",
-      licenseSource: "",
-      certificateIssueDate: "",
-      certificateReferenceNumber: "",
-    },
+    initialValues,
     validationSchema,
-    // Reinitialize the form when initialData changes
     onSubmit: async (values, { resetForm }) => {
       setLoading(true);
       try {
@@ -95,9 +92,8 @@ export default function Addnew() {
         if (response?.status === 201) {
           setLoading(false);
           toast.success("add new car Info Success!", {
-            icon: <FaCircleCheck className="h-5 w-5   text-green-600" />,
+            icon: <FaCircleCheck className="h-5 w-5 text-green-600" />,
           });
-          // Show success message
           resetForm();
         }
       } catch (error) {
@@ -113,7 +109,7 @@ export default function Addnew() {
       <div className="container py-8">
         <h1 className="font-bold text-2xl my-4">Add new Car Info</h1>
         <form onSubmit={formik.handleSubmit}>
-          <div className="grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 border border-solid rounded-lg p-4 my-4">
+          <div className="grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 border border-solid shadow-sm rounded-lg p-6 my-4">
             {/* Export Country To */}
             <Input
               labelName="Export Country To"
@@ -123,6 +119,16 @@ export default function Addnew() {
               name="exportCountryTo"
               value={formik.values.exportCountryTo}
               onChange={formik.handleChange}
+            />
+            <Input
+              labelName="بلد التصدير إلى"
+              placeholder="مثال: عمان"
+              id="exportCountryToAr"
+              type="text"
+              name="exportCountryToAr"
+              value={formik.values.exportCountryToAr}
+              onChange={formik.handleChange}
+              dir="rtl"
             />
 
             {/* Vehicle Type */}
@@ -135,6 +141,16 @@ export default function Addnew() {
               value={formik.values.vehicleType}
               onChange={formik.handleChange}
             />
+            <Input
+              labelName="نوع المركبة"
+              name="vehicleTypeAr"
+              placeholder="مثال: سيدان"
+              id="vehicleTypeAr"
+              type="text"
+              value={formik.values.vehicleTypeAr}
+              onChange={formik.handleChange}
+              dir="rtl"
+            />
 
             {/* Export Plate Number */}
             <Input
@@ -146,6 +162,16 @@ export default function Addnew() {
               value={formik.values.exportPlateNumber}
               onChange={formik.handleChange}
             />
+            <Input
+              labelName="رقم لوحة التصدير"
+              name="exportPlateNumberAr"
+              placeholder="مثال: ٢٣٥٤٣٤"
+              id="exportPlateNumberAr"
+              type="text"
+              value={formik.values.exportPlateNumberAr}
+              onChange={formik.handleChange}
+              dir="rtl"
+            />
 
             {/* Registration Plate Number */}
             <Input
@@ -156,6 +182,16 @@ export default function Addnew() {
               type="text"
               value={formik.values.registrationPlateNumber}
               onChange={formik.handleChange}
+            />
+            <Input
+              labelName="رقم لوحة التسجيل"
+              name="registrationPlateNumberAr"
+              placeholder="مثال: ٢٣٥٤٣٤"
+              id="registrationPlateNumberAr"
+              type="text"
+              value={formik.values.registrationPlateNumberAr}
+              onChange={formik.handleChange}
+              dir="rtl"
             />
 
             {/* Registration Date */}
@@ -169,11 +205,27 @@ export default function Addnew() {
               <input
                 id="registrationDate"
                 name="registrationDate"
-                type="Date"
-                placeholder="MM/DD/YYYY"
+                type="date"
                 value={formik.values.registrationDate}
                 onChange={formik.handleChange}
-                className="h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-gray-900 text-base shadow-sm transition-all focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+                className=" customInput"
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <label
+                htmlFor="registrationDateAr"
+                className="text-sm font-medium mb-1 text-gray-500 text-right"
+              >
+                تاريخ التسجيل
+              </label>
+              <input
+                id="registrationDateAr"
+                name="registrationDateAr"
+                type="date"
+                value={formik.values.registrationDateAr}
+                onChange={formik.handleChange}
+                className=" customInput"
+                dir="rtl"
               />
             </div>
 
@@ -189,10 +241,26 @@ export default function Addnew() {
                 id="registrationExpiryDate"
                 name="registrationExpiryDate"
                 type="date"
-                placeholder="MM/DD/YYYY"
                 value={formik.values.registrationExpiryDate}
                 onChange={formik.handleChange}
-                className="h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-gray-900 text-base shadow-sm transition-all focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+                className=" customInput"
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <label
+                htmlFor="registrationExpiryDateAr"
+                className="text-sm font-medium mb-1 text-gray-500 text-right"
+              >
+                تاريخ انتهاء التسجيل
+              </label>
+              <input
+                id="registrationExpiryDateAr"
+                name="registrationExpiryDateAr"
+                type="date"
+                value={formik.values.registrationExpiryDateAr}
+                onChange={formik.handleChange}
+                className=" customInput"
+                dir="rtl"
               />
             </div>
 
@@ -206,6 +274,16 @@ export default function Addnew() {
               value={formik.values.vehicleMake}
               onChange={formik.handleChange}
             />
+            <Input
+              labelName="صنع المركبة"
+              name="vehicleMakeAr"
+              placeholder="مثال: تويوتا"
+              id="vehicleMakeAr"
+              type="text"
+              value={formik.values.vehicleMakeAr}
+              onChange={formik.handleChange}
+              dir="rtl"
+            />
 
             {/* Category */}
             <Input
@@ -218,15 +296,16 @@ export default function Addnew() {
               onChange={formik.handleChange}
             />
             <Input
-              labelName="category Arabic"
-              name="categoryArabic"
-              placeholder="e.g Sedan"
-              id="categoryArabic"
+              labelName="الفئة"
+              name="categoryAr"
+              placeholder="مثال: خاصة"
+              id="categoryAr"
               type="text"
-              value={formik.values.categoryArabic}
+              value={formik.values.categoryAr}
               onChange={formik.handleChange}
-             />
-            
+              dir="rtl"
+            />
+
             {/* Model Year */}
             <Input
               labelName="Model Year"
@@ -236,6 +315,16 @@ export default function Addnew() {
               type="text"
               value={formik.values.modelYear}
               onChange={formik.handleChange}
+            />
+            <Input
+              labelName="سنة الصنع"
+              name="modelYearAr"
+              placeholder="مثال: ٢٠٢٣"
+              id="modelYearAr"
+              type="text"
+              value={formik.values.modelYearAr}
+              onChange={formik.handleChange}
+              dir="rtl"
             />
 
             {/* Country of Origin */}
@@ -248,6 +337,16 @@ export default function Addnew() {
               value={formik.values.countryOfOrigin}
               onChange={formik.handleChange}
             />
+            <Input
+              labelName="بلد المنشأ"
+              name="countryOfOriginAr"
+              placeholder="مثال: اليابان"
+              id="countryOfOriginAr"
+              type="text"
+              value={formik.values.countryOfOriginAr}
+              onChange={formik.handleChange}
+              dir="rtl"
+            />
 
             {/* Vehicle Color */}
             <Input
@@ -258,6 +357,16 @@ export default function Addnew() {
               type="text"
               value={formik.values.vehicleColor}
               onChange={formik.handleChange}
+            />
+            <Input
+              labelName="لون المركبة"
+              name="vehicleColorAr"
+              placeholder="مثال: أحمر"
+              id="vehicleColorAr"
+              type="text"
+              value={formik.values.vehicleColorAr}
+              onChange={formik.handleChange}
+              dir="rtl"
             />
 
             {/* Chassis Number */}
@@ -270,6 +379,16 @@ export default function Addnew() {
               value={formik.values.chassisNumber}
               onChange={formik.handleChange}
             />
+            <Input
+              labelName="رقم الهيكل"
+              name="chassisNumberAr"
+              placeholder="مثال: ١٢٣٤٥٦٧٨٩"
+              id="chassisNumberAr"
+              type="text"
+              value={formik.values.chassisNumberAr}
+              onChange={formik.handleChange}
+              dir="rtl"
+            />
 
             {/* Engine Number */}
             <Input
@@ -281,6 +400,16 @@ export default function Addnew() {
               value={formik.values.engineNumber}
               onChange={formik.handleChange}
             />
+            <Input
+              labelName="رقم المحرك"
+              name="engineNumberAr"
+              placeholder="مثال: ٩٨٧٦٥٤٣٢١"
+              id="engineNumberAr"
+              type="text"
+              value={formik.values.engineNumberAr}
+              onChange={formik.handleChange}
+              dir="rtl"
+            />
 
             {/* Number of Doors */}
             <Input
@@ -289,8 +418,18 @@ export default function Addnew() {
               placeholder="e.g 4"
               id="numberOfDoors"
               type="text"
-              value={formik?.values?.numberOfDoors}
+              value={formik.values.numberOfDoors}
               onChange={formik.handleChange}
+            />
+            <Input
+              labelName="عدد الأبواب"
+              name="numberOfDoorsAr"
+              placeholder="مثال: ٤"
+              id="numberOfDoorsAr"
+              type="text"
+              value={formik.values.numberOfDoorsAr}
+              onChange={formik.handleChange}
+              dir="rtl"
             />
 
             {/* Fuel Type */}
@@ -303,6 +442,16 @@ export default function Addnew() {
               value={formik.values.fuelType}
               onChange={formik.handleChange}
             />
+            <Input
+              labelName="نوع الوقود"
+              name="fuelTypeAr"
+              placeholder="مثال: بنزين"
+              id="fuelTypeAr"
+              type="text"
+              value={formik.values.fuelTypeAr}
+              onChange={formik.handleChange}
+              dir="rtl"
+            />
 
             {/* Number of Seats */}
             <Input
@@ -313,6 +462,16 @@ export default function Addnew() {
               type="text"
               value={formik.values.numberOfSeats}
               onChange={formik.handleChange}
+            />
+            <Input
+              labelName="عدد المقاعد"
+              name="numberOfSeatsAr"
+              placeholder="مثال: ٥"
+              id="numberOfSeatsAr"
+              type="text"
+              value={formik.values.numberOfSeatsAr}
+              onChange={formik.handleChange}
+              dir="rtl"
             />
 
             {/* Empty Weight */}
@@ -325,6 +484,16 @@ export default function Addnew() {
               value={formik.values.emptyWeight}
               onChange={formik.handleChange}
             />
+            <Input
+              labelName="الوزن الفارغ"
+              name="emptyWeightAr"
+              placeholder="مثال: ١٥٠٠ كجم"
+              id="emptyWeightAr"
+              type="text"
+              value={formik.values.emptyWeightAr}
+              onChange={formik.handleChange}
+              dir="rtl"
+            />
 
             {/* Insurance Company */}
             <Input
@@ -335,6 +504,16 @@ export default function Addnew() {
               type="text"
               value={formik.values.insuranceCompany}
               onChange={formik.handleChange}
+            />
+            <Input
+              labelName="شركة التأمين"
+              name="insuranceCompanyAr"
+              placeholder="مثال: أكسا للتأمين"
+              id="insuranceCompanyAr"
+              type="text"
+              value={formik.values.insuranceCompanyAr}
+              onChange={formik.handleChange}
+              dir="rtl"
             />
 
             {/* Insurance Type */}
@@ -347,6 +526,16 @@ export default function Addnew() {
               value={formik.values.insuranceType}
               onChange={formik.handleChange}
             />
+            <Input
+              labelName="نوع التأمين"
+              name="insuranceTypeAr"
+              placeholder="مثال: شامل"
+              id="insuranceTypeAr"
+              type="text"
+              value={formik.values.insuranceTypeAr}
+              onChange={formik.handleChange}
+              dir="rtl"
+            />
 
             {/* Insurance Policy Number */}
             <Input
@@ -357,6 +546,16 @@ export default function Addnew() {
               type="text"
               value={formik.values.insurancePolicyNumber}
               onChange={formik.handleChange}
+            />
+            <Input
+              labelName="رقم وثيقة التأمين"
+              name="insurancePolicyNumberAr"
+              placeholder="مثال: ١٢٣٤٥٦"
+              id="insurancePolicyNumberAr"
+              type="text"
+              value={formik.values.insurancePolicyNumberAr}
+              onChange={formik.handleChange}
+              dir="rtl"
             />
 
             {/* Insurance Expiry Date */}
@@ -371,10 +570,26 @@ export default function Addnew() {
                 id="insuranceExpiryDate"
                 name="insuranceExpiryDate"
                 type="date"
-                placeholder="MM/DD/YYYY"
                 value={formik.values.insuranceExpiryDate}
                 onChange={formik.handleChange}
-                className="h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-gray-900 text-base shadow-sm transition-all focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+                className=" customInput"
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <label
+                htmlFor="insuranceExpiryDateAr"
+                className="text-sm font-medium mb-1 text-gray-500 text-right"
+              >
+                تاريخ انتهاء التأمين
+              </label>
+              <input
+                id="insuranceExpiryDateAr"
+                name="insuranceExpiryDateAr"
+                type="date"
+                value={formik.values.insuranceExpiryDateAr}
+                onChange={formik.handleChange}
+                className=" customInput"
+                dir="rtl"
               />
             </div>
 
@@ -388,6 +603,16 @@ export default function Addnew() {
               value={formik.values.ownerName}
               onChange={formik.handleChange}
             />
+            <Input
+              labelName="اسم المالك"
+              name="ownerNameAr"
+              placeholder="مثال: جون دو"
+              id="ownerNameAr"
+              type="text"
+              value={formik.values.ownerNameAr}
+              onChange={formik.handleChange}
+              dir="rtl"
+            />
 
             {/* Nationality */}
             <Input
@@ -398,6 +623,16 @@ export default function Addnew() {
               type="text"
               value={formik.values.nationality}
               onChange={formik.handleChange}
+            />
+            <Input
+              labelName="الجنسية"
+              name="nationalityAr"
+              placeholder="مثال: أمريكي"
+              id="nationalityAr"
+              type="text"
+              value={formik.values.nationalityAr}
+              onChange={formik.handleChange}
+              dir="rtl"
             />
 
             {/* Passport Number */}
@@ -410,6 +645,16 @@ export default function Addnew() {
               value={formik.values.passportNumber}
               onChange={formik.handleChange}
             />
+            <Input
+              labelName="رقم جواز السفر"
+              name="passportNumberAr"
+              placeholder="مثال: ١٢٣٤٥٦٧٨٩"
+              id="passportNumberAr"
+              type="text"
+              value={formik.values.passportNumberAr}
+              onChange={formik.handleChange}
+              dir="rtl"
+            />
 
             {/* Traffic Code Number */}
             <Input
@@ -420,6 +665,16 @@ export default function Addnew() {
               type="text"
               value={formik.values.trafficCodeNumber}
               onChange={formik.handleChange}
+            />
+            <Input
+              labelName="رقم رمز المرور"
+              name="trafficCodeNumberAr"
+              placeholder="مثال: ٩٨٧٦٥٤٣٢١"
+              id="trafficCodeNumberAr"
+              type="text"
+              value={formik.values.trafficCodeNumberAr}
+              onChange={formik.handleChange}
+              dir="rtl"
             />
 
             {/* Emirates ID Number */}
@@ -432,6 +687,16 @@ export default function Addnew() {
               value={formik.values.emiratesIdNumber}
               onChange={formik.handleChange}
             />
+            <Input
+              labelName="رقم الهوية الإماراتية"
+              name="emiratesIdNumberAr"
+              placeholder="مثال: ٧٨٤-١٢٣٤-٥٦٧٨٩٠١-٢"
+              id="emiratesIdNumberAr"
+              type="text"
+              value={formik.values.emiratesIdNumberAr}
+              onChange={formik.handleChange}
+              dir="rtl"
+            />
 
             {/* Driver Name */}
             <Input
@@ -442,6 +707,16 @@ export default function Addnew() {
               type="text"
               value={formik.values.driverName}
               onChange={formik.handleChange}
+            />
+            <Input
+              labelName="اسم السائق"
+              name="driverNameAr"
+              placeholder="مثال: جون دو"
+              id="driverNameAr"
+              type="text"
+              value={formik.values.driverNameAr}
+              onChange={formik.handleChange}
+              dir="rtl"
             />
 
             {/* License Number */}
@@ -454,6 +729,16 @@ export default function Addnew() {
               value={formik.values.licenseNumber}
               onChange={formik.handleChange}
             />
+            <Input
+              labelName="رقم الرخصة"
+              name="licenseNumberAr"
+              placeholder="مثال: ١٢٣٤٥٦٧٨٩"
+              id="licenseNumberAr"
+              type="text"
+              value={formik.values.licenseNumberAr}
+              onChange={formik.handleChange}
+              dir="rtl"
+            />
 
             {/* Driver Nationality */}
             <Input
@@ -465,6 +750,16 @@ export default function Addnew() {
               value={formik.values.driverNationality}
               onChange={formik.handleChange}
             />
+            <Input
+              labelName="جنسية السائق"
+              name="driverNationalityAr"
+              placeholder="مثال: كندي"
+              id="driverNationalityAr"
+              type="text"
+              value={formik.values.driverNationalityAr}
+              onChange={formik.handleChange}
+              dir="rtl"
+            />
 
             {/* License Source */}
             <Input
@@ -475,6 +770,16 @@ export default function Addnew() {
               type="text"
               value={formik.values.licenseSource}
               onChange={formik.handleChange}
+            />
+            <Input
+              labelName="مصدر الرخصة"
+              name="licenseSourceAr"
+              placeholder="مثال: هيئة الطرق والمواصلات دبي"
+              id="licenseSourceAr"
+              type="text"
+              value={formik.values.licenseSourceAr}
+              onChange={formik.handleChange}
+              dir="rtl"
             />
 
             {/* Certificate Issue Date */}
@@ -489,10 +794,26 @@ export default function Addnew() {
                 id="certificateIssueDate"
                 name="certificateIssueDate"
                 type="date"
-                placeholder="MM/DD/YYYY"
                 value={formik.values.certificateIssueDate}
                 onChange={formik.handleChange}
-                className="h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-gray-900 text-base shadow-sm transition-all focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+                className=" customInput"
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <label
+                htmlFor="certificateIssueDateAr"
+                className="text-sm font-medium mb-1 text-gray-500 text-right"
+              >
+                تاريخ إصدار الشهادة
+              </label>
+              <input
+                id="certificateIssueDateAr"
+                name="certificateIssueDateAr"
+                type="date"
+                value={formik.values.certificateIssueDateAr}
+                onChange={formik.handleChange}
+                className=" customInput"
+                dir="rtl"
               />
             </div>
 
@@ -511,9 +832,20 @@ export default function Addnew() {
                 placeholder="e.g 123456"
                 value={formik.values.certificateReferenceNumber}
                 onChange={formik.handleChange}
-                className="h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-gray-900 text-base shadow-sm transition-all focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+                className="customInput"
               />
             </div>
+
+            <Input
+              labelName=" رقم مرجع الشهادة"
+              name="certificateReferenceNumberAr"
+              placeholder="مثال: ١٢٣٤٥٦"
+              id="certificateReferenceNumberAr"
+              type="text"
+              value={formik.values.certificateReferenceNumberAr}
+              onChange={formik.handleChange}
+              dir="rtl"
+            />
           </div>
           <div className="flex flex-row item-center justify-center">
             <Button

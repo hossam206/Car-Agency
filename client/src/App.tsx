@@ -4,6 +4,7 @@ import Loader from "./Components/Loader";
 import ProtectRoutes from "./routes/protectRoutes";
 import { AuthContextProvider } from "./Context/AuthProvider.tsx";
 import ViewDocument from "./pages/ViewDocument/index.tsx";
+import ContentLoader from "./Components/ContentLoader/inedx.tsx";
 const Login = lazy(() => import("./pages/Auth/Login"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
 const AddNew = lazy(() => import("./pages/Addnew"));
@@ -26,7 +27,7 @@ function App() {
                 <Route
                   path="/Login"
                   element={
-                    <Suspense fallback={<Loader />}>
+                    <Suspense fallback={<ContentLoader />}>
                       <Login />
                     </Suspense>
                   }
@@ -45,7 +46,7 @@ function App() {
                   <Route
                     path="/addnew"
                     element={
-                      <Suspense fallback={<Loader />}>
+                      <Suspense fallback={<ContentLoader />}>
                         <AddNew />
                       </Suspense>
                     }
@@ -53,7 +54,7 @@ function App() {
                   <Route
                     path="cars/editCar/:id"
                     element={
-                      <Suspense fallback={<Loader />}>
+                      <Suspense fallback={<ContentLoader />}>
                         <EditCar />
                       </Suspense>
                     }

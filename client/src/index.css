@@ -72,6 +72,10 @@
     opacity: 0.25;
   }
 }
+.customInput {
+  @apply w-full rounded-xl border border-gray-300 bg-white px-3 py-3 text-sm text-gray-900 placeholder:text-gray-400 outline-none 
+           transition disabled:bg-gray-100 disabled:cursor-not-allowed focus:border-slate-700;
+}
 
 .animate-fade {
   animation: fadeEffect 1s linear infinite;
