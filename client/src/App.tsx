@@ -3,13 +3,12 @@ import { Suspense, lazy } from "react";
 import Loader from "./Components/Loader";
 import ProtectRoutes from "./routes/protectRoutes";
 import { AuthContextProvider } from "./Context/AuthProvider.tsx";
-import ViewDocument from "./pages/ViewDocument/index.tsx";
 import ContentLoader from "./Components/ContentLoader/inedx.tsx";
 const Login = lazy(() => import("./pages/Auth/Login"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
 const AddNew = lazy(() => import("./pages/Addnew"));
 const EditCar = lazy(() => import("./pages/Editcar"));
-
+const ViewDocument = lazy(() => import("./pages/ViewDocument"));
 function App() {
   return (
     <BrowserRouter>
@@ -68,6 +67,5 @@ function App() {
     </BrowserRouter>
   );
 }
-
 
 export default App;
