@@ -103,7 +103,6 @@ export default function Dashboard() {
     globalFilterFn: (row, _, filterValue) =>
       globalSearchFilter(row, filterValue),
   });
-
   return (
     <>
       <Navbar />
