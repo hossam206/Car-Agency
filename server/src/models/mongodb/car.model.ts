@@ -1,7 +1,8 @@
-import mongoose, { Types } from "mongoose";
+import mongoose from "mongoose";
 
 const carSchema = new mongoose.Schema(
   {
+    // English
     category: String,
     categoryArabic: String,
     certificateIssueDate: String,
@@ -35,6 +36,33 @@ const carSchema = new mongoose.Schema(
     vehicleColor: String,
     vehicleMake: String,
     vehicleType: String,
+
+    // Arabic
+    exportCountryToAr: String,
+    vehicleTypeAr: String,
+    exportPlateNumberAr: String,
+    registrationPlateNumberAr: String,
+    registrationDateAr: String,
+    registrationExpiryDateAr: String,
+    vehicleMakeAr: String,
+    categoryAr: String,
+    modelYearAr: String,
+    countryOfOriginAr: String,
+    vehicleColorAr: String,
+    chassisNumberAr: String,
+    engineNumberAr: String,
+    numberOfDoorsAr: String,
+    fuelTypeAr: String,
+    numberOfSeatsAr: String,
+    emptyWeightAr: String,
+    insuranceCompanyAr: String,
+    insuranceTypeAr: String,
+    insurancePolicyNumberAr: String,
+    insuranceExpiryDateAr: String,
+    ownerNameAr: String,
+    nationalityAr: String,
+    driverNameAr: String,
+    certificateIssueDateAr: String,
   },
   {
     timestamps: true,

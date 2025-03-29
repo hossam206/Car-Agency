@@ -66,7 +66,7 @@ router.get(
 // Download Export Certificate
 router.get(
   "/download/:id",
-  AuthenticationMiddleware.authenticate,
+  // AuthenticationMiddleware.authenticate,
   async (req: Request, res: Response) => {
     await controller.downloadCertificate(req, res);
   }

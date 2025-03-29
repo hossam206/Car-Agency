@@ -143,7 +143,7 @@ class CarController {
   async downloadCertificate(req: Request, res: Response): Promise<void> {
     try {
       const { id } = req.params;
-      const pdfStream = await this.serviceInstance.generateCertificate(id, res);
+      const pdfStream = await this.serviceInstance.generateCertificate(id);
       if (!pdfStream || pdfStream.length === 0) {
         res.status(400).json({ message: "Error generating PDF" });
         return;
@@ -162,8 +162,8 @@ class CarController {
   // View Export Certificate
   async ViewCertificate(req: Request, res: Response): Promise<void> {
     try {
-      const { id } = req.params;
-      const pdfStream = await this.serviceInstance.generateCertificate(id, res);
+      const carId = req.params.id;
+      const pdfStream = await this.serviceInstance.generateCertificate(carId);
       if (!pdfStream || pdfStream.length === 0) {
         res.status(400).json({ message: "Error view PDF" });
         return;
@@ -171,11 +171,11 @@ class CarController {
       res.setHeader("Content-Type", "application/pdf");
       res.setHeader(
         "Content-Disposition",
-        `inline; filename="Certificate_${id}.pdf"`
+        `inline; filename="Certificate_${carId}.pdf"`
       );
       res.send(pdfStream);
     } catch (error) {
-      this.handleError(res, "Failed to download please try again", error);
+      this.handleError(res, `Failed to view please try again ${error}`, error);
     }
   }
 }

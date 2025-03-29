@@ -43,7 +43,7 @@ class UserController {
         httpOnly: false,
         secure: process.env.NODE_ENV === "production",
         sameSite: "strict",
-        expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+        expires: new Date(Date.now() +  24 * 60 * 60 * 1000),
       });
       res.clearCookie("token");
       res.clearCookie("refreshToken");
