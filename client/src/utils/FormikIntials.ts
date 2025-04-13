@@ -64,4 +64,5 @@ export const initialValues = {
   certificateIssueDateAr: "",
   certificateReferenceNumber: "",
   certificateReferenceNumberAr: "",
+  exportCompany: "",
 };

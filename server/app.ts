@@ -12,7 +12,8 @@ dotenv.config();
 const app: Application = express();
 
 const corsOptions = {
-  origin: process.env.FORNTEND_URL,
+  origin: "http://localhost:5173",
+  // origin: String(process.env.FORNTEND_URL),
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
