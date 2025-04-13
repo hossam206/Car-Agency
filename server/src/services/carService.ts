@@ -86,7 +86,7 @@ class CarService {
         if (!parsed.success) {
           throw new Error("Car validation failed");
         }
-        return { _id: _id.toString(), ...parsed.data,  };
+        return { _id: _id.toString(), ...parsed.data };
       });
       return carsDto;
     } catch (error) {
@@ -142,18 +142,20 @@ class CarService {
     const page = pages[0];
     const fontBytesEn = fs.readFileSync(String(process.env.PATH_FONT_EN));
     const fontBytesAr = fs.readFileSync(String(process.env.PATH_FONT_AR));
+    const fontBytesBold = fs.readFileSync(String(process.env.PATH_FONT_BOLD));
     const LargeFontSize = 7.3;
     const SmallFontSize = 7.3;
     const BlueColor = rgb(51 / 255, 49 / 255, 156 / 255);
     const WhiteColor = rgb(240 / 255, 248 / 255, 1);
     const fontEn = await pdfDoc.embedFont(fontBytesEn);
     const fontAr = await pdfDoc.embedFont(fontBytesAr);
+    const fontBold = await pdfDoc.embedFont(fontBytesBold);
 
     // Generate the QR code image for the URL
     const url = `${process.env.API}/car/view/${carId}`;
     const qrImageBytes = await this.generateQrCode(url);
     const qrImage = await pdfDoc.embedPng(qrImageBytes);
-    page.drawImage(qrImage, { x: 358, y: 295, width: 38, height: 38 });
+    page.drawImage(qrImage, { x: 357.5, y: 296, width: 38.5, height: 38 });
 
     // Function to add left-aligned text (for English)
     const addLeftAlignedText = (
@@ -219,9 +221,29 @@ class CarService {
       [carRetrieved.driverNationality     ?? "",  285, 118, LargeFontSize, BlueColor],
       [carRetrieved.licenseSource         ?? "",  285, 95, LargeFontSize, BlueColor],
       [carRetrieved.certificateIssueDate  ?? "",  186,  378, SmallFontSize-2, WhiteColor], // In block blue - edit is english
-      [carRetrieved.certificateReferenceNumber ?? "",  358, 339, SmallFontSize-1.7, WhiteColor]
+      // [carRetrieved.certificateReferenceNumber ?? "",  362, 337, SmallFontSize-1.3, WhiteColor]
     ];
 
+    page.drawText(
+      carRetrieved.exportCompany
+        ? ` تشحن بواسطة شركة ${carRetrieved.exportCompany} للنقلیات`
+        : "",
+      {
+        x: 305,
+        y: 499,
+        size: SmallFontSize -2,
+        font: fontBold,
+        color: WhiteColor,
+      }
+    );
+
+    page.drawText(carRetrieved.certificateReferenceNumber ?? "", {
+      x: 362,
+      y: 337,
+      size: SmallFontSize - 1.2,
+      font: fontBold,
+      color: WhiteColor,
+    });
     // prettier-ignore
     // Arabic text data
     const textArabic: [string, number, number, number, any][] = [
@@ -269,7 +291,7 @@ class CarService {
   // Generate QrCode
   async generateQrCode(url: string): Promise<Buffer> {
     const size = 70;
-    const margin = 5;
+    const margin = 3;
     const canvas = createCanvas(size, size);
     await QRCode.toCanvas(canvas, url, {
       width: size,

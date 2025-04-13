@@ -38,6 +38,7 @@ export const CarDto = z.object({
   certificateReferenceNumber: z.string().optional(),
 
   // Arabic
+  exportCompany: z.string().optional(),
   exportCountryToAr: z.string().optional(),
   vehicleTypeAr: z.string().optional(),
   exportPlateNumberAr: z.string().optional(),
