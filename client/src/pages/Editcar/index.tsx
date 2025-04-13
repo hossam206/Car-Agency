@@ -27,6 +27,12 @@ export default function EditCar() {
   const [loading, setLoading] = useState<boolean>(false);
   const [initialData, setInitialData] = useState<CarsData | null>(null);
   const navigate = useNavigate();
+
+  // handle cancel
+  const handleCancel = () => {
+    formik.resetForm();
+    navigate("/");
+  };
   const { id } = useParams();
 
   useEffect(() => {
@@ -44,7 +50,7 @@ export default function EditCar() {
 
     fetchCarData();
   }, [id]);
-
+console.log(initialData);
   // Create initial values dynamically
   const initialValues = fieldConfig.reduce((values, field) => {
     values[field.id] = initialData?.[field.id as keyof CarsData] || "";
@@ -147,10 +153,10 @@ export default function EditCar() {
           </div>
           <div className="flex flex-row item-center justify-center gap-4">
             <Button
-              variant={"outline"}
+              variant={"destructive"}
               type="button"
               size="lg"
-              onClick={() => navigate(-1)}
+              onClick={() => handleCancel()}
               disabled={loading}
             >
               Cancel

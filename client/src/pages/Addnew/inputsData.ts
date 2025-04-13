@@ -1,4 +1,4 @@
-export const fieldConfig = [
+const fieldConfig = [
   // Vehicle Information
   {
     id: "exportCountryTo",
@@ -195,3 +195,4 @@ export const fieldConfig = [
     type: "text",
   },
 ];
+export default fieldConfig;

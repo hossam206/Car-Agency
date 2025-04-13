@@ -12,7 +12,7 @@ type InputProps = {
   type: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
-  error?: string;
+  error?: string | undefined | boolean;
   disabled?: boolean;
   required?: boolean;
 };
@@ -43,7 +43,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         {labelName && (
           <label
             htmlFor={id}
-            className={`text-sm font-medium text-gray-600 mb-1 ${
+            className={`text-sm font-medium text-gray-700 mb-1 ${
               dir === "rtl" ? "text-right" : "text-left"
             }`}
           >
