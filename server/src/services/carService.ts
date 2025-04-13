@@ -224,6 +224,7 @@ class CarService {
       // [carRetrieved.certificateReferenceNumber ?? "",  362, 337, SmallFontSize-1.3, WhiteColor]
     ];
 
+    
     page.drawText(
       carRetrieved.exportCompany
         ? ` تشحن بواسطة شركة ${carRetrieved.exportCompany} للنقلیات`
