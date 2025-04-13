@@ -1,7 +1,7 @@
 import express, { Application } from "express";
 import dotenv from "dotenv";
-import connectToMongoDB from "./config/mongoDBConnect";
-import router from "./router";
+import connectToMongoDB from "./src/config/mongoDBConnect";
+import router from "./src/router";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import rateLimit from "express-rate-limit";

@@ -5,26 +5,18 @@ import {
   CarDtoRetrieved,
   CarDtoRetrievedType,
 } from "../dto/car.dto";
-import { clip, PDFDocument, rgb } from "pdf-lib";
+import { PDFDocument, rgb } from "pdf-lib";
 import fs from "fs";
 import QRCode from "qrcode";
 import dotenv from "dotenv";
+import { createCanvas } from "canvas";
 dotenv.config();
 
 // @ts-ignore
-import translate from "translate-google";
-import { Response } from "express";
 import fontkit from "@pdf-lib/fontkit";
-import OpenAI from "openai";
- 
-
 
 class CarService {
   private static instance: CarService;
-  private readonly LargeFontSize = 13.55;
-  private readonly SmallFontSize = 10.55;
-  private readonly BlueColor = rgb(53 / 255, 60 / 255, 145 / 255);
-  private readonly WhiteColor = rgb(240 / 255, 248 / 255, 1);
 
   private constructor() {}
 
@@ -94,7 +86,7 @@ class CarService {
         if (!parsed.success) {
           throw new Error("Car validation failed");
         }
-        return { _id: _id.toString(), ...parsed.data,  };
+        return { _id: _id.toString(), ...parsed.data };
       });
       return carsDto;
     } catch (error) {
@@ -135,63 +127,37 @@ class CarService {
     }
   }
 
-  async generateCertificate(car: any, res: Response): Promise<Buffer> {
-    // Retrieve the car details
-
-    const carRetrieved = await this.getCarById(car);
+  async generateCertificate(carId: string): Promise<Buffer> {
+    // Check car exist
+    const carRetrieved = await this.getCarById(carId);
     if (!carRetrieved) {
       throw new Error("Car not found.");
     }
 
-    //#region
-
-    //endregion
-    // Translate car details for Arabic fields
-    const translatedCar = await this.TranslatedCar(carRetrieved);
-
-    //#region PDF Properties
-    // Load the PDF template and font from the file system
-    const templateBytes = fs.readFileSync(
-      String(process.env.PATH_LOCATION_PDF)
-    );
-
-    // Font
-    const fontBytes = fs.readFileSync(String(process.env.PATH_FONT));
-    const LargeFontSize = 13;
-    const SmallFontSize = 11;
-
-    // Define colors
-    const BlueColor = rgb(53 / 255, 60 / 255, 145 / 255);
+    // Load the PDF template and font from the file system and define colors
+    const templateBytes = fs.readFileSync(String(process.env.PATH_PDF));
+    const pdfDoc = await PDFDocument.load(templateBytes);
+    pdfDoc.registerFontkit(fontkit);
+    const pages = pdfDoc.getPages();
+    const page = pages[0];
+    const fontBytesEn = fs.readFileSync(String(process.env.PATH_FONT_EN));
+    const fontBytesAr = fs.readFileSync(String(process.env.PATH_FONT_AR));
+    const fontBytesBold = fs.readFileSync(String(process.env.PATH_FONT_BOLD));
+    const LargeFontSize = 7.3;
+    const SmallFontSize = 7.3;
+    const BlueColor = rgb(51 / 255, 49 / 255, 156 / 255);
     const WhiteColor = rgb(240 / 255, 248 / 255, 1);
-
-    //#endregion
+    const fontEn = await pdfDoc.embedFont(fontBytesEn);
+    const fontAr = await pdfDoc.embedFont(fontBytesAr);
+    const fontBold = await pdfDoc.embedFont(fontBytesBold);
 
     // Generate the QR code image for the URL
-    const url = `${process.env.FORNTEND_URL}/car/view/${car}`;
-    const qrDataUrl = await QRCode.toDataURL(url, { width: 150, margin: 1 });
-    const base64Data = qrDataUrl.split(",")[1];
-    const qrImageBytes = Buffer.from(base64Data, "base64");
-
-    // Create a new PDF document and add a page
-    const pdfDoc = await PDFDocument.create();
-    pdfDoc.registerFontkit(fontkit);
-    const page = pdfDoc.addPage([850, 1000]);
-
-    // Embed the font and background image in the PDF
-    const font = await pdfDoc.embedFont(fontBytes);
-    const backgroundImage = await pdfDoc.embedJpg(templateBytes);
-    page.drawImage(backgroundImage, {
-      x: 0,
-      y: 0,
-      width: page.getWidth(),
-      height: page.getHeight(),
-    });
-
-    // Embed and draw the QR code image
+    const url = `${process.env.API}/car/view/${carId}`;
+    const qrImageBytes = await this.generateQrCode(url);
     const qrImage = await pdfDoc.embedPng(qrImageBytes);
-    page.drawImage(qrImage, { x: 360, y: 482, width: 73, height: 67 });
+    page.drawImage(qrImage, { x: 357.5, y: 296, width: 38.5, height: 38 });
 
-    // Helper function to add left-aligned text (for English)
+    // Function to add left-aligned text (for English)
     const addLeftAlignedText = (
       text: string,
       x: number,
@@ -199,11 +165,10 @@ class CarService {
       fontSize: number,
       color: any
     ) => {
-      page.drawText(text, { x, y, size: fontSize, font, color });
+      page.drawText(text, { x, y, size: fontSize, font: fontEn, color });
     };
 
-    // Helper function to add right-aligned text (for Arabic)
-    // This function calculates the text width and subtracts it from the right margin
+    // Function to add right-aligned text (for Arabic)
     const addRightAlignedText = (
       text: string,
       rightMargin: number,
@@ -211,76 +176,103 @@ class CarService {
       fontSize: number,
       color: any
     ) => {
-      const textWidth = font.widthOfTextAtSize(text, fontSize);
+      const textWidth = fontAr.widthOfTextAtSize(text, fontSize);
       const startX = rightMargin - textWidth;
-      page.drawText(text, { x: startX, y, size: fontSize, font, color });
+      page.drawText(text, {
+        x: startX,
+        y,
+        size: fontSize,
+        font: fontAr,
+        color,
+      });
     };
 
     // prettier-ignore
     // English text data
     const textEnglish: [string, number, number, number, any][] = [
-      [carRetrieved.exportCountryTo       ?? "",  217, 771, SmallFontSize, WhiteColor],
-      [carRetrieved.vehicleType           ?? "",  484, 880, LargeFontSize, BlueColor],
-      [carRetrieved.exportPlateNumber     ?? "",  485, 841, LargeFontSize, BlueColor],
-      [carRetrieved.registrationPlateNumber ?? "",485, 805, LargeFontSize, BlueColor],
-      [this.DateConvertEnglish(carRetrieved.registrationDate  ?? "","EG"),  485, 764, LargeFontSize, BlueColor],
-      [this.DateConvertEnglish(carRetrieved.registrationExpiryDate ?? "","EG"), 485, 723, LargeFontSize, BlueColor],
-      [carRetrieved.vehicleMake           ?? "",  485, 685, LargeFontSize, BlueColor],
-      [carRetrieved.category              ?? "",  485, 645, LargeFontSize, BlueColor],
-      [carRetrieved.modelYear             ?? "",  485, 600, LargeFontSize, BlueColor],
-      [carRetrieved.countryOfOrigin       ?? "",  485, 565, LargeFontSize, BlueColor],
-      [carRetrieved.vehicleColor          ?? "",  485, 527, LargeFontSize, BlueColor],
-      [carRetrieved.chassisNumber         ?? "",  485, 485, LargeFontSize, BlueColor],
-      [carRetrieved.engineNumber          ?? "NULL",  485, 445, LargeFontSize, BlueColor],
-      [String(carRetrieved.numberOfDoors  ?? ""), 485, 408, LargeFontSize, BlueColor],
-      [carRetrieved.fuelType              ?? "",  485, 365, LargeFontSize, BlueColor],
-      [String(carRetrieved.numberOfSeats  ?? ""),  485, 329, LargeFontSize, BlueColor],
-      [String(carRetrieved.emptyWeight    ?? ""),  485, 288, LargeFontSize, BlueColor],
-      [carRetrieved.insuranceCompany      ?? "",  485, 250, LargeFontSize, BlueColor],
-      [carRetrieved.insuranceType         ?? "",  485, 210, LargeFontSize, BlueColor],
-      [carRetrieved.insurancePolicyNumber ?? "",  485, 172, LargeFontSize, BlueColor],
-      [this.DateConvertEnglish(carRetrieved.insuranceExpiryDate ?? "","EG"),  485, 134, LargeFontSize, BlueColor],
-      [carRetrieved.ownerName             ?? "",  36,  418, LargeFontSize, BlueColor],
-      [carRetrieved.nationality           ?? "",  36,  383, LargeFontSize, BlueColor],
-      [carRetrieved.passportNumber        ?? "",  200, 348, LargeFontSize, BlueColor],
-      [carRetrieved.trafficCodeNumber     ?? "",  200, 320, LargeFontSize, BlueColor],
-      [carRetrieved.emiratesIdNumber      ?? "",  200, 285, LargeFontSize, BlueColor],
-      [carRetrieved.driverName            ?? "",  116, 238, LargeFontSize, BlueColor],
-      [carRetrieved.licenseNumber         ?? "",  200, 216, LargeFontSize, BlueColor],
-      [carRetrieved.driverNationality     ?? "",  200, 190, LargeFontSize, BlueColor],
-      [carRetrieved.licenseSource         ?? "",  200, 150, LargeFontSize, BlueColor],
-      [this.DateConvertArabic(carRetrieved.certificateIssueDate  ?? "","EG"),  30,  615, SmallFontSize-2, WhiteColor], // In block blue - edit is english
-      [carRetrieved.certificateReferenceNumber ?? "",  370, 556, SmallFontSize, WhiteColor]
+      [carRetrieved.exportCountryTo       ?? "",  284, 473, SmallFontSize+1.4, WhiteColor],
+      [carRetrieved.vehicleType           ?? "",  424, 540, LargeFontSize, BlueColor],
+      [carRetrieved.exportPlateNumber     ?? "",  424, 517, LargeFontSize, BlueColor],
+      [carRetrieved.registrationPlateNumber ?? "",424, 492, LargeFontSize, BlueColor],
+      [this.DateConvertEnglish(carRetrieved.registrationDate  ?? "","EG"),  424, 469, LargeFontSize, BlueColor],
+      [this.DateConvertEnglish(carRetrieved.registrationExpiryDate ?? "","EG"), 424, 443, LargeFontSize, BlueColor],
+      [carRetrieved.vehicleMake           ?? "",  424, 420, LargeFontSize, BlueColor],
+      [carRetrieved.category              ?? "",  424, 395, LargeFontSize, BlueColor],
+      [carRetrieved.modelYear             ?? "",  424, 370, LargeFontSize, BlueColor],
+      [carRetrieved.countryOfOrigin       ?? "",  424, 346, LargeFontSize, BlueColor],
+      [carRetrieved.vehicleColor          ?? "",  424, 323, LargeFontSize, BlueColor],
+      [carRetrieved.chassisNumber         ?? "",  424, 298, LargeFontSize, BlueColor],
+      [carRetrieved.engineNumber          ?? "NILL",  508, 274, LargeFontSize, BlueColor],
+      [String(carRetrieved.numberOfDoors  ?? ""), 424, 251, LargeFontSize, BlueColor],
+      [carRetrieved.fuelType              ?? "",  424, 227, LargeFontSize, BlueColor],
+      [String(carRetrieved.numberOfSeats  ?? ""),  424, 202, LargeFontSize, BlueColor],
+      [String(carRetrieved.emptyWeight    ?? ""),  424, 177, LargeFontSize, BlueColor],
+      [carRetrieved.insuranceCompany      ?? "",  424, 153, LargeFontSize, BlueColor],
+      // [carRetrieved.insuranceType         ?? "",  424, 135, LargeFontSize, BlueColor],
+      [carRetrieved.insurancePolicyNumber ?? "",  424, 105, LargeFontSize, BlueColor],
+      [this.DateConvertEnglish(carRetrieved.insuranceExpiryDate ?? "","EG"),  424, 83, LargeFontSize, BlueColor],
+      [carRetrieved.ownerName             ?? "",  189,  257, LargeFontSize, BlueColor],
+      [carRetrieved.nationality           ?? "",  189,  236, LargeFontSize, BlueColor],
+      [carRetrieved.passportNumber        ?? "",  275, 214, LargeFontSize, BlueColor],
+      [carRetrieved.trafficCodeNumber     ?? "",  280, 197, LargeFontSize, BlueColor],
+      [carRetrieved.emiratesIdNumber      ?? "",  275, 182, LargeFontSize, BlueColor],
+      [carRetrieved.driverName            ?? "",  228, 146, LargeFontSize-0.3, BlueColor],
+      [carRetrieved.licenseNumber         ?? "",  285, 133, LargeFontSize, BlueColor],
+      [carRetrieved.driverNationality     ?? "",  285, 118, LargeFontSize, BlueColor],
+      [carRetrieved.licenseSource         ?? "",  285, 95, LargeFontSize, BlueColor],
+      [carRetrieved.certificateIssueDate  ?? "",  186,  378, SmallFontSize-2, WhiteColor], // In block blue - edit is english
+      // [carRetrieved.certificateReferenceNumber ?? "",  362, 337, SmallFontSize-1.3, WhiteColor]
     ];
 
+    
+    page.drawText(
+      carRetrieved.exportCompany
+        ? ` تشحن بواسطة شركة ${carRetrieved.exportCompany} للنقلیات`
+        : "",
+      {
+        x: 305,
+        y: 499,
+        size: SmallFontSize -2,
+        font: fontBold,
+        color: WhiteColor,
+      }
+    );
+
+    page.drawText(carRetrieved.certificateReferenceNumber ?? "", {
+      x: 362,
+      y: 337,
+      size: SmallFontSize - 1.2,
+      font: fontBold,
+      color: WhiteColor,
+    });
     // prettier-ignore
     // Arabic text data
     const textArabic: [string, number, number, number, any][] = [
-      [translatedCar.exportCountryTo ?? "", 291, 892, SmallFontSize, WhiteColor],
-      [translatedCar.vehicleType ?? "", 816, 880, LargeFontSize, BlueColor],
-      [carRetrieved.exportPlateNumber ?? "", 816, 841, LargeFontSize, BlueColor],
-      [carRetrieved.registrationPlateNumber ?? "", 816, 805, LargeFontSize, BlueColor],
-      [ this.DateConvertEnglish(carRetrieved.registrationDate ?? "","ar"), 816, 764, LargeFontSize, BlueColor],
-      [ this.DateConvertEnglish(carRetrieved.registrationExpiryDate ??"", "ar"), 816, 723, LargeFontSize, BlueColor],
-      [carRetrieved.vehicleMake ?? "", 816, 685, LargeFontSize, BlueColor],
-      [carRetrieved.categoryArabic ?? "", 816, 645, LargeFontSize, BlueColor],
-      [carRetrieved.modelYear ?? "", 816, 600, LargeFontSize, BlueColor],
-      [translatedCar.countryOfOrigin ?? "", 816, 565, LargeFontSize, BlueColor],
-      [translatedCar.vehicleColor ?? "", 816, 527, LargeFontSize, BlueColor],
-      [carRetrieved.chassisNumber ?? "", 816, 485, LargeFontSize, BlueColor],
-      [carRetrieved.engineNumber ?? "", 816, 445, LargeFontSize, BlueColor],
-      [String(carRetrieved.numberOfDoors ?? ""), 816, 408, LargeFontSize, BlueColor],
-      [translatedCar.fuelType ?? "", 816, 365, LargeFontSize, BlueColor],
-      [String(carRetrieved.numberOfSeats ?? ""), 816, 329, LargeFontSize, BlueColor],
-      [String(carRetrieved.emptyWeight ?? ""), 816, 288, LargeFontSize, BlueColor],
-      [translatedCar.insuranceCompany ?? "", 816, 250, LargeFontSize, BlueColor],
-      [translatedCar.insuranceType ?? "", 816, 210, LargeFontSize, BlueColor],
-      [carRetrieved.insurancePolicyNumber ?? "", 816, 172, LargeFontSize, BlueColor],
-      [ this.DateConvertEnglish(carRetrieved.insuranceExpiryDate ??"", "ar"), 816, 134, SmallFontSize, BlueColor],
-      [translatedCar.ownerName ?? "", 448, 450, LargeFontSize, BlueColor],
-      [translatedCar.nationality ?? "",  448,  383, LargeFontSize, BlueColor],
-      [translatedCar.driverName ?? "", 390, 264, LargeFontSize, BlueColor],
-      [ this.DateConvertArabic(carRetrieved.certificateIssueDate ??"" , "ar"), 430, 608, SmallFontSize, WhiteColor] // In block blue - edit is arabic
+      [carRetrieved.exportCountryToAr ?? "", 322, 547, SmallFontSize+1.7, WhiteColor],
+      [carRetrieved.vehicleTypeAr ?? "", 599, 540, LargeFontSize, BlueColor],
+      [carRetrieved.exportPlateNumberAr ?? "", 599, 517, LargeFontSize, BlueColor],
+      [carRetrieved.registrationPlateNumberAr ?? "", 599, 492, LargeFontSize, BlueColor],
+      [ this.DateConvertEnglish(carRetrieved.registrationDateAr ?? "","ar"), 599, 469, LargeFontSize, BlueColor],
+      [ this.DateConvertEnglish(carRetrieved.registrationExpiryDateAr ??"", "ar"), 599, 443, LargeFontSize, BlueColor],
+      [carRetrieved.vehicleMakeAr ?? "", 599, 420, LargeFontSize, BlueColor],
+      [carRetrieved.categoryAr ?? "", 599, 395, LargeFontSize, BlueColor],
+      [carRetrieved.modelYearAr ?? "", 599, 370, LargeFontSize, BlueColor],
+      [carRetrieved.countryOfOriginAr ?? "", 599, 346, LargeFontSize, BlueColor],
+      [carRetrieved.vehicleColorAr ?? "", 599, 323, LargeFontSize, BlueColor],
+      [carRetrieved.chassisNumberAr ?? "", 599, 298, LargeFontSize, BlueColor],
+      // [carRetrieved.engineNumberAr ?? "", 599, 273, LargeFontSize, BlueColor],
+      [String(carRetrieved.numberOfDoorsAr ?? ""), 599, 251, LargeFontSize, BlueColor],
+      [carRetrieved.fuelTypeAr ?? "", 599, 227, LargeFontSize, BlueColor],
+      [String(carRetrieved.numberOfSeatsAr ?? ""), 599, 202, LargeFontSize, BlueColor],
+      [String(carRetrieved.emptyWeightAr ?? ""), 599, 177, LargeFontSize, BlueColor],
+      [carRetrieved.insuranceCompanyAr ?? "", 599, 153, LargeFontSize, BlueColor],
+      [carRetrieved.insuranceTypeAr ?? "", 599, 129, LargeFontSize, BlueColor],
+      [carRetrieved.insurancePolicyNumberAr ?? "", 599, 105, LargeFontSize, BlueColor],
+      [ this.DateConvertEnglish(carRetrieved.insuranceExpiryDateAr ??"", "ar"), 599, 83, SmallFontSize, BlueColor],
+      [carRetrieved.ownerNameAr ?? "", 404, 277, LargeFontSize, BlueColor],
+      [carRetrieved.nationalityAr ?? "",  404,  236, LargeFontSize, BlueColor],
+      [carRetrieved.driverNameAr ?? "", 372, 161, LargeFontSize, BlueColor],
+      // [ this.DateConvertArabic(carRetrieved.certificateIssueDateAr ?? "" , "ar"), 430, 608, SmallFontSize, WhiteColor] // In block blue - edit is arabic
     ];
 
     // Draw English text
@@ -293,9 +285,24 @@ class CarService {
       addRightAlignedText(text, rightMargin, y, fontSize, color);
     });
 
-    // Save the PDF and return it as a Buffer
     const updatedPdfBytes = await pdfDoc.save();
     return Buffer.from(updatedPdfBytes);
+  }
+
+  // Generate QrCode
+  async generateQrCode(url: string): Promise<Buffer> {
+    const size = 70;
+    const margin = 3;
+    const canvas = createCanvas(size, size);
+    await QRCode.toCanvas(canvas, url, {
+      width: size,
+      margin: margin,
+      color: {
+        dark: "#000000",
+        light: "#FFFFFF",
+      },
+    });
+    return canvas.toBuffer("image/png");
   }
 
   // Convert date to arabic
@@ -339,9 +346,13 @@ class CarService {
         .replace("صباحًا", "ص")
         .replace("مساءً", "م");
 
-      let partsArabic = formattedDateArabic.split(" ");
       let partsEnglish = formattedDateEnglish.split(" ");
-      partsArabic[0] = partsEnglish[1].split("").reverse().join("").replace(",","");
+      let partsArabic = formattedDateArabic.split(" ");
+      partsArabic[0] = partsEnglish[1]
+        .split("")
+        .reverse()
+        .join("")
+        .replace(",", "");
       partsArabic[3] = "";
       partsArabic[2] = partsEnglish[2].split("").reverse().join("");
       partsArabic[4] = partsEnglish[4]
@@ -372,48 +383,18 @@ class CarService {
       day = date.toLocaleString("EG", { day: "2-digit" });
       month = date.toLocaleString("ar", { month: "long" });
       year = date.toLocaleString("EG", { year: "numeric" });
-      return `${day} ${month} ${year.split("").reverse().join("")}`;
+      return `${day.split("").reverse().join("")} ${month} ${year
+        .split("")
+        .reverse()
+        .join("")}`;
     }
 
     // Using to format => 2025 December 10
     day = date.toLocaleString("EG", { day: "2-digit" });
     month = date.toLocaleString("EG", { month: "long" });
     year = date.toLocaleString("EG", { year: "numeric" });
-    return `${year} ${month} ${day}`;
+    return `${day} ${month} ${year} `;
   }
-
-  // // Translate to arabic by using translate
-  // async TranslatedCar(carRetrieved: any): Promise<any> {
-  //   return Object.fromEntries(
-  //     await Promise.all(
-  //       Object.entries(carRetrieved).map(async ([key, value]) => {
-  //         if (typeof value === "string" && value.trim() !== "") {
-  //           const translatedText = await translate(value, { to: "ar" });
-  //           // const translatedText = await translateWithOpenAI(value, "Arabic");
-  //           return [key, translatedText];
-  //         }
-  //         return [key, value];
-  //       })
-  //     )
-  //   );
-  // }
-
-  async  TranslatedCar(carRetrieved: any): Promise<any> {
-    return Object.fromEntries(
-      await Promise.all(
-        Object.entries(carRetrieved).map(async ([key, value]) => {
-          if (typeof value === "string" && value.trim() !== "") {
-            const translatedText = await translate(value, { to: "ar" });
-            return [key, translatedText];
-          }
-          return [key, value];
-        })
-      )
-    );
 }
-
-}
-
-
 
 export default CarService;

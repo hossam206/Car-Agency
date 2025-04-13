@@ -1,6 +1,8 @@
 import { z } from "zod";
 
 export const CarDto = z.object({
+
+  // English
   _id: z.string().optional(),
   exportCountryTo: z.string().optional(),
   vehicleType: z.string().optional(),
@@ -10,7 +12,6 @@ export const CarDto = z.object({
   registrationExpiryDate: z.string().optional(),
   vehicleMake: z.string().optional(),
   category: z.string().optional(),
-  categoryArabic: z.string().optional(),
   modelYear: z.string().optional(),
   countryOfOrigin: z.string().optional(),
   vehicleColor: z.string().optional(),
@@ -35,6 +36,34 @@ export const CarDto = z.object({
   licenseSource: z.string().optional(),
   certificateIssueDate: z.string().optional(),
   certificateReferenceNumber: z.string().optional(),
+
+  // Arabic
+  exportCompany: z.string().optional(),
+  exportCountryToAr: z.string().optional(),
+  vehicleTypeAr: z.string().optional(),
+  exportPlateNumberAr: z.string().optional(),
+  registrationPlateNumberAr: z.string().optional(),
+  registrationDateAr: z.string().optional(),
+  registrationExpiryDateAr: z.string().optional(),
+  vehicleMakeAr: z.string().optional(),
+  categoryAr: z.string().optional(),
+  modelYearAr: z.string().optional(),
+  countryOfOriginAr: z.string().optional(),
+  vehicleColorAr: z.string().optional(),
+  chassisNumberAr: z.string().optional(),
+  engineNumberAr: z.string().optional(),
+  numberOfDoorsAr: z.string().optional(),
+  fuelTypeAr: z.string().optional(),
+  numberOfSeatsAr: z.string().optional(),
+  emptyWeightAr: z.string().optional(),
+  insuranceCompanyAr: z.string().optional(),
+  insuranceTypeAr: z.string().optional(),
+  insurancePolicyNumberAr: z.string().optional(),
+  insuranceExpiryDateAr: z.string().optional(),
+  ownerNameAr: z.string().optional(),
+  nationalityAr: z.string().optional(),
+  driverNameAr: z.string().optional(),
+  certificateIssueDateAr: z.string().optional(),
 });
 
 export const CarDtoRetrieved = z.object({
