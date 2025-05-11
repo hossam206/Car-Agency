@@ -39,7 +39,6 @@ const apiCall = async ({
   }
 };
 // get all items
-
 export const getAll = async (path: string, page?: number, limit?: number) => {
   return apiCall({ method: "GET", path, page, limit });
 };

@@ -1,6 +1,11 @@
 const fieldConfig = [
   // Vehicle Information
   {
+    id: "userId",
+    labelEn: "userId",
+    type: "text",
+  },
+  {
     id: "exportCountryTo",
     labelEn: "Export Country To",
     labelAr: "بلد التصدير إلى",
@@ -28,13 +33,13 @@ const fieldConfig = [
     id: "registrationDate",
     labelEn: "Registration Date",
     labelAr: "تاريخ التسجيل",
-    type: "date",
+    type: "text",
   },
   {
     id: "registrationExpiryDate",
     labelEn: "Registration Expiry Date",
     labelAr: "تاريخ انتهاء التسجيل",
-    type: "date",
+    type: "text",
   },
   {
     id: "vehicleMake",
@@ -116,7 +121,7 @@ const fieldConfig = [
     id: "insuranceExpiryDate",
     labelEn: "Insurance Expiry Date",
     labelAr: "تاريخ انتهاء التأمين",
-    type: "date",
+    type: "text",
   },
 
   // Owner Information
@@ -180,7 +185,7 @@ const fieldConfig = [
     id: "certificateIssueDate",
     labelEn: "Certificate Issue Date",
     labelAr: "تاريخ إصدار الشهادة",
-    type: "date",
+    type: "text",
   },
   {
     id: "certificateReferenceNumber",
