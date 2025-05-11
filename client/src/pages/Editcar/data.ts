@@ -28,13 +28,13 @@ export const fieldConfig = [
     id: "registrationDate",
     labelEn: "Registration Date",
     labelAr: "تاريخ التسجيل",
-    type: "date",
+    type: "text",
   },
   {
     id: "registrationExpiryDate",
     labelEn: "Registration Expiry Date",
     labelAr: "تاريخ انتهاء التسجيل",
-    type: "date",
+    type: "text",
   },
   {
     id: "vehicleMake",
@@ -116,7 +116,7 @@ export const fieldConfig = [
     id: "insuranceExpiryDate",
     labelEn: "Insurance Expiry Date",
     labelAr: "تاريخ انتهاء التأمين",
-    type: "date",
+    type: "text",
   },
 
   // Owner Information
@@ -180,7 +180,7 @@ export const fieldConfig = [
     id: "certificateIssueDate",
     labelEn: "Certificate Issue Date",
     labelAr: "تاريخ إصدار الشهادة",
-    type: "date",
+    type: "text",
   },
   {
     id: "certificateReferenceNumber",
