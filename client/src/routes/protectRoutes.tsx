@@ -2,20 +2,16 @@ import Loader from "@/Components/Loader";
 import { useAuth } from "@/Context/AuthProvider";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import Cookies from "js-cookie";
 
 const ProtectRoutes = () => {
   const navigate = useNavigate();
-  const { loading } = useAuth();
+  const { accessToken, loading } = useAuth();
 
   useEffect(() => {
-    const Token = Cookies.get("AuthToken");
-    if (!loading) {
-      if (!Token) {
-        navigate("/Login");
-      }
+    if (!loading && !accessToken) {
+      navigate("/Login", { replace: true });
     }
-  }, [loading, navigate]);
+  }, [loading, accessToken, navigate]);
 
   if (loading) return <Loader />;
 

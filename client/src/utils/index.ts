@@ -1,13 +1,13 @@
 import axios from "axios";
 const api = import.meta.env.VITE_API_URL;
 export const handleDownloadPdf = async (
-  documentId: number,
+  carId: number,
   path: string,
   setDownloadStatus: (id: number, status: string) => void
 ) => {
-   setDownloadStatus(documentId, "loading"); // Set status to loading
+  setDownloadStatus(carId, "loading"); // Set status to loading
   try {
-    const response = await axios.get(`${api}/${path}/${documentId}`, {
+    const response = await axios.get(`${api}/${path}/${carId}`, {
       responseType: "blob",
       withCredentials: true,
     });
@@ -19,7 +19,7 @@ export const handleDownloadPdf = async (
     const contentDisposition =
       response.headers["content-disposition"] ||
       response.headers["Content-Disposition"];
-    let filename = `certificate_${documentId}.pdf`;
+    let filename = `certificate_${carId}.pdf`;
 
     if (contentDisposition) {
       const match = contentDisposition.match(/filename="?([^"]+)"?/);
@@ -39,9 +39,9 @@ export const handleDownloadPdf = async (
     // Revoke the object URL to free up memory
     setTimeout(() => window.URL.revokeObjectURL(url), 100);
 
-    setDownloadStatus(documentId, "success"); // Update to success
+    setDownloadStatus(carId, "success"); // Update to success
   } catch (error) {
-    setDownloadStatus(documentId, "failed"); // Update to failed
+    setDownloadStatus(carId, "failed"); // Update to failed
     console.error("Download error:", error);
     alert("Error downloading the file. Please try again.");
   }

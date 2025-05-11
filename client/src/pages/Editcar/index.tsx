@@ -50,7 +50,6 @@ export default function EditCar() {
 
     fetchCarData();
   }, [id]);
-console.log(initialData);
   // Create initial values dynamically
   const initialValues = fieldConfig.reduce((values, field) => {
     values[field.id] = initialData?.[field.id as keyof CarsData] || "";
