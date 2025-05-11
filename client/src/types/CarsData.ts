@@ -32,6 +32,7 @@ export type CarsData = {
   vehicleColor: string;
   vehicleMake: string;
   vehicleType: string;
+  
   // Added missing fields from initialValues/validationSchema
   exportCountryToAr: string;
   categoryArabic: string;

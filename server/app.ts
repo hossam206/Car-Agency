@@ -1,19 +1,19 @@
 import express, { Application } from "express";
 import dotenv from "dotenv";
-import connectToMongoDB from "./src/config/mongoDBConnect";
+import connectToMongoDB from "./src/config/mongo.config";
 import router from "./src/router";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import rateLimit from "express-rate-limit";
 import helmet from "helmet";
 import bodyParser from "body-parser";
+import { swaggerDoc } from "./src/config/swagger.config";
 dotenv.config();
 
 const app: Application = express();
 
 const corsOptions = {
-  origin: "http://localhost:5173",
-  // origin: String(process.env.FORNTEND_URL),
+  origin: process.env.FRONTEND_URL,
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
@@ -43,11 +43,12 @@ const limiter = rateLimit({
 });
 app.use(limiter);
 
-app.use("/api", router);
+swaggerDoc(app);
+app.use("/api/v1", router);
 
+const PORT = process.env.PORT || 8080;
 Promise.all([connectToMongoDB()])
   .then(() => {
-    const PORT = process.env.PORT || 8080;
     app.listen(PORT, () => {
       console.log(`Express server started on port ${PORT}`);
     });
