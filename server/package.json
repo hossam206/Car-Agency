@@ -4,8 +4,13 @@
   "description": "HallaDeals-BE is the backend service for the HallaDeals platform. It provides APIs for managing users, products, orders, payments, and more. This repository contains the core functionality for the platform, using Node.js, Express, MongoDB and SQL.",
   "main": "app.ts",
   "scripts": {
-    "dev": "nodemon --exec ts-node app.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --exec ts-node app.ts",
+    "build": "tsc",
+    "serve": "node dist/app.js",
+    "stop": "pkill -f node",
+    "restart": "npm run stop && npm run start",
+    "dev": "node-dev app.ts"
   },
   "keywords": [],
   "author": "",
