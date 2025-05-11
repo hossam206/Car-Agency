@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import CarService from "../services/carService";
+import CarService from "../services/car.service";
 const { validationResult } = require("express-validator");
 
 class CarController {
@@ -22,160 +22,125 @@ class CarController {
     message: string,
     error: unknown,
     status = 500
-  ): void {
-    res.status(status).send({
+  ): Response {
+    return res.status(status).send({
       message,
       error: error instanceof Error ? error.message : error,
     });
   }
 
-  // Add Car
-  async addCar(req: Request, res: Response): Promise<void> {
+  async addCar(req: Request, res: Response): Promise<Response> {
     try {
-      const errors = validationResult(req);
-      if (!errors.isEmpty()) {
-        res
-          .status(400)
-          .json({ message: "Something went wrong", error: errors.array() });
-        return;
-      }
       const result = await this.serviceInstance.addCar(req.body);
-      if (!result) {
-        res.status(400).json({ message: "Something went wrong" });
-        return;
-      }
-      res.status(201).json({ message: "Car added successfully" });
+      if (!result.success) return res.status(400).json(result);
+      return res.status(201).json(result);
     } catch (error) {
-      this.handleError(res, "Failed to add car", error);
+      return this.handleError(res, "Failed to add car", error);
     }
   }
 
-  // Delete Car
-  async deleteCar(req: Request, res: Response): Promise<void> {
+  async deleteCar(req: Request, res: Response): Promise<Response> {
     try {
-      const { carId } = req.params;
-      const result = await this.serviceInstance.deleteCar(carId);
-      if (!result) {
-        res.status(404).json({ message: "Car not found" });
-        return;
-      }
-      res.status(200).json({ message: "Car deleted successfully" });
+      const result = await this.serviceInstance.deleteCar(req.params.carId);
+      if (!result.success) return res.status(404).json(result);
+      return res.status(200).json(result);
     } catch (error) {
-      this.handleError(res, "Failed to delete car", error);
+      return this.handleError(res, "Failed to delete car", error);
     }
   }
 
-  // Update Car
-  async updateCar(req: Request, res: Response): Promise<void> {
+  async updateCar(req: Request, res: Response): Promise<Response> {
     try {
-      const errors = validationResult(req);
-      if (!errors.isEmpty()) {
-        res
-          .status(400)
-          .json({ message: "Something went wrong", error: errors.array() });
-        return;
-      }
-      const { carId } = req.params;
-      const result = await this.serviceInstance.updateCar(carId, req.body);
-      if (!result) {
-        res.status(400).json({ message: "Car not found" });
-        return;
-      }
-      res.status(200).json({ message: "Car updated successfully" });
-    } catch (error) {
-      this.handleError(res, "Failed to update car", error);
-    }
-  }
-
-  // Get all Cars
-  async getAllCars(req: Request, res: Response): Promise<void> {
-    try {
-      const { page, limit } = req.query;
-      const result = await this.serviceInstance.getAllCars(
-        Number(page),
-        Number(limit)
+      const result = await this.serviceInstance.updateCar(
+        req.params.carId,
+        req.body
       );
+      if (!result.success) return res.status(400).json(result);
+      return res.status(200).json(result);
+    } catch (error) {
+      return this.handleError(res, "Failed to update car", error);
+    }
+  }
+
+  async getAllCars(req: Request, res: Response): Promise<Response> {
+    try {
+      const result = await this.serviceInstance.getAllCars(req.query);
       const count = await this.serviceInstance.getCarCount();
-      if (!result) {
-        res.status(404).json({ message: "No cars found" });
-        return;
-      }
-      res.status(200).json({
+      if (!result.success) return res.status(404).json(result);
+      return res.status(200).json({
         message: "Cars retrieved successfully",
         data: result,
         count: count,
       });
     } catch (error) {
-      this.handleError(res, "Failed to retrieve cars", error);
+      return this.handleError(res, "Failed to retrieve cars", error);
     }
   }
 
-  // Get Car by ID
-  async getCarById(req: Request, res: Response): Promise<void> {
+  async getCarById(req: Request, res: Response): Promise<Response> {
     try {
-      const { id } = req.params;
-      const result = await this.serviceInstance.getCarById(id);
-      if (!result) {
-        res.status(404).json({ message: "Car not found" });
-        return;
-      }
-      res
-        .status(200)
-        .json({ message: "Car retrieved successfully", data: result });
+      const result = await this.serviceInstance.getCarById(req.params.carId);
+      if (!result.success) return res.status(404).json(result);
+      return res.status(200).json(result);
     } catch (error) {
-      this.handleError(res, "Failed to retrieve car", error);
+      return this.handleError(res, "Failed to retrieve car", error);
     }
   }
 
-  // Get Car Count
-  async getCarCount(req: Request, res: Response): Promise<void> {
+  async getCarCount(req: Request, res: Response): Promise<Response> {
     try {
       const count = await this.serviceInstance.getCarCount();
-      res
+      return res
         .status(200)
         .json({ message: "Car count retrieved successfully", count });
     } catch (error) {
-      this.handleError(res, "Failed to retrieve car count", error);
+      return this.handleError(res, "Failed to retrieve car count", error);
     }
   }
 
-  // Download Export Certificate
-  async downloadCertificate(req: Request, res: Response): Promise<void> {
+  async downloadCertificate(req: Request, res: Response): Promise<Response> {
     try {
-      const { id } = req.params;
-      const pdfStream = await this.serviceInstance.generateCertificate(id);
+      const pdfStream = await this.serviceInstance.generateCertificate(
+        req.body
+      );
       if (!pdfStream || pdfStream.length === 0) {
-        res.status(400).json({ message: "Error generating PDF" });
-        return;
+        return res.status(400).json({ message: "Error generating PDF" });
       }
       res.setHeader("Content-Type", "application/pdf");
       res.setHeader(
         "Content-Disposition",
-        `attachment; filename="Certificate_${id}.pdf"`
+        `attachment; filename="Certificate_${new Date().getTime()}.pdf"`
       );
-      res.send(pdfStream);
+      return res.send(pdfStream);
     } catch (error) {
-      this.handleError(res, "Failed to download please try again", error);
+      return this.handleError(
+        res,
+        "Failed to download please try again",
+        error
+      );
     }
   }
 
-  // View Export Certificate
-  async ViewCertificate(req: Request, res: Response): Promise<void> {
+  async ViewCertificate(req: Request, res: Response): Promise<Response> {
     try {
-      const carId = req.params.id;
-      const pdfStream = await this.serviceInstance.generateCertificate(carId);
+      const pdfStream = await this.serviceInstance.generateCertificate(
+        req.user
+      );
       if (!pdfStream || pdfStream.length === 0) {
-        res.status(400).json({ message: "Error view PDF" });
-        return;
+        return res.status(400).json({ message: "Error view PDF" });
       }
       res.setHeader("Content-Type", "application/pdf");
       res.setHeader(
         "Content-Disposition",
-        `inline; filename="Certificate_${carId}.pdf"`
+        `inline; filename="Certificate_${new Date().getTime()}.pdf"`
       );
-      res.send(pdfStream);
+      return res.send(pdfStream);
     } catch (error) {
-      this.handleError(res, `Failed to view please try again ${error}`, error);
+      return this.handleError(
+        res,
+        `Failed to view please try again ${error}`,
+        error
+      );
     }
   }
 }

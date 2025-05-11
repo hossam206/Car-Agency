@@ -53,7 +53,6 @@ export default function Dashboard() {
     try {
       const response = await getAll("car", pageNumber, pageSize);
       setCarsCount(response?.data?.count);
-
       if (response?.status === 200 && response?.data?.data) {
         setData(response?.data?.data);
         setLoadingStatus("success");
@@ -65,7 +64,6 @@ export default function Dashboard() {
       setLoadingStatus("failed");
     }
   };
-  // console.log(data, data.length);
   useEffect(() => {
     fetchCars();
   }, [pageNumber, deleteItemId]); // ✅ Refetch data when pageNumber changes or item is deleted
