@@ -11,12 +11,12 @@
 // const api = import.meta.env.VITE_API_URL;
 
 // function ViewDocument() {
-//   const { documentId } = useParams();
+//   const { carId } = useParams();
 //   const [images, setImages] = useState<string[]>([]);
 
 //   const getDocument = async () => {
 //     try {
-//       const response = await axios.get(`${api}/car/view/${documentId}`, {
+//       const response = await axios.get(`${api}/car/view/${carId}`, {
 //         headers: { Accept: "application/pdf" },
 //         responseType: "blob",
 //       });
@@ -80,7 +80,8 @@
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { PiSpinnerLight } from "react-icons/pi";
-
+import { useParams } from "react-router-dom";
+const api = import.meta.env.VITE_API_URL;
 const PDFViewer = () => {
   const [viewerState, setViewerState] = useState<{
     status: "loading" | "loaded" | "error";
@@ -99,14 +100,12 @@ const PDFViewer = () => {
     let isMounted = true;
 
     const fetchPDF = async () => {
+      const { carId } = useParams();
       try {
-        const response = await axios.get(
-          "http://localhost:8080/api/car/view/67e75880eae9ff943c966fc2",
-          {
-            responseType: "blob",
-            headers: { Accept: "application/pdf" },
-          }
-        );
+        const response = await axios.get(`${api}/car/view/${carId}`, {
+          responseType: "blob",
+          headers: { Accept: "application/pdf" },
+        });
 
         blobUrl = URL.createObjectURL(
           new Blob([response.data], { type: "application/pdf" })
