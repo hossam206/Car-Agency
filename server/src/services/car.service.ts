@@ -152,9 +152,6 @@ class CarService {
         WhiteColor,
         SmallFontSize,
       } = await pdfProperties();
-      console.log(fontBold)
-      console.log(fontEn)
-      console.log(fontAr)
 
       // Add QR Code
       const idToken = this.tokenService.generateIdToken(user, body.carId);

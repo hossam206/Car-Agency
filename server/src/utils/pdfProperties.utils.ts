@@ -2,8 +2,8 @@ import fs from "fs";
 import { PDFDocument, PDFPage } from "pdf-lib";
 import { rgb, RGB } from "pdf-lib";
 import fontkit from "@pdf-lib/fontkit";
-import path from "path";
-  console.log(__dirname);
+
+
 interface PdfResources {
   page: PDFPage;
   fontEn: any;
@@ -17,28 +17,19 @@ interface PdfResources {
 export const pdfProperties = async (): Promise<PdfResources> => {
   // Load fonts
 
-  // const fontBytesBold = fs.readFileSync(String(process.env.PATH_FONT_BOLD));
-  // const fontBytesEn = fs.readFileSync(String(process.env.PATH_FONT_EN));
-  // const fontBytesAr = fs.readFileSync(String(process.env.PATH_FONT_AR));
-  const fontBytesBold = path.join(
-    __dirname,
-    "Pdf",
-    "alfont_com_Wafeq-SemiBold.otf"
+  const fontBytesBold = fs.readFileSync(
+    String("/dist/Pdf/alfont_com_Wafeq-SemiBold.otf")
   );
-  const fontBytesEn = path.join(__dirname, "Pdf", "Copihue-Normal.otf");
-  const fontBytesAr = path.join(
-    __dirname,
-    "Pdf",
-    "alfont_com_Wafeq-Regular.otf"
+  const fontBytesEn = fs.readFileSync(String("/dist/Pdf/Copihue-Normal.otf"));
+  const fontBytesAr = fs.readFileSync(
+    String("/dist/Pdf/alfont_com_Wafeq-Regular.otf")
   );
   const SmallFontSize = 7.3;
 
   // Load template
-  // const templateBytes = fs.readFileSync(String(process.env.PATH_PDF));
-
-  const templateBytes = path.join(__dirname, "Pdf", "ExportCertificate.pdf");
-  console.log(__dirname);
-  console.log("Template file path:", templateBytes);
+  const templateBytes = fs.readFileSync(
+    String("/dist/Pdf/ExportCertificate.pdf")
+  );
   const pdfDoc = await PDFDocument.load(templateBytes);
   pdfDoc.registerFontkit(fontkit);
 
