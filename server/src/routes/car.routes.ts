@@ -228,8 +228,8 @@ router.post(
  * /car/view/{carId}:
  *   get:
  *     tags: [Car]
- *     summary: View car certificate
- *     description: Display the car's certificate in browser
+ *     summary: View car certificate by downloading pdf file and scan qrCode
+ *     description: Display the car's certificate
  *     parameters:
  *       - $ref: '#/components/parameters/CarId'
  *     responses:

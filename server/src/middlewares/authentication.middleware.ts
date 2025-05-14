@@ -35,7 +35,6 @@ export class AuthMiddleware {
 
     const getUser = await User.findById({ _id: decoded.userId }).lean();
     if (!getUser) return res.status(401).json({ message: "Unauthorized" });
-
     req.user = decoded as UserRequestType;
     return next();
   };
@@ -61,8 +60,7 @@ export class AuthMiddleware {
   ): Promise<any> => {
     const accessToken = req.cookies?.accessToken;
     const refreshToken = req.cookies?.refreshToken;
-    if (!refreshToken)
-      return res.status(401).json({ message: "Unauthorized" });
+    if (!refreshToken) return res.status(401).json({ message: "Unauthorized" });
 
     if (accessToken) {
       try {
