@@ -2,8 +2,8 @@ import fs from "fs";
 import { PDFDocument, PDFPage } from "pdf-lib";
 import { rgb, RGB } from "pdf-lib";
 import fontkit from "@pdf-lib/fontkit";
-import path from "path";
-console.log(__dirname);
+
+
 interface PdfResources {
   page: PDFPage;
   fontEn: any;
