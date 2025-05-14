@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import UserService from "../services/userService";
-const { validationResult } = require("express-validator");
+import UserService from "../services/user.service";
+import { encryptToken } from "../utils/encryptToken.utils";
 
 class UserController {
   private serviceInstance: UserService;
@@ -17,48 +17,150 @@ class UserController {
     return UserController.instance;
   }
 
-  async login(req: Request, res: Response): Promise<void> {
+  private handleError(
+    res: Response,
+    message: string,
+    error: unknown,
+    status = 500
+  ): Response {
+    return res.status(status).send({
+      message,
+      error: error instanceof Error ? error.message : error,
+    });
+  }
+
+  async login(req: Request, res: Response): Promise<Response> {
     try {
-      const errors = validationResult(req);
-      if (!errors.isEmpty()) {
-        res.status(400).json({ message: "Something wrong!!" });
-        return;
-      }
-      const { email, password } = req.body;
-
-      const user = await this.serviceInstance
-        .login(email, password)
-        .catch((error) => {
-          throw new Error(error.message || "Login failed");
-        });
-
-      if (user == null) {
-        res.status(400).json({ message: "Invalid credentials" });
-        return;
-      }
-
-      const token = this.serviceInstance.generateJwtToken(user);
-      const encryptedToken = Buffer.from(token).toString("base64");
-      res.cookie("AuthToken", encryptedToken, {
-        httpOnly: false,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
-        expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-      });
-      res.clearCookie("token");
-      res.clearCookie("refreshToken");
-      res.status(200).json({ message: "Login successfully" });
+      const authResult = await this.serviceInstance.login(req.body);
+      if (!authResult.success)
+        return res.status(authResult.status!).json(authResult);
+      const { data, ...responseData } = authResult;
+      this.generateCookies(res, data);
+      return res
+        .status(200)
+        .json({ ...responseData, accessToken: encryptToken(data.accessToken) });
     } catch (error) {
-      res.status(500).json({
+      return res.status(500).json({
         message: "Internal Server Error",
         error: error instanceof Error ? error.message : "Unknown error",
       });
     }
   }
 
-  logout(req: Request, res: Response): void {
-    res.clearCookie("AuthToken");
-    res.status(200).json({ message: "Logout successfully" });
+  async addUser(req: Request, res: Response): Promise<Response> {
+    try {
+      const authResult = await this.serviceInstance.addUser(req.body);
+      if (!authResult.success)
+        return res.status(authResult.status!).json(authResult);
+      return res.status(201).json(authResult);
+    } catch (error) {
+      return this.handleError(res, "Internal Server Error", error);
+    }
+  }
+
+  async deleteUser(req: Request, res: Response): Promise<Response> {
+    try {
+      const result = await this.serviceInstance.deleteUser(
+        req.params.userId,
+        req.user.role
+      );
+      if (!result.success) return res.status(404).json(result);
+      return res.status(200).json(result);
+    } catch (error) {
+      return this.handleError(res, "Internal Server Error", error);
+    }
+  }
+
+  async updateUser(req: Request, res: Response): Promise<Response> {
+    try {
+      const result = await this.serviceInstance.updateUser(
+        req.params.userId,
+        req.body
+      );
+      if (!result.success) return res.status(400).json(result);
+      return res.status(200).json(result);
+    } catch (error) {
+      return this.handleError(res, "Internal Server Error", error);
+    }
+  }
+
+  async getAllUsers(req: Request, res: Response): Promise<Response> {
+    try {
+      const { page, limit } = req.query;
+      const result = await this.serviceInstance.getAllUsers(
+        Number(page),
+        Number(limit)
+      );
+      const count = await this.serviceInstance.getUserCount();
+      if (!result.success) return res.status(404).json(result);
+      return res.status(200).json({
+        message: "Users retrieved successfully",
+        data: result,
+        count: count,
+      });
+    } catch (error) {
+      return this.handleError(res, "Internal Server Error", error);
+    }
+  }
+
+  async getUserById(req: Request, res: Response): Promise<Response> {
+    try {
+      const result = await this.serviceInstance.getUserById(req.params.userId);
+      if (!result.success) return res.status(404).json(result);
+      return res.status(200).json(result);
+    } catch (error) {
+      return this.handleError(res, "Internal Server Error", error);
+    }
+  }
+
+  async getUserCount(req: Request, res: Response): Promise<Response> {
+    try {
+      const count = await this.serviceInstance.getUserCount();
+      return res
+        .status(200)
+        .json({ message: "User count retrieved successfully", count });
+    } catch (error) {
+      return this.handleError(res, "Internal Server Error", error);
+    }
+  }
+
+  logout(req: Request, res: Response): Response {
+    res.clearCookie("accessToken");
+    res.clearCookie("refreshToken");
+    return res.status(200).json({ message: "Logout successfully" });
+  }
+
+  private generateCookies(
+    res: Response,
+    data: { refreshToken: string; accessToken: string }
+  ) {
+    const isProduction = process.env.NODE_ENV === "production";
+    const options = {
+      httpOnly: true,
+      sameSite: isProduction ? ("none" as "none") : ("lax" as "lax"),
+      secure: isProduction,
+    };
+    const tokens = [
+      {
+        name: "refreshToken",
+        value: data.refreshToken,
+        expires: 60 * 24 * 7,
+      },
+      {
+        name: "accessToken",
+        value: data.accessToken,
+        expires: 60,
+      },
+    ];
+
+    tokens.forEach((token) => {
+      if (token.value != undefined) {
+        res.cookie(token.name, encryptToken(String(token.value)), {
+          ...options,
+          expires: new Date(Date.now() + 1000 * 60 * token.expires),
+        });
+      }
+    });
   }
 }
 

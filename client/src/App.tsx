@@ -14,7 +14,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         {/* Public Route (No Auth Required) */}
-        <Route path="api/car/view/:documentId" element={<ViewDocument />} />
+        <Route path="api/v1/car/view/:carId" element={<ViewDocument />} />
 
         {/* Wrap everything else with Auth Context */}
         <Route
