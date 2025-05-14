@@ -23,7 +23,7 @@ router.get("/health-check", (req: Request, res: Response) => {
 
 // Routes
 router.use("/auth", UserRouters);
-// router.use("/user", UserRouters);
+router.use("/user", UserRouters);
 router.use("/car", CarRouters);
 
 export default router;
