@@ -18,17 +18,17 @@ export const pdfProperties = async (): Promise<PdfResources> => {
   // Load fonts
 
   const fontBytesBold = fs.readFileSync(
-    String("/dist/Pdf/alfont_com_Wafeq-SemiBold.otf")
+    String("/server/dist/Pdf/alfont_com_Wafeq-SemiBold.otf")
   );
-  const fontBytesEn = fs.readFileSync(String("/dist/Pdf/Copihue-Normal.otf"));
+  const fontBytesEn = fs.readFileSync(String("/server/dist/Pdf/Copihue-Normal.otf"));
   const fontBytesAr = fs.readFileSync(
-    String("/dist/Pdf/alfont_com_Wafeq-Regular.otf")
+    String("/server/dist/Pdf/alfont_com_Wafeq-Regular.otf")
   );
   const SmallFontSize = 7.3;
 
   // Load template
   const templateBytes = fs.readFileSync(
-    String("/dist/Pdf/ExportCertificate.pdf")
+    String("/server/dist/Pdf/ExportCertificate.pdf")
   );
   const pdfDoc = await PDFDocument.load(templateBytes);
   pdfDoc.registerFontkit(fontkit);
