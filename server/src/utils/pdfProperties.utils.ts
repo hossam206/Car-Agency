@@ -17,26 +17,28 @@ interface PdfResources {
 export const pdfProperties = async (): Promise<PdfResources> => {
   // Load fonts
 
-  const fontPathBold = path.resolve(
-    __dirname,
-    "../Pdf/alfont_com_Wafeq-SemiBold.otf"
+  const fontBytesBold = fs.readFileSync(
+    path.join(__dirname, "../Pdf/alfont_com_Wafeq-SemiBold.otf")
   );
-  const fontPathEn = path.resolve(__dirname, "../Pdf/Copihue-Normal.otf");
-  const fontPathAr = path.resolve(
-    __dirname,
-    "../Pdf/alfont_com_Wafeq-Regular.otf"
+  const fontPathEn = fs.readFileSync(
+    path.join(__dirname, "../Pdf/Copihue-Normal.otf")
+  );
+  const fontPathAr = fs.readFileSync(
+    path.join(__dirname, "../Pdf/alfont_com_Wafeq-Regular.otf")
   );
   const SmallFontSize = 7.3;
-
+console.log(__dirname)
   // Load template
-  const templateBytes = path.resolve(__dirname, "..Pdf/ExportCertificate.pdf");
+  const templateBytes = fs.readFileSync(
+    path.join(__dirname, "../Pdf/ExportCertificate.pdf")
+  );
   const pdfDoc = await PDFDocument.load(templateBytes);
   pdfDoc.registerFontkit(fontkit);
 
   // Embed fonts
   const fontEn = await pdfDoc.embedFont(fontPathEn);
   const fontAr = await pdfDoc.embedFont(fontPathAr);
-  const fontBold = await pdfDoc.embedFont(fontPathBold);
+  const fontBold = await pdfDoc.embedFont(fontBytesBold);
 
   // Load colors
   const WhiteColor: RGB = rgb(240 / 255, 248 / 255, 1);

@@ -142,7 +142,6 @@ class CarService {
       if (!car) throw new CustomError("Car not found", "NotFound", 404, false);
       if (!user)
         throw new CustomError("User not found", "NotFound", 404, false);
-      console.log(__dirname);
       const {
         page,
         fontEn,
